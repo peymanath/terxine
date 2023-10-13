@@ -1,5 +1,5 @@
 const config = {
-  extends: ['next/core-web-vitals', 'prettier'],
+  extends: ['next/core-web-vitals', 'prettier', 'plugin:storybook/recommended'],
   parserOptions: {
     parser: '@typescript-eslint/parser',
     project: './tsconfig.json',
