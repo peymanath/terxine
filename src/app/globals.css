@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:lang(fa-IR) {
+  font-family: var(--font-estedad);
+}
