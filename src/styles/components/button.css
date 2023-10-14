@@ -1,0 +1,82 @@
+.btn {
+  @apply no-underline p-1 h-4 border border-transparent cursor-pointer select-none;
+  @apply inline-flex items-center justify-center gap-2 rounded border-transparent text-center transition duration-200;
+
+  &:active:hover,
+  &:active:focus {
+    transform: scale(0.97);
+  }
+
+  /* Default */
+  &,
+  &-default {
+    @apply bg-primary text-white outline-primary border-primary text-caption-md;
+    @media (hover: hover) {
+      @apply hover:bg-primary-focus hover:border-primary-focus;
+    }
+  }
+
+  /* Tint 600 */
+  &-tint-600 {
+    @apply bg-tint-600 text-white outline-tint-600 border-tint-600;
+    @media (hover: hover) {
+      @apply hover:bg-tint-600-focus hover:border-tint-600-focus;
+    }
+  }
+
+  /* Tint 650 */
+  &-tint-650 {
+    @apply bg-tint-650 text-white outline-tint-650 border-tint-650;
+    @media (hover: hover) {
+      @apply hover:bg-tint-650-focus hover:border-tint-650-focus;
+    }
+  }
+
+  /* Tint 50 */
+  &-tint-50 {
+    @apply bg-tint-50 text-primary outline-tint-50 border-tint-50;
+    @media (hover: hover) {
+      @apply hover:bg-tint-50-focus hover:border-tint-50-focus;
+    }
+  }
+
+  /* Tint 100 */
+  &-tint-100 {
+    @apply bg-tint-100 text-primary outline-tint-100 border-tint-100;
+    @media (hover: hover) {
+      @apply hover:bg-tint-100-focus hover:border-tint-100-focus;
+    }
+  }
+
+  /* Tint 150 */
+  &-tint-150 {
+    @apply bg-tint-150 text-primary outline-tint-150 border-tint-150;
+    @media (hover: hover) {
+      @apply hover:bg-tint-150-focus hover:border-tint-150-focus;
+    }
+  }
+
+  /* Gray 700 */
+  &-gray-700 {
+    @apply bg-gray-700 text-white outline-gray-700 border-gray-700;
+    @media (hover: hover) {
+      @apply hover:bg-gray-700-focus hover:border-gray-700-focus;
+    }
+  }
+
+  /* Gray 800 */
+  &-gray-800 {
+    @apply bg-gray-800 text-white outline-gray-800 border-gray-800;
+    @media (hover: hover) {
+      @apply hover:bg-gray-800-focus hover:border-gray-800-focus;
+    }
+  }
+
+  /* Black */
+  &-black {
+    @apply bg-black text-white outline-black border-black;
+    @media (hover: hover) {
+      @apply hover:bg-black-focus hover:border-black-focus;
+    }
+  }
+}

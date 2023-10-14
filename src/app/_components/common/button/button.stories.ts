@@ -13,11 +13,12 @@ type Story = StoryObj<typeof Button>;
 
 export const ButtonComponent: Story = {
   args: {
-    text: 'Button',
-    loadingText: 'Loading ...',
-    size: 'default',
+    color: 'default',
     variant: undefined,
+    text: 'سفارش غذا',
+    loadingText: 'Loading ...',
     isLoading: false,
     isDisables: false,
+    size: 'default',
   },
 };

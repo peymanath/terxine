@@ -15,27 +15,27 @@ export const Button: React.FC<ButtonProps> = props => {
   // Destructure Props
   const {
     text,
-    color = 'primary',
-    variant = undefined,
-    size = 'default',
+    variant,
     endIcon,
     startIcon,
-    type,
     loadingText,
-    isLoading = false,
-    isDisables = false,
     className,
     onClick,
+    color = 'default',
+    size = 'default',
+    type = 'button',
+    isLoading = false,
+    isDisables = false,
     ...rest
-  } = props;
+  }: ButtonProps = props;
 
   const classes = classNames(
     'btn',
     className,
     { [`btn-loading`]: isLoading },
     { [`btn-disabled`]: isDisables },
-    { [`btn-${variant}`]: variant },
     { [`btn-${color}`]: color },
+    { [`btn-${variant}`]: variant },
     { [buttonSize[size]]: size }
   );
 

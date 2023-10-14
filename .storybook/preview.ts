@@ -1,6 +1,6 @@
 import type { Preview } from '@storybook/react';
-
 import '../src/app/globals.css';
+import '../src/styles/storybook/custom-font.css';
 
 const preview: Preview = {
   parameters: {

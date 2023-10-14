@@ -5,16 +5,16 @@ import type { LoadingBehavior } from '@/app/_components/types/loading-behavior.t
 /**
  * Button Variant Type
  */
-export type ButtonVariant = undefined | 'contained' | 'outlined';
+export type ButtonVariant = 'contained' | 'outlined';
 
 /**
  * Button Props Type
  */
-export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
+export type ButtonProps = Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'color'> &
   ComponentBase &
   LoadingBehavior & {
     text: string;
-    variant?: ButtonVariant;
+    variant: ButtonVariant;
     endIcon?: React.ReactNode;
     startIcon?: React.ReactNode;
     onClick?: React.MouseEventHandler<HTMLButtonElement>;

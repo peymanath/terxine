@@ -1,8 +1,9 @@
-import type { Color, Size } from '@/app/_components/types';
+import type { Size } from '@/app/_components/types';
+import type { Color } from '@/app/_components/types/color.type';
 
 export type ComponentBase = {
-  color?: Color | undefined;
-  size?: Size | undefined;
-  isDisables?: boolean | undefined;
-  className?: string | undefined;
+  size?: Size;
+  color: Color;
+  isDisables?: boolean;
+  className?: string;
 };
