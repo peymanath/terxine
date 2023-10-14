@@ -1,5 +1,4 @@
-import type { Size } from '@/app/_components/types';
-import type { Color } from '@/app/_components/types/color.type';
+import type { Size, Color } from '@/app/_components/types';
 
 export type ComponentBase = {
   size?: Size;
