@@ -35,11 +35,11 @@ export type ButtonVariant = 'link' | 'contained' | 'outlined';
 export type ButtonProps = Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'color'> &
   ComponentBase &
   LoadingBehavior & {
-    color: ButtonColor;
-    shape: ButtonShape;
-    text: string;
-    icon: React.ReactNode;
-    variant: ButtonVariant;
+    color?: ButtonColor;
+    shape?: ButtonShape;
+    text?: string;
+    icon?: React.ReactNode;
+    variant?: ButtonVariant;
     endIcon?: React.ReactNode;
     startIcon?: React.ReactNode;
     onClick?: React.MouseEventHandler<HTMLButtonElement>;

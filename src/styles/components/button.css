@@ -146,6 +146,14 @@
       }
     }
 
+    /* Black */
+    &.btn-black {
+      @apply bg-black text-white outline-black border-black;
+      @media (hover: hover) {
+        @apply hover:bg-black-focus hover:border-black-focus;
+      }
+    }
+
     /* Error */
     &.btn-error {
       @apply bg-error text-white outline-error border-error;
