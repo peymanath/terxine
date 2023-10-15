@@ -59,6 +59,22 @@
     &.btn-black {
       @apply text-black;
     }
+
+    /* Error */
+    &.btn-error {
+      @apply text-error;
+    }
+
+    /* Success */
+    &.btn-success {
+      @apply text-success;
+    }
+
+    /* Warning */
+    &.btn-warning {
+      @apply text-warning;
+    }
+
     &[disabled],
     &:disabled {
       @apply text-gray-300;
@@ -130,13 +146,30 @@
       }
     }
 
-    /* Black */
-    &.btn-black {
-      @apply bg-black text-white outline-black border-black;
+    /* Error */
+    &.btn-error {
+      @apply bg-error text-white outline-error border-error;
       @media (hover: hover) {
-        @apply hover:bg-black-focus hover:border-black-focus;
+        @apply hover:bg-error-focus hover:border-error-focus;
       }
     }
+
+    /* Success */
+    &.btn-success {
+      @apply bg-success text-white outline-success border-success;
+      @media (hover: hover) {
+        @apply hover:bg-success-focus hover:border-success-focus;
+      }
+    }
+
+    /* Warning */
+    &.btn-warning {
+      @apply bg-warning text-white outline-warning border-warning;
+      @media (hover: hover) {
+        @apply hover:bg-warning-focus hover:border-warning-focus;
+      }
+    }
+
     &[disabled],
     &:disabled {
       @apply bg-gray-300 text-gray-400 border-opacity-0;
@@ -218,13 +251,38 @@
         @apply hover:bg-black-focus hover:text-white hover:border-black-focus;
       }
     }
+
+    /* Error */
+    &.btn-error {
+      @apply text-error;
+      @media (hover: hover) {
+        @apply hover:bg-error-focus hover:text-white hover:border-error-focus;
+      }
+    }
+
+    /* Success */
+    &.btn-success {
+      @apply text-success;
+      @media (hover: hover) {
+        @apply hover:bg-success-focus hover:text-white hover:border-success-focus;
+      }
+    }
+
+    /* Warning */
+    &.btn-warning {
+      @apply text-warning;
+      @media (hover: hover) {
+        @apply hover:bg-warning-focus hover:text-white hover:border-warning-focus;
+      }
+    }
+
     &[disabled],
     &:disabled {
       @apply text-gray-400 border-gray-400;
     }
   }
 
-  /*  Button Size */
+  /* Button Size and Shape*/
   &-sm {
     @apply text-caption-md px-1 h-4;
   }
@@ -233,5 +291,17 @@
   }
   &-lg {
     @apply h-7;
+  }
+  &-wide {
+    @apply w-20 flex-nowrap;
+  }
+  &-block {
+    @apply w-full;
+  }
+  &-square {
+    @apply h-3 w-3 p-0.5;
+    &.btn-lg {
+      @apply h-5 w-5 p-1;
+    }
   }
 }

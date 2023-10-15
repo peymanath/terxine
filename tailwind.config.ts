@@ -304,6 +304,7 @@ const fontTailwind: CustomFontType = {
 
 // Customize Spacing
 const spacingTailwind: ResolvableTo<KeyValuePair> = {
+  0: '0',
   px: '1px',
   '0.25': '2px',
   '0.5': '4px',

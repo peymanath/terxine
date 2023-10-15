@@ -1,5 +1,5 @@
 import React from 'react';
-import type { ButtonProps } from '@/app/_components/common/button/button.types';
+import type { ButtonProps, ButtonShape } from '@/app/_components/common/button/button.types';
 import classNames from 'classnames';
 import type { Size } from '@/app/_components/types';
 
@@ -11,10 +11,17 @@ const buttonSize: Record<Size, string> = {
   large: 'btn-lg',
 };
 
+const shapeClasses: Record<ButtonShape, string> = {
+  wide: 'btn-wide',
+  full: 'btn-block',
+  square: 'btn-square',
+  default: '',
+};
 export const Button: React.FC<ButtonProps> = props => {
   // Destructure Props
   const {
     text,
+    icon,
     endIcon,
     startIcon,
     loadingText,
@@ -24,6 +31,7 @@ export const Button: React.FC<ButtonProps> = props => {
     color = 'default',
     size = 'default',
     type = 'button',
+    shape = 'default',
     isLoading = false,
     isDisables = false,
     ...rest
@@ -36,7 +44,8 @@ export const Button: React.FC<ButtonProps> = props => {
     { [`btn-disabled`]: isDisables },
     { [`btn-${color}`]: color },
     { [`btn-${variant}`]: variant },
-    { [buttonSize[size]]: size }
+    { [buttonSize[size]]: size },
+    { [shapeClasses[shape]]: shape }
   );
 
   return (
@@ -47,7 +56,7 @@ export const Button: React.FC<ButtonProps> = props => {
       disabled={isDisables}
       {...rest}>
       {!!startIcon && startIcon}
-      {isLoading ? loadingText : text}
+      {isLoading ? loadingText : shape === 'square' ? icon : text}
       {!!endIcon && endIcon}
     </button>
   );
