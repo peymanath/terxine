@@ -1,82 +1,237 @@
 .btn {
-  @apply no-underline p-1 h-4 border border-transparent cursor-pointer select-none;
-  @apply inline-flex items-center justify-center gap-2 rounded border-transparent text-center transition duration-200;
+  @apply no-underline px-2 py-1 h-5 border border-transparent cursor-pointer select-none;
+  @apply inline-flex items-center justify-center gap-2 rounded border-transparent text-center transition duration-100;
+  @apply text-primary;
+  @apply text-button-lg px-2 h-5;
 
   &:active:hover,
   &:active:focus {
     transform: scale(0.97);
   }
 
-  /* Default */
-  &,
-  &-default {
-    @apply bg-primary text-white outline-primary border-primary text-caption-md;
+  /* disabled */
+  &[disabled],
+  &:disabled {
+    @apply pointer-events-none no-underline hover:no-underline;
+  }
+
+  &-link {
     @media (hover: hover) {
-      @apply hover:bg-primary-focus hover:border-primary-focus;
+      @apply hover:underline;
+    }
+
+    /* Tint 600 */
+    &.btn-tint-600 {
+      @apply text-tint-600;
+    }
+
+    /* Tint 650 */
+    &.btn-tint-650 {
+      @apply text-tint-650;
+    }
+
+    /* Tint 50 */
+    &.btn-tint-50 {
+      @apply text-tint-50;
+    }
+
+    /* Tint 100 */
+    &.btn-tint-100 {
+      @apply text-tint-100;
+    }
+
+    /* Tint 150 */
+    &.btn-tint-150 {
+      @apply text-tint-150;
+    }
+
+    /* Gray 700 */
+    &.btn-gray-700 {
+      @apply text-gray-700;
+    }
+
+    /* Gray 800 */
+    &.btn-gray-800 {
+      @apply text-gray-800;
+    }
+
+    /* Black */
+    &.btn-black {
+      @apply text-black;
+    }
+    &[disabled],
+    &:disabled {
+      @apply text-gray-300;
     }
   }
 
-  /* Tint 600 */
-  &-tint-600 {
-    @apply bg-tint-600 text-white outline-tint-600 border-tint-600;
-    @media (hover: hover) {
-      @apply hover:bg-tint-600-focus hover:border-tint-600-focus;
+  &-contained {
+    /* Default */
+    &.btn-default {
+      @apply bg-primary text-white outline-primary border-primary;
+      @media (hover: hover) {
+        @apply hover:bg-primary-focus hover:border-primary-focus;
+      }
+    }
+
+    /* Tint 600 */
+    &.btn-tint-600 {
+      @apply bg-tint-600 text-white outline-tint-600 border-tint-600;
+      @media (hover: hover) {
+        @apply hover:bg-tint-600-focus hover:border-tint-600-focus;
+      }
+    }
+
+    /* Tint 650 */
+    &.btn-tint-650 {
+      @apply bg-tint-650 text-white outline-tint-650 border-tint-650;
+      @media (hover: hover) {
+        @apply hover:bg-tint-650-focus hover:border-tint-650-focus;
+      }
+    }
+
+    /* Tint 50 */
+    &.btn-tint-50 {
+      @apply bg-tint-50 text-primary outline-tint-50 border-tint-50;
+      @media (hover: hover) {
+        @apply hover:bg-tint-50-focus hover:border-tint-50-focus;
+      }
+    }
+
+    /* Tint 100 */
+    &.btn-tint-100 {
+      @apply bg-tint-100 text-primary outline-tint-100 border-tint-100;
+      @media (hover: hover) {
+        @apply hover:bg-tint-100-focus hover:border-tint-100-focus;
+      }
+    }
+
+    /* Tint 150 */
+    &.btn-tint-150 {
+      @apply bg-tint-150 text-primary outline-tint-150 border-tint-150;
+      @media (hover: hover) {
+        @apply hover:bg-tint-150-focus hover:border-tint-150-focus;
+      }
+    }
+
+    /* Gray 700 */
+    &.btn-gray-700 {
+      @apply bg-gray-700 text-white outline-gray-700 border-gray-700;
+      @media (hover: hover) {
+        @apply hover:bg-gray-700-focus hover:border-gray-700-focus;
+      }
+    }
+
+    /* Gray 800 */
+    &.btn-gray-800 {
+      @apply bg-gray-800 text-white outline-gray-800 border-gray-800;
+      @media (hover: hover) {
+        @apply hover:bg-gray-800-focus hover:border-gray-800-focus;
+      }
+    }
+
+    /* Black */
+    &.btn-black {
+      @apply bg-black text-white outline-black border-black;
+      @media (hover: hover) {
+        @apply hover:bg-black-focus hover:border-black-focus;
+      }
+    }
+    &[disabled],
+    &:disabled {
+      @apply bg-gray-300 text-gray-400 border-opacity-0;
     }
   }
 
-  /* Tint 650 */
-  &-tint-650 {
-    @apply bg-tint-650 text-white outline-tint-650 border-tint-650;
-    @media (hover: hover) {
-      @apply hover:bg-tint-650-focus hover:border-tint-650-focus;
+  &-outlined {
+    @apply bg-transparent border-current;
+
+    /* Default */
+    &,
+    &.btn-default {
+      @apply text-primary;
+      @media (hover: hover) {
+        @apply hover:bg-primary-focus hover:text-white hover:border-primary-focus;
+      }
+    }
+
+    /* Tint 600 */
+    &.btn-tint-600 {
+      @apply text-tint-600;
+      @media (hover: hover) {
+        @apply hover:bg-tint-600-focus hover:text-white hover:border-tint-600-focus;
+      }
+    }
+
+    /* Tint 650 */
+    &.btn-tint-650 {
+      @apply text-tint-650;
+      @media (hover: hover) {
+        @apply hover:bg-tint-650-focus hover:text-white hover:border-tint-650-focus;
+      }
+    }
+
+    /* Tint 50 */
+    &.btn-tint-50 {
+      @apply text-tint-50;
+      @media (hover: hover) {
+        @apply hover:bg-tint-50-focus hover:text-primary hover:border-tint-50-focus;
+      }
+    }
+
+    /* Tint 100 */
+    &.btn-tint-100 {
+      @apply text-tint-100;
+      @media (hover: hover) {
+        @apply hover:bg-tint-100-focus hover:text-primary hover:border-tint-100-focus;
+      }
+    }
+
+    /* Tint 150 */
+    &.btn-tint-150 {
+      @apply text-tint-150;
+      @media (hover: hover) {
+        @apply hover:bg-tint-150-focus hover:text-primary hover:border-tint-150-focus;
+      }
+    }
+
+    /* Gray 700 */
+    &.btn-gray-700 {
+      @apply text-gray-700;
+      @media (hover: hover) {
+        @apply hover:bg-gray-700-focus hover:text-white hover:border-gray-700-focus;
+      }
+    }
+
+    /* Gray 800 */
+    &.btn-gray-800 {
+      @apply text-gray-800;
+      @media (hover: hover) {
+        @apply hover:bg-gray-800-focus hover:text-white hover:border-gray-800-focus;
+      }
+    }
+
+    /* Black */
+    &.btn-black {
+      @apply text-black;
+      @media (hover: hover) {
+        @apply hover:bg-black-focus hover:text-white hover:border-black-focus;
+      }
+    }
+    &[disabled],
+    &:disabled {
+      @apply text-gray-400 border-gray-400;
     }
   }
 
-  /* Tint 50 */
-  &-tint-50 {
-    @apply bg-tint-50 text-primary outline-tint-50 border-tint-50;
-    @media (hover: hover) {
-      @apply hover:bg-tint-50-focus hover:border-tint-50-focus;
-    }
+  /*  Button Size */
+  &-sm {
+    @apply text-caption-md px-1 h-4;
   }
-
-  /* Tint 100 */
-  &-tint-100 {
-    @apply bg-tint-100 text-primary outline-tint-100 border-tint-100;
-    @media (hover: hover) {
-      @apply hover:bg-tint-100-focus hover:border-tint-100-focus;
-    }
+  &-md {
+    @apply h-6;
   }
-
-  /* Tint 150 */
-  &-tint-150 {
-    @apply bg-tint-150 text-primary outline-tint-150 border-tint-150;
-    @media (hover: hover) {
-      @apply hover:bg-tint-150-focus hover:border-tint-150-focus;
-    }
-  }
-
-  /* Gray 700 */
-  &-gray-700 {
-    @apply bg-gray-700 text-white outline-gray-700 border-gray-700;
-    @media (hover: hover) {
-      @apply hover:bg-gray-700-focus hover:border-gray-700-focus;
-    }
-  }
-
-  /* Gray 800 */
-  &-gray-800 {
-    @apply bg-gray-800 text-white outline-gray-800 border-gray-800;
-    @media (hover: hover) {
-      @apply hover:bg-gray-800-focus hover:border-gray-800-focus;
-    }
-  }
-
-  /* Black */
-  &-black {
-    @apply bg-black text-white outline-black border-black;
-    @media (hover: hover) {
-      @apply hover:bg-black-focus hover:border-black-focus;
-    }
+  &-lg {
+    @apply h-7;
   }
 }

@@ -13,10 +13,10 @@ type Story = StoryObj<typeof Button>;
 
 export const ButtonComponent: Story = {
   args: {
-    color: 'default',
+    color: undefined,
     variant: undefined,
     text: 'سفارش غذا',
-    loadingText: 'Loading ...',
+    loadingText: 'Loading',
     isLoading: false,
     isDisables: false,
     size: 'default',

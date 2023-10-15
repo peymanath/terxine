@@ -5,7 +5,7 @@ import type { LoadingBehavior } from '@/app/_components/types/loading-behavior.t
 /**
  * Button Variant Type
  */
-export type ButtonVariant = 'contained' | 'outlined';
+export type ButtonVariant = 'link' | 'contained' | 'outlined';
 
 /**
  * Button Props Type

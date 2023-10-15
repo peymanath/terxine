@@ -15,12 +15,12 @@ export const Button: React.FC<ButtonProps> = props => {
   // Destructure Props
   const {
     text,
-    variant,
     endIcon,
     startIcon,
     loadingText,
     className,
     onClick,
+    variant = 'contained',
     color = 'default',
     size = 'default',
     type = 'button',
