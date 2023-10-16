@@ -3,6 +3,7 @@ import { colord, extend } from 'colord';
 import mixPlugin from 'colord/plugins/mix';
 import type { RecursiveKeyValuePair, ResolvableTo } from 'tailwindcss/types/config';
 import type { KeyValuePair } from 'tailwindcss/types/config';
+import { ScreensConfig } from 'tailwindcss/types/config';
 
 type CustomFontType = ResolvableTo<
   KeyValuePair<
@@ -352,13 +353,31 @@ const boxShadowCustomize: ResolvableTo<KeyValuePair> = {
   'contact-card':
     '0px 0px 0px 0px rgba(0, 0, 0, 0.10), 0px 3px 6px 0px rgba(0, 0, 0, 0.10), 0px 11px 11px 0px rgba(0, 0, 0, 0.09), 0px 24px 14px 0px rgba(0, 0, 0, 0.05), 0px 42px 17px 0px rgba(0, 0, 0, 0.01), 0px 66px 18px 0px rgba(0, 0, 0, 0.00)',
 };
+// Customize BorderRadius
+const screensCustomize: ScreensConfig = {
+  mobile: '576px',
+  // => @media (min-width: 640px) { ... }
 
+  tablet: '768px',
+  // => @media (min-width: 640px) { ... }
+
+  laptop: '992px',
+  // => @media (min-width: 1024px) { ... }
+
+  desktop: '1224px',
+  // => @media (min-width: 1280px) { ... }
+};
 const config: Config = {
   content: ['./src/app/**/*.{js,ts,jsx,tsx}'],
   darkMode: 'class',
   theme: {
     container: {
       center: true,
+      padding: {
+        DEFAULT: '20px',
+        mobile: '2rem',
+      },
+      screens: screensCustomize,
     },
     colors: colorTailwind,
     fontSize: fontTailwind,

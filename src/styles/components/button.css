@@ -307,9 +307,16 @@
     @apply w-full;
   }
   &-square {
-    @apply h-3 w-3 p-0.5;
+    @apply h-4 w-4 p-0.5;
+
     &.btn-lg {
       @apply h-5 w-5 p-1;
+    }
+    &.btn-link {
+      @apply h-5 w-5 p-0.5;
+      &.btn-lg {
+        @apply h-6 w-6 p-0;
+      }
     }
   }
 }
