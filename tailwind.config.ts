@@ -310,6 +310,7 @@ const spacingTailwind: ResolvableTo<KeyValuePair> = {
   '0.5': '4px',
   1: '8px',
   2: '16px',
+  2.5: '20px',
   3: '24px',
   4: '32px',
   5: '40px',
@@ -356,6 +357,9 @@ const config: Config = {
   content: ['./src/app/**/*.{js,ts,jsx,tsx}'],
   darkMode: 'class',
   theme: {
+    container: {
+      center: true,
+    },
     colors: colorTailwind,
     fontSize: fontTailwind,
     spacing: spacingTailwind,

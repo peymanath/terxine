@@ -1,0 +1,23 @@
+.logo {
+  @apply flex items-center justify-between;
+
+  &-primary {
+    @apply text-primary;
+  }
+
+  &-white {
+    @apply text-white;
+  }
+
+  &-gray-800 {
+    @apply text-gray-800;
+  }
+
+  &-sm {
+    @apply gap-0.5;
+  }
+
+  &-lg {
+    @apply gap-1;
+  }
+}

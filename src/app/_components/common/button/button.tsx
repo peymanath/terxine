@@ -1,7 +1,7 @@
 import React from 'react';
 import type { ButtonProps, ButtonShape } from '@/app/_components/common/button/button.types';
 import classNames from 'classnames';
-import type { Size } from '@/app/_components/types';
+import type { Size } from '@/app/_components/common/types';
 
 // Generate ClassName for button size
 const buttonSize: Record<Size, string> = {

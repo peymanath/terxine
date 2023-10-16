@@ -1,4 +1,4 @@
-import type { Size } from '@/app/_components/types';
+import type { Size } from '@/app/_components/common/types';
 
 export type ComponentBase = {
   size?: Size;
