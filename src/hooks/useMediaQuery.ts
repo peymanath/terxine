@@ -1,30 +1,27 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { MediaQueryEnum } from '@/types/hooks.types';
+import type { MediaQueryReturn } from '@/types/hooks.types';
 
-export const useMediaQuery = (minWidth: MediaQueryEnum): boolean => {
-  const generateMinWidth: Record<MediaQueryEnum, number> = {
-    [MediaQueryEnum.MOBILE]: 576,
-    [MediaQueryEnum.TABLET]: 768,
-    [MediaQueryEnum.LAPTOP]: 992,
-    [MediaQueryEnum.DESKTOP]: 1224,
+export const useMediaQuery = (): MediaQueryReturn => {
+  const [width, setWidth] = useState(window.innerWidth);
+
+  const handleWindowSizeChange = () => {
+    setWidth(window.innerWidth);
   };
 
-  const [state, setState] = useState({
-    windowWidth: window.innerWidth,
-    isDesiredWidth: false,
-  });
-
   useEffect(() => {
-    const resizeHandler = (): void => {
-      const currentWindowWidth: number = window.innerWidth;
-      const isDesiredWidth: boolean = currentWindowWidth < generateMinWidth[minWidth];
-      setState({ windowWidth: currentWindowWidth, isDesiredWidth });
-    };
-    window.addEventListener('resize', resizeHandler);
-    return () => window.removeEventListener('resize', resizeHandler);
-  }, [state.windowWidth]);
+    window.addEventListener('resize', handleWindowSizeChange);
 
-  return state.isDesiredWidth;
+    return () => {
+      window.removeEventListener('resize', handleWindowSizeChange);
+    };
+  }, []);
+
+  const isMobile = width <= 576;
+  const isTablet = width <= 768;
+  const isLaptop = width > 992;
+  const isDesktop = width > 1224;
+
+  return { isMobile, isTablet, isLaptop, isDesktop };
 };
