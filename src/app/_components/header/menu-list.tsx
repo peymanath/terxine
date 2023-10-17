@@ -11,44 +11,44 @@ const menuListItem: MenuListItem[] = [
   {
     id: 2,
     text: 'شعبه',
-    url: '/',
+    url: '/branchs',
     subMenu: [
       {
         id: 1,
         text: 'شعبه اکباتان',
-        url: '/',
+        url: '/branchs/ekabtan',
       },
       {
         id: 2,
         text: 'شعبه چالوس',
-        url: '/',
+        url: 'branchs/chaloos',
       },
       {
         id: 3,
         text: 'شعبه اقدسیه',
-        url: '/',
+        url: 'branchs/aghdasyeh',
       },
       {
         id: 4,
         text: 'شعبه ونک',
-        url: '/',
+        url: 'branchs/vanak',
       },
     ],
   },
   {
     id: 4,
     text: 'اعظای نمایندگی',
-    url: '/',
+    url: 'deputize',
   },
   {
     id: 5,
     text: 'درباره ما',
-    url: '/',
+    url: '/about-us',
   },
   {
     id: 6,
     text: 'تماس با ما',
-    url: '/',
+    url: '/contact-us',
   },
 ];
 

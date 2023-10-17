@@ -11,8 +11,8 @@ export const Header: React.FC = () => {
   const { isLaptop } = useMediaQuery();
 
   return (
-    <div className='w-full flex items-center justify-between fixed top-0 right-0 left-0 py-2.5 desktop:py-4'>
-      <div className='container flex items-center justify-between bg-white'>
+    <header className='bg-white w-full flex items-center justify-between fixed top-0 right-0 left-0 h-7 laptop:h-10 shadow-2'>
+      <div className='container flex items-center justify-between'>
         {isLaptop && (
           <Button
             shape='square'
@@ -51,6 +51,6 @@ export const Header: React.FC = () => {
           />
         </div>
       </div>
-    </div>
+    </header>
   );
 };
