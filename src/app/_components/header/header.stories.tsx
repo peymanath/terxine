@@ -1,3 +1,4 @@
+import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { Header } from './header';
 
@@ -6,7 +7,7 @@ const meta: Meta<typeof Header> = {
   component: Header,
   tags: ['autodocs'],
   decorators: [
-    Story => {
+    (Story): React.ReactElement<unknown> => {
       document.documentElement.dir = 'rtl';
       return <Story />;
     },

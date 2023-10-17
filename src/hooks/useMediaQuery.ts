@@ -6,7 +6,7 @@ import type { MediaQueryReturn } from '@/types/hooks.types';
 export const useMediaQuery = (): MediaQueryReturn => {
   const [width, setWidth] = useState(window.innerWidth);
 
-  const handleWindowSizeChange = () => {
+  const handleWindowSizeChange = (): void => {
     setWidth(window.innerWidth);
   };
 
@@ -20,8 +20,8 @@ export const useMediaQuery = (): MediaQueryReturn => {
 
   const isMobile = width <= 576;
   const isTablet = width <= 768;
-  const isLaptop = width > 992;
-  const isDesktop = width > 1224;
+  const isLaptop = width <= 992;
+  const isDesktop = width <= 1224;
 
   return { isMobile, isTablet, isLaptop, isDesktop };
 };

@@ -207,7 +207,7 @@ const fontTailwind: CustomFontType = {
       fontWeight: '700', // Bold
     },
   ],
-  h7: [
+  'header-7': [
     '20px',
     {
       letterSpacing: '0',
@@ -217,28 +217,28 @@ const fontTailwind: CustomFontType = {
 
   // Body Font
   'body-sm': [
-    '20px',
+    '14px',
     {
       letterSpacing: '0',
       fontWeight: '400', // Regular
     },
   ],
   'body-md': [
-    '18px',
-    {
-      letterSpacing: '0',
-      fontWeight: '400', // Regular
-    },
-  ],
-  'body-lg': [
     '16px',
     {
       letterSpacing: '0',
       fontWeight: '400', // Regular
     },
   ],
+  'body-lg': [
+    '18px',
+    {
+      letterSpacing: '0',
+      fontWeight: '400', // Regular
+    },
+  ],
   'body-xl': [
-    '14px',
+    '20px',
     {
       letterSpacing: '0',
       fontWeight: '400', // Regular
