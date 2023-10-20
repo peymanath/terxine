@@ -9,7 +9,7 @@ import type { DotButtonsProps } from '@/app/_components/hero-section-slider/hero
 
 export const DotButtons: React.FC<DotButtonsProps> = props => {
   const { snaps, selectedIndex, scrollTo } = props;
-
+  console.log({ snaps, selectedIndex });
   return (
     <div className='embla__dots__container before:h-3 after:h-3 before:w-2.5 after:w-2.5  desktop:before:h-4 desktop:after:h-4 desktop:before:w-[27px] desktop:after:w-[27px]'>
       <div className='flex items-center justify-between gap-0.5 bg-white px-1 tablet:py-1'>

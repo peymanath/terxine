@@ -1,6 +1,35 @@
+'use client';
 import React from 'react';
+import type { HeroSectionSliderItems } from '@/app/_components/hero-section-slider';
+import dynamic from 'next/dynamic';
+
+const HeroSectionSlider = dynamic(
+  () => import('@/app/_components/hero-section-slider').then(com => com.HeroSectionSlider),
+  { ssr: false }
+);
+
+const sliderItem: HeroSectionSliderItems[] = [
+  {
+    src: '/images/sliders/food-1.webp',
+    title: 'یک ماجراجویی آشپزی برای تمام حواس',
+    textButton: 'سفارش غذای آنلاین',
+  },
+  {
+    src: '/images/sliders/neshiman-1.webp',
+    title: 'با محیطی دلنشین و با کیفیت',
+    textButton: 'رزرو آنلاین میز غذا',
+  },
+  {
+    src: '/images/sliders/food-2.webp',
+    title: 'لذت غذای سالم و گیاهی را با ترخینه تجربه کنید!',
+  },
+];
 
 const Home: React.FC = () => {
-  return <div>Hello world</div>;
+  return (
+    <div>
+      <HeroSectionSlider sliderItems={sliderItem} />
+    </div>
+  );
 };
 export default Home;

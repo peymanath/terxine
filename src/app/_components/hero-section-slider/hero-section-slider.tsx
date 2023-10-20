@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import useEmblaCarousel, { type EmblaCarouselType } from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
@@ -25,7 +27,7 @@ export const HeroSectionSlider: React.FC<HeroSectionSliderProps> = props => {
   const [scrollSnaps, setScrollSnaps] = React.useState<number[]>([]);
 
   // Config embla
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false }, [Autoplay()]);
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, direction: 'rtl' }, [Autoplay()]);
   const scrollPrev = React.useCallback(() => emblaApi && emblaApi.scrollPrev(), [emblaApi]);
   const scrollNext = React.useCallback(() => emblaApi && emblaApi.scrollNext(), [emblaApi]);
   const scrollTo = React.useCallback(

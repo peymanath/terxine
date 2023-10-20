@@ -1,5 +1,10 @@
+'use client';
 import React from 'react';
-import { Header } from '@/app/_components/header';
+import dynamic from 'next/dynamic';
+
+const Header = dynamic(() => import('@/app/_components/header').then(com => com.Header), {
+  ssr: false,
+});
 
 const RootLayout: React.FC<React.PropsWithChildren> = ({ children }) => {
   return (
