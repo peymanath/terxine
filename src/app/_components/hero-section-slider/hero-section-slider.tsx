@@ -65,7 +65,7 @@ export const HeroSectionSlider: React.FC<HeroSectionSliderProps> = props => {
                 width={2093}
                 height={336}
                 src={src}
-                alt={title}
+                alt={title || 'Slider'}
               />
               <span className='absolute inset-0 w-full h-full bg-black opacity-70'></span>
               {!!title && (
