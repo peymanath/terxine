@@ -72,7 +72,7 @@ export const HeroSectionSlider: React.FC<HeroSectionSliderProps> = props => {
         </div>
 
         {!isMobile && (
-          <>
+          <React.Fragment>
             <PrevButton
               onClick={scrollPrev}
               disabled={prevBtnDisabled}
@@ -82,14 +82,14 @@ export const HeroSectionSlider: React.FC<HeroSectionSliderProps> = props => {
               onClick={scrollNext}
               disabled={nextBtnDisabled}
             />
-          </>
+          </React.Fragment>
         )}
 
         <div className='embla__dots'>
           {scrollSnaps.map((_, index) => (
             <DotButton
               key={index}
-              onClick={() => scrollTo(index)}
+              onClick={(): void => scrollTo(index)}
               className={'embla__dot'.concat(
                 index === selectedIndex ? ' embla__dot--selected' : ''
               )}

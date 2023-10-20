@@ -4,17 +4,23 @@ import { useEffect, useState } from 'react';
 import type { MediaQueryReturn } from '@/types/hooks.types';
 
 export const useMediaQuery = (): MediaQueryReturn => {
-  const [width, setWidth] = useState(window.innerWidth);
+  const [width, setWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 0);
 
   const handleWindowSizeChange = (): void => {
-    setWidth(window.innerWidth);
+    if (typeof window !== 'undefined') {
+      setWidth(window.innerWidth);
+    }
   };
 
   useEffect(() => {
-    window.addEventListener('resize', handleWindowSizeChange);
+    if (typeof window !== 'undefined') {
+      window.addEventListener('resize', handleWindowSizeChange);
+    }
 
     return () => {
-      window.removeEventListener('resize', handleWindowSizeChange);
+      if (typeof window !== 'undefined') {
+        window.addEventListener('resize', handleWindowSizeChange);
+      }
     };
   }, []);
 
