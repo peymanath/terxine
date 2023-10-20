@@ -1,26 +1,25 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import React from 'react';
 import type { MediaQueryReturn } from '@/types/hooks.types';
+import { useIsClient } from '@/hooks/useClientCtx';
 
 export const useMediaQuery = (): MediaQueryReturn => {
-  const [width, setWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 0);
+  // Use Hooks
+  const isClient = useIsClient();
+
+  // States;
+  const [width, setWidth] = React.useState(isClient ? window.innerWidth : 0);
 
   const handleWindowSizeChange = (): void => {
-    if (typeof window !== 'undefined') {
-      setWidth(window.innerWidth);
-    }
+    isClient && setWidth(window.innerWidth);
   };
 
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      window.addEventListener('resize', handleWindowSizeChange);
-    }
+  React.useEffect(() => {
+    isClient && window.addEventListener('resize', handleWindowSizeChange);
 
     return () => {
-      if (typeof window !== 'undefined') {
-        window.addEventListener('resize', handleWindowSizeChange);
-      }
+      isClient && window.addEventListener('resize', handleWindowSizeChange);
     };
   }, []);
 
