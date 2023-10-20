@@ -4,18 +4,19 @@ import Autoplay from 'embla-carousel-autoplay';
 import type { HeroSectionSliderProps } from '@/app/_components/hero-section-slider/hero-section-slider.types';
 import Image from 'next/image';
 import {
-  DotButton,
+  DotButtons,
   NextButton,
   PrevButton,
 } from '@/app/_components/hero-section-slider/embla-carousel-buttons';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
+import { Button } from '@/app/_components/common/button';
 
 export const HeroSectionSlider: React.FC<HeroSectionSliderProps> = props => {
   // Destructure Props
   const { sliderItems }: HeroSectionSliderProps = props;
 
   // Use Hooks
-  const { isMobile } = useMediaQuery();
+  const { isMobile, isDesktop } = useMediaQuery();
 
   // States
   const [prevBtnDisabled, setPrevBtnDisabled] = React.useState(true);
@@ -55,7 +56,7 @@ export const HeroSectionSlider: React.FC<HeroSectionSliderProps> = props => {
         className='embla__viewport'
         ref={emblaRef}>
         <div className='embla__container'>
-          {sliderItems.map(({ src, title }, index) => (
+          {sliderItems.map(({ src, title, textButton }, index) => (
             <div
               key={index}
               className='relative embla__slide'>
@@ -66,7 +67,18 @@ export const HeroSectionSlider: React.FC<HeroSectionSliderProps> = props => {
                 src={src}
                 alt={title}
               />
-              <span className='absolute inset-0 w-full h-full bg-black opacity-50'></span>
+              <span className='absolute inset-0 w-full h-full bg-black opacity-70'></span>
+              {!!title && (
+                <div className='w-full absolute right-1/2 -translate-y-1/2 top-1/2 translate-x-1/2 flex flex-col items-center justify-between gap-2 desktop:gap-5'>
+                  <span className='text-header-6 desktop:text-header-2 text-white'>{title}</span>
+                  {!!textButton && (
+                    <Button
+                      text={textButton}
+                      size={isDesktop ? 'small' : 'default'}
+                    />
+                  )}
+                </div>
+              )}
             </div>
           ))}
         </div>
@@ -84,18 +96,11 @@ export const HeroSectionSlider: React.FC<HeroSectionSliderProps> = props => {
             />
           </React.Fragment>
         )}
-
-        <div className='embla__dots'>
-          {scrollSnaps.map((_, index) => (
-            <DotButton
-              key={index}
-              onClick={(): void => scrollTo(index)}
-              className={'embla__dot'.concat(
-                index === selectedIndex ? ' embla__dot--selected' : ''
-              )}
-            />
-          ))}
-        </div>
+        <DotButtons
+          snaps={scrollSnaps}
+          selectedIndex={selectedIndex}
+          scrollTo={scrollTo}
+        />
       </div>
     </div>
   );

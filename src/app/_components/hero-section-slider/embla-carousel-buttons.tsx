@@ -1,16 +1,40 @@
-import React, { type PropsWithChildren } from 'react';
+import React from 'react';
 import { DirectionLeft, DirectionRight } from 'react-huge-icons/outline';
+import type {
+  DotButtonProps,
+  PropType,
+} from '@/app/_components/hero-section-slider/hero-section-slider.types';
+import classNames from 'classnames';
+import type { DotButtonsProps } from '@/app/_components/hero-section-slider/hero-section-slider.types';
 
-type PropType = PropsWithChildren<
-  React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>
->;
+export const DotButtons: React.FC<DotButtonsProps> = props => {
+  const { snaps, selectedIndex, scrollTo } = props;
 
-export const DotButton: React.FC<PropType> = props => {
-  const { children, ...restProps } = props;
+  return (
+    <div className='embla__dots__container before:h-3 after:h-3 before:w-2.5 after:w-2.5  desktop:before:h-4 desktop:after:h-4 desktop:before:w-[27px] desktop:after:w-[27px]'>
+      <div className='flex items-center justify-between gap-0.5 bg-white px-1 tablet:py-1'>
+        {snaps.map((_, index) => (
+          <DotButton
+            key={index}
+            onClick={(): void => scrollTo(index)}
+            isActive={index === selectedIndex}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+const DotButton: React.FC<DotButtonProps> = props => {
+  const { children, isActive, ...restProps } = props;
+
+  // Generate Classes
+  const classes = classNames('embla__dot', { 'embla__dot--selected': isActive });
 
   return (
     <button
       type='button'
+      className={classes}
       {...restProps}>
       {children}
     </button>
