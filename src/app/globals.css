@@ -2,7 +2,7 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
-@import '../styles/components';
+@import '../styles';
 
 :lang(fa-IR) {
   font-family: var(--font-estedad);

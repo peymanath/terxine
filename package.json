@@ -21,6 +21,8 @@
     "autoprefixer": "10.4.16",
     "classnames": "^2.3.2",
     "colord": "^2.9.3",
+    "embla-carousel-autoplay": "^8.0.0-rc14",
+    "embla-carousel-react": "^8.0.0-rc14",
     "next": "13.5.4",
     "postcss": "8.4.31",
     "react": "18.2.0",
