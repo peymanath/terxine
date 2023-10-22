@@ -9,24 +9,36 @@ export const useMediaQuery = (): MediaQueryReturn => {
   const isClient = useIsClient();
 
   // States;
-  const [width, setWidth] = React.useState(isClient ? window.innerWidth : 0);
+  const [width, setWidth] = React.useState((isClient && window.innerWidth) || 0);
 
-  const handleWindowSizeChange = (): void => {
-    isClient && setWidth(window.innerWidth);
-  };
+  const [responsive, serResponsive] = React.useState<MediaQueryReturn>({
+    isMobile: false,
+    isTablet: false,
+    isLaptop: false,
+    isDesktop: false,
+  });
 
   React.useEffect(() => {
-    isClient && window.addEventListener('resize', handleWindowSizeChange);
+    const handler = (): void => {
+      setWidth(window.innerWidth);
+    };
+    window.addEventListener('resize', handler);
 
     return () => {
-      isClient && window.addEventListener('resize', handleWindowSizeChange);
+      window.addEventListener('resize', handler);
     };
   }, []);
 
-  const isMobile = width <= 576;
-  const isTablet = width <= 768;
-  const isLaptop = width <= 992;
-  const isDesktop = width <= 1224;
+  React.useEffect(() => {
+    serResponsive(() => {
+      return {
+        isMobile: width <= 576,
+        isTablet: width <= 768,
+        isLaptop: width <= 992,
+        isDesktop: width <= 1224,
+      };
+    });
+  }, [width]);
 
-  return { isMobile, isTablet, isLaptop, isDesktop };
+  return responsive;
 };

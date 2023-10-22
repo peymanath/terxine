@@ -8,6 +8,4 @@ export const IsClientCtxProvider: React.FC<React.PropsWithChildren> = ({ childre
   return <IsClientCtx.Provider value={isClient}>{children}</IsClientCtx.Provider>;
 };
 
-export const useIsClient = () => {
-  return React.useContext(IsClientCtx);
-};
+export const useIsClient = () => React.useContext(IsClientCtx);
