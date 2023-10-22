@@ -1,8 +1,7 @@
-import React from 'react';
-import { IsClientCtxProvider } from '@/hooks/useClientCtx';
+import type React from 'react';
 
 const Providers: React.FC<React.PropsWithChildren> = ({ children }) => {
-  return <IsClientCtxProvider>{children}</IsClientCtxProvider>;
+  return children;
 };
 
 export default Providers;

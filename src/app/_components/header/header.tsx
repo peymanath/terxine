@@ -11,9 +11,9 @@ export const Header: React.FC = () => {
   const { isLaptop } = useMediaQuery();
 
   return (
-    <header className='bg-white w-full flex items-center justify-between fixed top-0 right-0 left-0 h-7 laptop:h-10 shadow-2'>
+    <header className='bg-white w-full flex items-center justify-between fixed top-0 right-0 left-0 h-7 laptop:h-10 shadow-2 z-50'>
       <div className='container flex items-center justify-between'>
-        {isLaptop && (
+        {!isLaptop && (
           <Button
             shape='square'
             size='large'
@@ -24,12 +24,12 @@ export const Header: React.FC = () => {
         <div>
           <Logo
             type='both'
-            size={isLaptop ? 'small' : 'large'}
+            size={!isLaptop ? 'small' : 'large'}
           />
         </div>
-        {!isLaptop && <MenuListDesktop />}
+        {isLaptop && <MenuListDesktop />}
         <div className='flex items-center justify-between gap-1'>
-          {!isLaptop && (
+          {isLaptop && (
             <Button
               shape='square'
               size='large'
@@ -39,13 +39,13 @@ export const Header: React.FC = () => {
           )}
           <Button
             shape='square'
-            size={isLaptop ? 'small' : 'large'}
+            size={!isLaptop ? 'small' : 'large'}
             color='tint-50'
             icon={<CartSmile className='w-3 h-3' />}
           />
           <Button
             shape='square'
-            size={isLaptop ? 'small' : 'large'}
+            size={!isLaptop ? 'small' : 'large'}
             color='tint-50'
             icon={<User className='w-3 h-3' />}
           />

@@ -1,6 +1,7 @@
 import React from 'react';
 import './globals.css';
 import localFont from 'next/font/local';
+import Providers from '@/providers';
 
 const estedad = localFont({
   variable: '--font-estedad',
@@ -40,7 +41,9 @@ const RootLayout: React.FC<React.PropsWithChildren> = ({ children }) => {
     <html
       lang='fa-IR'
       dir='rtl'>
-      <body className={estedad.variable}>{children}</body>
+      <body className={estedad.variable}>
+        <Providers>{children}</Providers>
+      </body>
     </html>
   );
 };

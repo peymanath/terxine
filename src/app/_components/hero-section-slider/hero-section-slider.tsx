@@ -18,7 +18,7 @@ export const HeroSectionSlider: React.FC<HeroSectionSliderProps> = props => {
   const { sliderItems }: HeroSectionSliderProps = props;
 
   // Use Hooks
-  const { isMobile, isDesktop } = useMediaQuery();
+  const { isLaptop, isDesktop } = useMediaQuery();
 
   // States
   const [prevBtnDisabled, setPrevBtnDisabled] = React.useState(true);
@@ -76,7 +76,7 @@ export const HeroSectionSlider: React.FC<HeroSectionSliderProps> = props => {
                   {!!textButton && (
                     <Button
                       text={textButton}
-                      size={isDesktop ? 'small' : 'default'}
+                      size={!isDesktop ? 'small' : 'default'}
                     />
                   )}
                 </div>
@@ -85,7 +85,7 @@ export const HeroSectionSlider: React.FC<HeroSectionSliderProps> = props => {
           ))}
         </div>
 
-        {!isMobile && (
+        {isLaptop && (
           <React.Fragment>
             <PrevButton
               onClick={scrollPrev}
