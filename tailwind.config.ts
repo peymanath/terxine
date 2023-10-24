@@ -1,8 +1,7 @@
 import type { Config } from 'tailwindcss';
 import { colord, extend } from 'colord';
 import mixPlugin from 'colord/plugins/mix';
-import type { RecursiveKeyValuePair, ResolvableTo } from 'tailwindcss/types/config';
-import type { KeyValuePair } from 'tailwindcss/types/config';
+import type { KeyValuePair, RecursiveKeyValuePair, ResolvableTo } from 'tailwindcss/types/config';
 import { ScreensConfig } from 'tailwindcss/types/config';
 
 type CustomFontType = ResolvableTo<
@@ -337,10 +336,11 @@ const spacingTailwind: ResolvableTo<KeyValuePair> = {
 const borderRadiusCustomize: ResolvableTo<KeyValuePair> = {
   none: '0',
   DEFAULT: '4px',
-  sm: '16px',
-  md: '24px',
-  lg: '32px',
-  xl: '64px',
+  sm: '8px',
+  md: '16px',
+  lg: '24px',
+  xl: '32px',
+  '2xl': '64px',
 };
 // Customize BorderRadius
 const boxShadowCustomize: ResolvableTo<KeyValuePair> = {

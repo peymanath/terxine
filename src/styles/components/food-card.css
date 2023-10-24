@@ -1,0 +1,95 @@
+.food-card {
+  /* Default Style */
+  @apply overflow-hidden bg-white flex flex-col border border-gray-400;
+
+  .food-card-image {
+    @apply object-cover;
+  }
+
+  /* Vertical Component */
+
+  &-vertical {
+    .food-card-vertical-content {
+      @apply flex flex-col items-center justify-between;
+    }
+
+    .food-card-vertical-meta {
+      @apply w-full flex flex-col gap-0.5 items-center justify-between;
+
+      .meta {
+        @apply w-full flex items-center justify-between;
+
+        .heart {
+          @apply text-gray-500;
+
+          &-is-wishlist {
+            @apply text-error;
+          }
+        }
+
+        & > div {
+          @apply flex flex-col gap-1;
+        }
+      }
+
+      .title {
+        @apply text-gray-800;
+      }
+    }
+
+    /* add styles for large card size */
+
+    &.food-card-sm {
+      @apply rounded gap-0.5;
+      /* add style for meta card */
+
+      .food-card-vertical-content {
+        @apply pt-0 p-1 gap-1.5;
+
+        .food-card-vertical-meta {
+          @apply gap-0.5;
+
+          .title {
+            @apply text-caption-md;
+          }
+        }
+      }
+
+      /* Image size in small card */
+
+      .food-card-image {
+        @apply w-[168px] h-[109px];
+      }
+    }
+
+    /* add styles for large card size */
+
+    &.food-card-lg {
+      @apply rounded-sm gap-2;
+      /* add style for meta card */
+
+      .food-card-vertical-content {
+        @apply pt-0 p-2 gap-2;
+
+        .food-card-vertical-meta {
+          @apply gap-2;
+
+          .title {
+            @apply text-header-7;
+          }
+        }
+      }
+
+      /* Image size in large card */
+
+      .food-card-image {
+        @apply w-[288px] h-[240px];
+      }
+    }
+  }
+
+  /* Horizontal Component */
+
+  &-horizontal {
+  }
+}

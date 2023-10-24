@@ -2,7 +2,7 @@
   @apply no-underline px-2 py-1 h-5 border border-transparent cursor-pointer select-none;
   @apply inline-flex items-center justify-center gap-2 rounded border-transparent text-center transition duration-100;
   @apply text-primary;
-  @apply text-button-lg px-2 h-5;
+  @apply px-2 h-5;
 
   &:active:hover,
   &:active:focus {
@@ -292,7 +292,7 @@
 
   /* Button Size and Shape*/
   &-sm {
-    @apply text-caption-md px-1 h-4;
+    @apply px-1 h-4;
   }
   &-md {
     @apply h-6;

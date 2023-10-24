@@ -5,15 +5,30 @@ export enum FoodCardSize {
 
 export type FoodCardProps = {
   id: number;
-  image: 'empty' | string;
-  title: string;
-  basePrice: number;
-  discountPerssentage?: number;
-  discountTotal?: number;
-  size?: FoodCardSize;
-  isLoading?: boolean;
-  isWishList?: boolean;
   rate: number;
+  title: string;
+  /**
+   * # Example:
+   *
+   * **Url Image**
+   *
+   * `google.com/image-holder/flower.webp`
+   *
+   * **Public Folder NextJs or ReactJS**
+   *
+   * `/image-holder/flower.webp`
+   *
+   * **Base64 Url**
+   *
+   * `data:image-holder/webp;base64,UklGRrqJAgBXRUJQVlA4IK6JAg`
+   */
+  imageUrl?: undefined | string;
+  basePrice: number;
+  discountPerssentage?: undefined | number;
+  discountTotal?: undefined | number;
+  size?: undefined | FoodCardSize;
+  isLoading?: undefined | boolean;
+  isWishList?: undefined | boolean;
 } & (FoodCardHorizontalProps | FoodCardVerticalProps);
 export type FoodCardHorizontalProps = {
   variant?: 'horizontal';

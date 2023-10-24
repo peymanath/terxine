@@ -27,6 +27,7 @@ export const Button: React.FC<ButtonProps> = props => {
     loadingText,
     className,
     onClick,
+    customFont = 'text-button-lg',
     variant = 'contained',
     color = 'default',
     size = 'default',
@@ -40,6 +41,7 @@ export const Button: React.FC<ButtonProps> = props => {
   const classes = classNames(
     'btn',
     className,
+    customFont,
     { [`btn-loading`]: isLoading },
     { [`btn-disabled`]: isDisables },
     { [`btn-${color}`]: color },

@@ -41,5 +41,6 @@ export type ButtonProps = Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'c
     variant?: ButtonVariant;
     endIcon?: React.ReactNode;
     startIcon?: React.ReactNode;
+    customFont?: string;
     onClick?: React.MouseEventHandler<HTMLButtonElement>;
   };
