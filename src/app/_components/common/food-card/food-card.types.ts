@@ -29,9 +29,9 @@ export type FoodCardProps = {
   size?: undefined | FoodCardSize;
   isLoading?: undefined | boolean;
   isWishList?: undefined | boolean;
-} & (FoodCardHorizontalProps | FoodCardVerticalProps);
+} & (FoodCardVerticalProps | FoodCardHorizontalProps);
 export type FoodCardHorizontalProps = {
-  variant?: 'horizontal';
+  variant: 'horizontal';
   /**
    * # Description
    * The description is used when the value of `variant` is equal to horizontal.
@@ -39,7 +39,7 @@ export type FoodCardHorizontalProps = {
   description?: string;
 };
 export type FoodCardVerticalProps = {
-  variant?: 'vertical';
+  variant: 'vertical';
   /**
    * # Total Rating
    * The Total Rating is used when the value of `variant` is equal to vertical.

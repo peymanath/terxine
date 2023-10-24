@@ -2,7 +2,6 @@ import React from 'react';
 import './globals.css';
 import localFont from 'next/font/local';
 import Providers from '@/providers';
-import { FoodCard } from '@/app/_components/common/food-card/food-card';
 
 const estedad = localFont({
   variable: '--font-estedad',
@@ -44,11 +43,6 @@ const RootLayout: React.FC<React.PropsWithChildren> = ({ children }) => {
       dir='rtl'>
       <body className={estedad.variable}>
         <Providers>{children}</Providers>
-        <FoodCard
-          variant='vertical'
-          title='sxssx'
-          image='empty'
-        />
       </body>
     </html>
   );

@@ -15,17 +15,11 @@ const cardSize: Record<FoodCardSize, string> = {
 
 export const FoodCard: React.FC<FoodCardProps> = props => {
   // Destructure Props
-  const {
-    variant = 'vertical',
-    size = FoodCardSize.Small,
-    isLoading = false,
-    imageUrl,
-    ...reset
-  }: FoodCardProps = props;
+  const { size = FoodCardSize.Small, isLoading = false, imageUrl, ...reset }: FoodCardProps = props;
 
   const classes = classNames(
     'food-card',
-    { [`food-card-${variant}`]: variant },
+    { [`food-card-${reset.variant}`]: reset.variant },
     { [`food-card-loading`]: isLoading },
     { [cardSize[size]]: size }
   );
@@ -40,13 +34,20 @@ export const FoodCard: React.FC<FoodCardProps> = props => {
           src={imageUrl}
           alt={reset.title}></Image>
       )}
-      {variant === 'vertical' ? (
+      {reset.variant === 'vertical' ? (
         <FoodCardVertical
-          size={size}
           {...reset}
+          size={size}
+          variant='vertical'
+          totalRating={reset?.totalRating}
         />
       ) : (
-        <></>
+        <FoodCardVertical
+          {...reset}
+          size={size}
+          variant='horizontal'
+          description={reset.description}
+        />
       )}
     </div>
   );

@@ -8,6 +8,7 @@
 
   /* Vertical Component */
 
+  &,
   &-vertical {
     .food-card-vertical-content {
       @apply flex flex-col items-center justify-between;
@@ -38,44 +39,55 @@
     }
 
     /* add styles for large card size */
-
     &.food-card-sm {
       @apply rounded gap-0.5;
       /* add style for meta card */
-
       .food-card-vertical-content {
         @apply pt-0 p-1 gap-1.5;
-
         .food-card-vertical-meta {
           @apply gap-0.5;
-
           .title {
             @apply text-caption-md;
+          }
+
+          .meta > div {
+            .badge-price {
+              @apply gap-0.5;
+            }
+
+            .price {
+              @apply text-caption-sm;
+            }
           }
         }
       }
 
       /* Image size in small card */
-
       .food-card-image {
         @apply w-[168px] h-[109px];
       }
     }
 
     /* add styles for large card size */
-
     &.food-card-lg {
       @apply rounded-sm gap-2;
       /* add style for meta card */
-
       .food-card-vertical-content {
         @apply pt-0 p-2 gap-2;
-
         .food-card-vertical-meta {
           @apply gap-2;
-
           .title {
             @apply text-header-7;
+          }
+
+          .meta > div {
+            .badge-price {
+              @apply gap-1;
+            }
+
+            .price {
+              @apply text-body-md;
+            }
           }
         }
       }

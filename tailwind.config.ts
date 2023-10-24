@@ -341,6 +341,7 @@ const borderRadiusCustomize: ResolvableTo<KeyValuePair> = {
   lg: '24px',
   xl: '32px',
   '2xl': '64px',
+  full: '9999px',
 };
 // Customize BorderRadius
 const boxShadowCustomize: ResolvableTo<KeyValuePair> = {
