@@ -1,3 +1,7 @@
+# Coming Soon...
+
+![Cover](/cover.png)
+
 ### About Project
 
 #### *UI/UX Design*
