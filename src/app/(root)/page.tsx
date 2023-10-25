@@ -1,9 +1,6 @@
 'use client';
 import React from 'react';
-import {
-  HeroSectionSlider,
-  type HeroSectionSliderItems,
-} from '@/app/_components/hero-section-slider';
+import { HeroSectionSlider, type HeroSectionSliderItems } from '@/app/_components';
 
 const heroSectionSliderItem: HeroSectionSliderItems[] = [
   {

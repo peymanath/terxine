@@ -1,5 +1,5 @@
 import type React from 'react';
-import type { ComponentBase, LoadingBehavior } from '@/app/_components/types';
+import type { ComponentBase, LoadingBehavior } from '@/app/_components';
 
 /**
  * Button Shape Type

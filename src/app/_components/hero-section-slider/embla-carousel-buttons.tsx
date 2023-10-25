@@ -1,11 +1,7 @@
 import React from 'react';
 import { DirectionLeft, DirectionRight } from 'react-huge-icons/outline';
 import classNames from 'classnames';
-import type {
-  DotButtonProps,
-  DotButtonsProps,
-  PropType,
-} from '@/app/_components/hero-section-slider/hero-section-slider.types';
+import type { DotButtonProps, DotButtonsProps, PropType } from '@/app/_components';
 
 export const DotButtons: React.FC<DotButtonsProps> = props => {
   const { snaps, selectedIndex, scrollTo } = props;

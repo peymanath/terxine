@@ -2,8 +2,7 @@ import React, { useRef } from 'react';
 import { Swiper, type SwiperRef, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import { ArrowThickLeft, ArrowThickRight } from 'react-huge-icons/outline';
-import type { SliderProps } from '@/app/_components/slider/slider.types';
-import { Button } from '@/app/_components/common'; // Import Css Class for Swiper Library
+import { Button, type SliderProps } from '@/app/_components'; // Import Css Class for Swiper Library
 import 'swiper/css';
 import 'swiper/css/navigation';
 

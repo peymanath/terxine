@@ -1,3 +1,3 @@
-import type { FoodCardProps } from '@/app/_components/common/food-card/food-card.types';
+import type { FoodCardProps } from '@/app/_components';
 
 export type FoodCardVerticalProps = Omit<FoodCardProps, 'imageUrl' | 'isLoading'>;

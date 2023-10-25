@@ -1,9 +1,5 @@
 import React from 'react';
-import { Badge, Button } from '@/app/_components/common';
-import {
-  type FoodCardProps,
-  FoodCardSize,
-} from '@/app/_components/common/food-card/food-card.types';
+import { Badge, Button, type FoodCardProps, FoodCardSize } from '@/app/_components';
 import { Heart as HeartSolid, Star } from 'react-huge-icons/solid';
 import { Heart as HeartOutline } from 'react-huge-icons/outline';
 import { formatPrice, toPersianNumber } from '@/utils/toPersianNumber';

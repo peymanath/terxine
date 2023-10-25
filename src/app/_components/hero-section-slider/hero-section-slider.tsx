@@ -5,12 +5,13 @@ import useEmblaCarousel, { type EmblaCarouselType } from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import Image from 'next/image';
-import { Button, type HeroSectionSliderProps } from '@/app/_components';
 import {
+  Button,
   DotButtons,
+  type HeroSectionSliderProps,
   NextButton,
   PrevButton,
-} from '@/app/_components/hero-section-slider/embla-carousel-buttons';
+} from '@/app/_components';
 
 export const HeroSectionSlider: React.FC<HeroSectionSliderProps> = props => {
   // Destructure Props

@@ -1,4 +1,4 @@
-import type { ComponentBase } from '@/app/_components/types';
+import type { ComponentBase } from '@/app/_components';
 
 /**
  * Logo Colors Type

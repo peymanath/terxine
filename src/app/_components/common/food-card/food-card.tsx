@@ -1,11 +1,7 @@
 import React from 'react';
-import {
-  type FoodCardProps,
-  FoodCardSize,
-} from '@/app/_components/common/food-card/food-card.types';
 import classNames from 'classnames';
 import Image from 'next/image';
-import { FoodCardVertical } from '@/app/_components/common/food-card/components/food-card-vertical'; // Generate ClassName for button size
+import { type FoodCardProps, FoodCardSize, FoodCardVertical } from '@/app/_components'; // Generate ClassName for button size
 
 // Generate ClassName for button size
 const cardSize: Record<FoodCardSize, string> = {

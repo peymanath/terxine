@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import type { LogoProps, LogoSize } from '@/app/_components/common/logo/logo.types';
+import type { LogoProps, LogoSize } from '@/app/_components';
 
 // Generate ClassName for Logo size
 const logoSize: Record<LogoSize, string> = {

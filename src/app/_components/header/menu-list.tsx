@@ -1,6 +1,5 @@
 import React from 'react';
-import type { MenuListItem } from '@/app/_components/header/menu.types';
-import { MenuListDesktopItem } from '@/app/_components/header/menu-list-item';
+import { MenuListDesktopItem, type MenuListItem } from '@/app/_components';
 
 const menuListItem: MenuListItem[] = [
   {

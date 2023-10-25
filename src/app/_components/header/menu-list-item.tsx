@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { DirectionDown } from 'react-huge-icons/outline';
 import { usePathname } from 'next/navigation';
-import type { MenuListItem } from '@/app/_components/header/menu.types';
+import type { MenuListItem } from '@/app/_components';
 
 export const MenuListDesktopItem: React.FC<MenuListItem> = ({ id, text, url, subMenu }) => {
   // Use Hooks

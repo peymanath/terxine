@@ -3,14 +3,12 @@ import React from 'react';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import {
   FoodCard,
+  type FoodCardProps,
+  FoodCardSize,
   HeroSectionSlider,
   type HeroSectionSliderItems,
   Slider,
 } from '@/app/_components';
-import {
-  type FoodCardProps,
-  FoodCardSize,
-} from '@/app/_components/common/food-card/food-card.types';
 
 const heroSectionSliderItem: HeroSectionSliderItems[] = [
   {
