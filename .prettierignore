@@ -2,6 +2,7 @@
 *.md
 *.txt
 *.yml
+*.css
 *.env*
 node_modules
 /.pnp
