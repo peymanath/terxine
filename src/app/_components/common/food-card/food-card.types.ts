@@ -22,7 +22,7 @@ export type FoodCardProps = {
    *
    * `data:image-holder/webp;base64,UklGRrqJAgBXRUJQVlA4IK6JAg`
    */
-  imageUrl?: undefined | string;
+  imageUrl: string;
   basePrice: number;
   discountPerssentage?: undefined | number;
   discountTotal?: undefined | number;

@@ -1,7 +1,7 @@
 import React from 'react';
 import type { ButtonProps, ButtonShape } from '@/app/_components/common/button/button.types';
 import classNames from 'classnames';
-import type { Size } from '@/app/_components/common/types';
+import type { Size } from '@/app/_components/types'; // Generate ClassName for button size
 
 // Generate ClassName for button size
 const buttonSize: Record<Size, string> = {
@@ -33,6 +33,7 @@ export const Button: React.FC<ButtonProps> = props => {
     size = 'default',
     type = 'button',
     shape = 'default',
+    isScale = true,
     isLoading = false,
     isDisables = false,
     ...rest
@@ -44,6 +45,7 @@ export const Button: React.FC<ButtonProps> = props => {
     customFont,
     { [`btn-loading`]: isLoading },
     { [`btn-disabled`]: isDisables },
+    { [`btn-scaled`]: isScale },
     { [`btn-${color}`]: color },
     { [`btn-${variant}`]: variant },
     { [buttonSize[size]]: size },

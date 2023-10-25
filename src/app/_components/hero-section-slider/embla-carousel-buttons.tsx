@@ -1,16 +1,16 @@
 import React from 'react';
 import { DirectionLeft, DirectionRight } from 'react-huge-icons/outline';
+import classNames from 'classnames';
 import type {
   DotButtonProps,
+  DotButtonsProps,
   PropType,
 } from '@/app/_components/hero-section-slider/hero-section-slider.types';
-import classNames from 'classnames';
-import type { DotButtonsProps } from '@/app/_components/hero-section-slider/hero-section-slider.types';
 
 export const DotButtons: React.FC<DotButtonsProps> = props => {
   const { snaps, selectedIndex, scrollTo } = props;
   return (
-    <div className='embla__dots__container before:h-3 after:h-3 before:w-2.5 after:w-2.5  desktop:before:h-4 desktop:after:h-4 desktop:before:w-[27px] desktop:after:w-[27px]'>
+    <div className='embla__dots__container before:h-3 after:h-3 before:w-2.5 after:w-2.5 desktop:before:h-4 desktop:after:h-4 desktop:before:w-[27px] desktop:after:w-[27px]'>
       <div className='flex items-center justify-between gap-0.5 bg-white px-1 tablet:py-1'>
         {snaps.map((_, index) => (
           <DotButton

@@ -64,7 +64,7 @@
 
       /* Image size in small card */
       .food-card-image {
-        @apply w-[168px] h-[109px];
+        @apply w-full h-[168px];
       }
     }
 
@@ -95,7 +95,7 @@
       /* Image size in large card */
 
       .food-card-image {
-        @apply w-[288px] h-[240px];
+        @apply w-full h-[240px];
       }
     }
   }

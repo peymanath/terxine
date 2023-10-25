@@ -1,14 +1,11 @@
 'use client';
 import React from 'react';
-import type { HeroSectionSliderItems } from '@/app/_components/hero-section-slider';
-import dynamic from 'next/dynamic';
+import {
+  HeroSectionSlider,
+  type HeroSectionSliderItems,
+} from '@/app/_components/hero-section-slider';
 
-const HeroSectionSlider = dynamic(
-  () => import('@/app/_components/hero-section-slider').then(com => com.HeroSectionSlider),
-  { ssr: false }
-);
-
-const sliderItem: HeroSectionSliderItems[] = [
+const heroSectionSliderItem: HeroSectionSliderItems[] = [
   {
     src: '/images/sliders/food-1.webp',
     title: 'یک ماجراجویی آشپزی برای تمام حواس',
@@ -27,8 +24,8 @@ const sliderItem: HeroSectionSliderItems[] = [
 
 const Home: React.FC = () => {
   return (
-    <div>
-      <HeroSectionSlider sliderItems={sliderItem} />
+    <div className='flex flex-col gap-6 '>
+      <HeroSectionSlider sliderItems={heroSectionSliderItem} />
     </div>
   );
 };

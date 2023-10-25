@@ -1,5 +1,5 @@
 import type React from 'react';
-import type { ComponentBase, LoadingBehavior } from '@/app/_components/common/types';
+import type { ComponentBase, LoadingBehavior } from '@/app/_components/types';
 
 /**
  * Button Shape Type
@@ -42,5 +42,6 @@ export type ButtonProps = Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'c
     endIcon?: React.ReactNode;
     startIcon?: React.ReactNode;
     customFont?: string;
+    isScale?: boolean;
     onClick?: React.MouseEventHandler<HTMLButtonElement>;
   };
