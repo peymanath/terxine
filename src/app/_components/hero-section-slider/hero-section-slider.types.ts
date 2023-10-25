@@ -1,12 +1,14 @@
 import type React from 'react';
 
-export type HeroSectionSliderItems = {
+export type SingleSliderItems = {
   src: string;
   title?: string;
   textButton?: string;
 };
-export type HeroSectionSliderProps = {
-  sliderItems: HeroSectionSliderItems[];
+export type SingleSliderProps = {
+  isPagination?: boolean;
+  isBackdrop?: boolean;
+  sliderItems: SingleSliderItems[];
 };
 export type PropType = React.PropsWithChildren<
   React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>

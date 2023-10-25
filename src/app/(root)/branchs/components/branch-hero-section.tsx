@@ -2,7 +2,7 @@
 import React from 'react';
 import { SingleSlider, type SingleSliderItems } from '@/app/_components';
 
-const SingleSliderItem: SingleSliderItems[] = [
+const sliderItem: SingleSliderItems[] = [
   {
     src: '/images/sliders/food-1.webp',
     title: 'یک ماجراجویی آشپزی برای تمام حواس',
@@ -19,11 +19,12 @@ const SingleSliderItem: SingleSliderItems[] = [
   },
 ];
 
-const Home: React.FC = () => {
+export const BranchHeroSection: React.FC = () => {
   return (
-    <div className='flex flex-col gap-6 '>
-      <SingleSlider sliderItems={SingleSliderItem} />
-    </div>
+    <SingleSlider
+      sliderItems={sliderItem}
+      isPagination
+      isBackdrop
+    />
   );
 };
-export default Home;

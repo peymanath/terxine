@@ -387,7 +387,12 @@ const config: Config = {
     spacing: spacingTailwind,
     borderRadius: borderRadiusCustomize,
     boxShadow: boxShadowCustomize,
-    extend: {},
+
+    extend: {
+      borderWidth: {
+        3: '3px',
+      },
+    },
   },
   plugins: [],
 };

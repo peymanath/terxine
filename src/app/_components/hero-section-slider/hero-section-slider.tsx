@@ -8,14 +8,14 @@ import Image from 'next/image';
 import {
   Button,
   DotButtons,
-  type HeroSectionSliderProps,
   NextButton,
   PrevButton,
+  type SingleSliderProps,
 } from '@/app/_components';
 
-export const HeroSectionSlider: React.FC<HeroSectionSliderProps> = props => {
+export const SingleSlider: React.FC<SingleSliderProps> = props => {
   // Destructure Props
-  const { sliderItems }: HeroSectionSliderProps = props;
+  const { sliderItems, isPagination, isBackdrop }: SingleSliderProps = props;
 
   // Use Hooks
   const { isLaptop, isDesktop } = useMediaQuery();
@@ -69,7 +69,9 @@ export const HeroSectionSlider: React.FC<HeroSectionSliderProps> = props => {
                 src={src}
                 alt={title || 'Slider'}
               />
-              <span className='absolute inset-0 w-full h-full bg-black opacity-70'></span>
+              {!!isBackdrop && (
+                <span className='absolute inset-0 w-full h-full bg-black opacity-70'></span>
+              )}
               {!!title && (
                 <div className='w-full absolute right-1/2 -translate-y-1/2 top-1/2 translate-x-1/2 flex flex-col items-center justify-between gap-2 desktop:gap-5'>
                   <span className='text-header-6 desktop:text-header-2 text-white'>{title}</span>
@@ -98,11 +100,13 @@ export const HeroSectionSlider: React.FC<HeroSectionSliderProps> = props => {
             />
           </React.Fragment>
         )}
-        <DotButtons
-          snaps={scrollSnaps}
-          selectedIndex={selectedIndex}
-          scrollTo={scrollTo}
-        />
+        {!!isPagination && (
+          <DotButtons
+            snaps={scrollSnaps}
+            selectedIndex={selectedIndex}
+            scrollTo={scrollTo}
+          />
+        )}
       </div>
     </div>
   );
