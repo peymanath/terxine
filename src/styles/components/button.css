@@ -4,11 +4,9 @@
   @apply text-primary;
   @apply px-2 h-5;
 
-    & -scaled {
-    &:active:hover,
-    &:active:focus {
-      transform: scale(0.97);
-    }
+  .btn-scaled:active:hover,
+  .btn-scaled:active:focus {
+    transform: scale(0.97);
   }
 
   /* disabled */
