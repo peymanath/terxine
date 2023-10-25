@@ -37,17 +37,13 @@ export const FoodCard: React.FC<FoodCardProps> = props => {
       {reset.variant === 'vertical' ? (
         <FoodCardVertical
           {...reset}
+          imageUrl={imageUrl}
           size={size}
           variant='vertical'
           totalRating={reset?.totalRating}
         />
       ) : (
-        <FoodCardVertical
-          {...reset}
-          size={size}
-          variant='horizontal'
-          description={reset.description}
-        />
+        <></>
       )}
     </div>
   );
