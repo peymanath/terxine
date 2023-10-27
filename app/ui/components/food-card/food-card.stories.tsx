@@ -1,6 +1,6 @@
 import type { Meta, StoryFn, StoryObj } from '@storybook/react';
 import { FoodCard } from './food-card';
-import db_image from '@/database/image-base64.json';
+import db_image from '@/app/database/image-base64.json';
 
 const meta: Meta<typeof FoodCard> = {
   title: 'Components/Food Card',
