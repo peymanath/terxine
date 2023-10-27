@@ -33,7 +33,6 @@ const config = {
     '@typescript-eslint/ban-tslint-comment': 'error', // ? https://typescript-eslint.io/rules/ban-tslint-comment
     '@typescript-eslint/ban-types': 'error', // ? https://typescript-eslint.io/rules/ban-types
     '@typescript-eslint/consistent-indexed-object-style': ['error', 'record'], // ? https://typescript-eslint.io/rules/consistent-indexed-object-style
-    '@typescript-eslint/consistent-type-definitions': ['error', 'type'], // ? https://typescript-eslint.io/rules/consistent-type-definitions
     '@typescript-eslint/no-duplicate-enum-values': 'error', // ? https://typescript-eslint.io/rules/no-duplicate-enum-values
     '@typescript-eslint/no-duplicate-type-constituents': 'error', // ? https://typescript-eslint.io/rules/no-duplicate-type-constituents
     '@typescript-eslint/no-empty-interface': 'error', // ? https://typescript-eslint.io/rules/no-empty-interface
