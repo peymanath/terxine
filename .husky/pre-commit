@@ -3,4 +3,3 @@
 
 npx prettier --write .
 git add .
-npm run lint

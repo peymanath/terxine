@@ -370,7 +370,7 @@ const screensCustomize: ScreensConfig = {
   // => @media (min-width: 1280px) { ... }
 };
 const config: Config = {
-  content: ['./src/app/**/*.{js,ts,jsx,tsx}'],
+  content: ['./app/**/*.{js,ts,jsx,tsx}'],
   darkMode: 'class',
   theme: {
     container: {
