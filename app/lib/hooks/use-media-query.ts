@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import type { MediaQueryReturn } from '@/types/hooks.types';
+import { MediaQueryReturn } from '@/app/types';
 
 export const useMediaQuery = (): MediaQueryReturn => {
   // States;
