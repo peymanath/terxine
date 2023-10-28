@@ -5,28 +5,28 @@ export const estedad = localFont({
   src: [
     // Regular
     {
-      path: '../public/fonts/Estedad-Regular.woff2',
+      path: '../../public/fonts/Estedad-Regular.woff2',
       style: 'normal',
       weight: '400',
     },
 
     // Medium
     {
-      path: '../public/fonts/Estedad-Medium.woff2',
+      path: '../../public/fonts/Estedad-Medium.woff2',
       style: 'normal',
       weight: '500',
     },
 
     // semiBold
     {
-      path: '../public/fonts/Estedad-SemiBold.woff2',
+      path: '../../public/fonts/Estedad-SemiBold.woff2',
       style: 'normal',
       weight: '600',
     },
 
     // Bold
     {
-      path: '../public/fonts/Estedad-Bold.woff2',
+      path: '../../public/fonts/Estedad-Bold.woff2',
       style: 'normal',
       weight: '700',
     },
