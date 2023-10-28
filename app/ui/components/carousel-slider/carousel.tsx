@@ -1,3 +1,4 @@
+'use client';
 import React, { useRef } from 'react';
 import { Swiper, type SwiperRef, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
