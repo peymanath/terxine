@@ -4,7 +4,7 @@
 branch_name="main"
 
 # List of remote repositories
-remotes=("personal" "org")
+remotes=("personal")
 
 npm run build
 
