@@ -131,3 +131,5 @@ dist
 
 # webstorm
 .idea
+
+storybook-static
