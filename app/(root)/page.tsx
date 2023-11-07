@@ -1,6 +1,7 @@
 'use client';
 import React from 'react';
 import { SingleSlider, type SingleSliderItems } from '@/app/ui/components';
+//import { FoodCard } from '@/app/ui/components/food-card/food-card';
 
 const SingleSliderItem: SingleSliderItems[] = [
   {
@@ -23,6 +24,7 @@ const Home: React.FC = () => {
   return (
     <div className='flex flex-col gap-6 '>
       <SingleSlider sliderItems={SingleSliderItem} />
+      {/* <FoodCard/> */}
     </div>
   );
 };
