@@ -9,6 +9,7 @@ type BranchProps = {
 };
 
 const Branch: React.FC<BranchProps> = async ({ params: { branchId, slug } }) => {
+  console.log({ branchId, slug });
   return (
     <div className='flex flex-col gap-6 pb-6'>
       <BranchHeroSection />
