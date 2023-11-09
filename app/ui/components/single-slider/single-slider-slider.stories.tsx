@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import db_image from '@/app/database/image-base64.json';
+import db_image from '@BackEnd/database/image-base64.json';
 import { SingleSlider } from '@/app/ui/components';
 
 const meta: Meta<typeof SingleSlider> = {
