@@ -7,20 +7,20 @@ import * as z from 'zod';
 import { mongoDbErrors } from '@BackEnd/lib/mongodb-errors-list';
 
 export class ErrorHandler {
-  protected error: any;
+  protected error: Error;
 
   /**
    *
    * @param err
    */
-  constructor(err: any) {
+  constructor(err: Error) {
     this.error = err;
   }
 
   /**
    *
    */
-  createError<T>(message?: string, status?: number) {
+  createError<T>(message?: string, status?: number): NextResponse {
     if (this.error instanceof mongoose.Error.ValidationError) {
       return this.mongooseValidationError<T>(this.error);
     } else if (this.error instanceof z.ZodError) {
@@ -107,8 +107,8 @@ export class ErrorHandler {
    *
    *
    */
-  otherError<T>(err: any, message?: string, status?: number): NextResponse {
-    // console.log(err);
+  otherError<T>(err: Error, message?: string, status?: number): NextResponse {
+    console.log(err);
     return this.response<T>({
       message: message || 'Has Any Error',
       errors: [],

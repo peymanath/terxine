@@ -1,7 +1,10 @@
-import mongoose from 'mongoose';
+import mongoose, { Mongoose } from 'mongoose';
 
 declare global {
-  var mongoose: any; // This must be a `var` and not a `let / const`
+  var mongoose: {
+    conn: typeof import('mongoose') | null;
+    promise: Promise<Mongoose> | null;
+  }; // This must be a `var` and not a `let / const`
 }
 
 const MONGODB_URI = process.env.MONGODB_URI!;
@@ -16,7 +19,7 @@ if (!cached) {
   cached = global.mongoose = { conn: null, promise: null };
 }
 
-export async function dbConnect() {
+export async function dbConnect(): Promise<typeof import('mongoose') | null> {
   if (cached.conn) {
     return cached.conn;
   }

@@ -2,6 +2,7 @@ import { apiResponse, dbConnect } from '@BackEnd/lib';
 import { Branch } from '@BackEnd/models';
 import { BranchDynamicParam, BranchType } from '@BackEnd/types';
 import { ErrorHandler } from '@BackEnd/lib/error-handler';
+import { NextResponse } from 'next/server';
 
 /**
  * @swagger
@@ -12,7 +13,10 @@ import { ErrorHandler } from '@BackEnd/lib/error-handler';
  *       200:
  *         description: Hello World!
  */
-export async function DELETE(_req: Request, { params: { _id } }: BranchDynamicParam) {
+export async function DELETE(
+  _req: Request,
+  { params: { _id } }: BranchDynamicParam
+): Promise<NextResponse> {
   try {
     await dbConnect();
     await Branch.deleteOne({ _id });
@@ -34,7 +38,10 @@ export async function DELETE(_req: Request, { params: { _id } }: BranchDynamicPa
  *       200:
  *         description: Hello World!
  */
-export async function GET(_req: Request, { params: { _id } }: BranchDynamicParam) {
+export async function GET(
+  _req: Request,
+  { params: { _id } }: BranchDynamicParam
+): Promise<NextResponse> {
   try {
     await dbConnect();
     const createBranch = await Branch.findOne({ _id });

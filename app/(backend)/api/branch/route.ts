@@ -5,6 +5,7 @@ import { zfd } from 'zod-form-data';
 import { Branch } from '@BackEnd/models';
 import { ErrorHandler } from '@BackEnd/lib/error-handler';
 import slugify from 'slugify';
+import { NextResponse } from 'next/server';
 
 const schema = zfd.formData(
   z.object({
@@ -30,7 +31,7 @@ const schema = zfd.formData(
  *       200:
  *         description: Hello World!
  */
-export async function POST(req: Request) {
+export async function POST(req: Request): Promise<NextResponse> {
   try {
     const { name, images, phoneNumbers, workingHours, slug, address }: BranchType = schema.parse(
       await req.json()
@@ -62,7 +63,7 @@ export async function POST(req: Request) {
  *       200:
  *         description: Hello World!
  */
-export async function GET() {
+export async function GET(): Promise<NextResponse> {
   try {
     await dbConnect();
     const createBranch = await Branch.find();

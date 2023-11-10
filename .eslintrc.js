@@ -62,7 +62,6 @@ const config = {
 
     // ? Custom Rule Warning
     '@typescript-eslint/consistent-type-exports': 'warn', // ? https://typescript-eslint.io/rules/consistent-type-exports
-    '@typescript-eslint/consistent-type-imports': 'error', // ? https://typescript-eslint.io/rules/consistent-type-exports
     '@typescript-eslint/member-ordering': 'warn', // ? https://typescript-eslint.io/rules/member-ordering
     '@typescript-eslint/no-explicit-any': 'warn', // ? https://typescript-eslint.io/rules/no-explicit-any
     '@typescript-eslint/explicit-function-return-type': 'warn', // ? https://typescript-eslint.io/rules/explicit-function-return-type
