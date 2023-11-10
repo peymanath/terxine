@@ -21,6 +21,15 @@ const schema = zfd.formData(
   })
 );
 
+/**
+ * @swagger
+ * /api/branch:
+ *   post:
+ *     description: Create Branch
+ *     responses:
+ *       200:
+ *         description: Hello World!
+ */
 export async function POST(req: Request) {
   try {
     const { name, images, phoneNumbers, workingHours, slug, address }: BranchType = schema.parse(
@@ -36,6 +45,28 @@ export async function POST(req: Request) {
       address,
     });
     return apiResponse<BranchType>({
+      data: createBranch,
+      message: 'The branch was created successfully.',
+    });
+  } catch (err) {
+    return new ErrorHandler(err).createError<BranchType>();
+  }
+}
+
+/**
+ * @swagger
+ * /api/branch:
+ *   get:
+ *     description: Returns the All branch
+ *     responses:
+ *       200:
+ *         description: Hello World!
+ */
+export async function GET() {
+  try {
+    await dbConnect();
+    const createBranch = await Branch.find();
+    return apiResponse<BranchType[]>({
       data: createBranch,
       message: 'The branch was created successfully.',
     });

@@ -9,3 +9,7 @@ export interface BranchType {
   address: string;
   workingHours: string[];
 }
+
+interface BranchDynamicParam {
+  params: { _id: ObjectId };
+}
