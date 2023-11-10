@@ -2,11 +2,16 @@ import mongoose, { Schema } from 'mongoose';
 import { BranchType } from '@BackEnd/types';
 
 const branchSchema = new Schema<BranchType>({
-  branchName: {
+  name: {
     type: String,
     required: [true, 'Branch Name is Required'],
     trim: true,
-    minlength: [5, 'Branch Name most be larger than character'],
+  },
+  slug: {
+    type: String,
+    unique: true,
+    lowercase: true,
+    trim: true,
   },
 });
 

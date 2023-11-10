@@ -14,7 +14,9 @@ export type ControllerBase<T, JsonBody = ControllerJsonBody<T>> = ControllerBase
   T,
   JsonBody
 > & {
-  find: (_req: T) => NextResponse<JsonBody>;
-  all: (_req: T) => NextResponse<JsonBody>;
   create: (_req: T) => NextResponse<JsonBody>;
+  update: (_req: T) => NextResponse<JsonBody>;
+  delete: (_req: T) => NextResponse<JsonBody>;
+  find: (_req: T) => NextResponse<JsonBody>;
+  getAll: (_req: T) => NextResponse<JsonBody>;
 };

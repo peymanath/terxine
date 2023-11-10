@@ -1,3 +1,11 @@
+import { ObjectId } from 'mongoose';
+
 export interface BranchType {
-  branchName: string;
+  _id?: ObjectId;
+  slug?: string;
+  name: string;
+  images: string[];
+  phoneNumbers: string[];
+  address: string;
+  workingHours: string[];
 }
