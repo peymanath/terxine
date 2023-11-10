@@ -13,6 +13,32 @@ const branchSchema = new Schema<BranchType>({
     lowercase: true,
     trim: true,
   },
+  address: {
+    type: String,
+    required: [true, 'Branch Address is Required'],
+    trim: true,
+  },
+  images: [
+    {
+      type: String,
+      required: [true, 'Branch Images is Required'],
+      trim: true,
+    },
+  ],
+  phoneNumbers: [
+    {
+      type: String,
+      required: [true, 'Branch Phone Numbers is Required'],
+      trim: true,
+    },
+  ],
+  workingHours: [
+    {
+      type: String,
+      required: [true, 'Branch Working Hours is Required'],
+      trim: true,
+    },
+  ],
 });
 
 export const Branch = mongoose.models.Branch || mongoose.model<BranchType>('Branch', branchSchema);
