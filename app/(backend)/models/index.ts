@@ -1,1 +1,1 @@
-export * from './branch';
+export * from './branch.model';

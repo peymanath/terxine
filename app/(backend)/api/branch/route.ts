@@ -1,16 +1,23 @@
-import { connectDb } from '@BackEnd/database';
+import { apiResponse, dbConnect } from '@BackEnd/lib';
+import { BranchType } from '@BackEnd/types';
+import { zfd } from 'zod-form-data';
 import { Branch } from '@BackEnd/models';
-import { NextResponse } from 'next/server';
+import { ErrorHandler } from '@BackEnd/lib/error-handler';
 
-export async function POST() {
+const schema = zfd.formData({
+  branchName: zfd.text(),
+});
+
+export async function POST(req: Request) {
+  const { branchName } = schema.parse(await req.formData());
   try {
-    await connectDb();
-    await Branch.create({ branchName: 'salam khobi' });
-
-    return NextResponse.json({
-      message: 'Successfuly',
+    await dbConnect();
+    await Branch.create({ branchName: branchName });
+    return apiResponse<BranchType>({
+      data: { branchName },
+      message: 'Create Branch Successfuly !',
     });
   } catch (err) {
-    console.log(err);
+    return new ErrorHandler(err).createError<BranchType>();
   }
 }
