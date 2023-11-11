@@ -8,6 +8,7 @@ export interface BranchType {
   phoneNumbers: string[];
   address: string;
   workingHours: string[];
+  foods?: string[];
 }
 
 interface BranchDynamicParam {

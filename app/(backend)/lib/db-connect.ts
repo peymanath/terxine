@@ -26,6 +26,8 @@ export async function dbConnect(): Promise<typeof import('mongoose') | null> {
   if (!cached.promise) {
     const opts = {
       bufferCommands: false,
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
     };
     cached.promise = mongoose.connect(MONGODB_URI, opts).then(mongoose => {
       return mongoose;

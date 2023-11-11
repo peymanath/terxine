@@ -1,7 +1,7 @@
-import mongoose, { Schema } from 'mongoose';
+import mongoose from 'mongoose';
 import { BranchType } from '@BackEnd/types';
 
-const branchSchema = new Schema<BranchType>({
+const branchSchema = new mongoose.Schema<BranchType>({
   name: {
     type: String,
     required: [true, 'Branch Name is Required'],
@@ -39,6 +39,7 @@ const branchSchema = new Schema<BranchType>({
       trim: true,
     },
   ],
+  foods: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Food', required: false }],
 });
 
 export const Branch = mongoose.models.Branch || mongoose.model<BranchType>('Branch', branchSchema);

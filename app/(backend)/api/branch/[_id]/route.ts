@@ -24,7 +24,7 @@ export async function DELETE(
       data: null,
       message: 'The branch was successfully deleted.',
     });
-  } catch (err) {
+  } catch (err: Error | unknown) {
     return new ErrorHandler(err).createError<BranchType>();
   }
 }
@@ -49,7 +49,7 @@ export async function GET(
       data: createBranch,
       message: 'A branch was found',
     });
-  } catch (err) {
+  } catch (err: Error | unknown) {
     return new ErrorHandler(err).createError<BranchType>();
   }
 }

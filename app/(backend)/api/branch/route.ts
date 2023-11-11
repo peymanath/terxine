@@ -10,7 +10,6 @@ import { NextResponse } from 'next/server';
 const schema = zfd.formData(
   z.object({
     name: z.string(),
-    slug: z.string().optional(),
     images: z.string().array(),
     phoneNumbers: z
       .string({
@@ -22,20 +21,10 @@ const schema = zfd.formData(
   })
 );
 
-/**
- * @swagger
- * /api/branch:
- *   post:
- *     description: Create Branch
- *     responses:
- *       200:
- *         description: Hello World!
- */
 export async function POST(req: Request): Promise<NextResponse> {
   try {
-    const { name, images, phoneNumbers, workingHours, slug, address }: BranchType = schema.parse(
-      await req.json()
-    );
+    const { name, images, phoneNumbers, workingHours, slug, address, foods }: BranchType =
+      schema.parse(await req.json());
     await dbConnect();
     const createBranch = await Branch.create<BranchType>({
       name,
@@ -44,25 +33,17 @@ export async function POST(req: Request): Promise<NextResponse> {
       workingHours,
       slug: slugify(slug || name, { lower: true, remove: /[*+~.()'"!:@]/g }),
       address,
+      foods,
     });
     return apiResponse<BranchType>({
       data: createBranch,
       message: 'The branch was created successfully.',
     });
-  } catch (err) {
+  } catch (err: Error | unknown) {
     return new ErrorHandler(err).createError<BranchType>();
   }
 }
 
-/**
- * @swagger
- * /api/branch:
- *   get:
- *     description: Returns the All branch
- *     responses:
- *       200:
- *         description: Hello World!
- */
 export async function GET(): Promise<NextResponse> {
   try {
     await dbConnect();
@@ -71,7 +52,7 @@ export async function GET(): Promise<NextResponse> {
       data: createBranch,
       message: 'The branch was created successfully.',
     });
-  } catch (err) {
+  } catch (err: Error | unknown) {
     return new ErrorHandler(err).createError<BranchType>();
   }
 }

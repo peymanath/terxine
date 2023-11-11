@@ -7,13 +7,13 @@ import * as z from 'zod';
 import { mongoDbErrors } from '@BackEnd/lib/mongodb-errors-list';
 
 export class ErrorHandler {
-  protected error: Error;
+  protected error: Error | unknown;
 
   /**
    *
    * @param err
    */
-  constructor(err: Error) {
+  constructor(err: Error | unknown) {
     this.error = err;
   }
 
@@ -107,7 +107,7 @@ export class ErrorHandler {
    *
    *
    */
-  otherError<T>(err: Error, message?: string, status?: number): NextResponse {
+  otherError<T>(err: Error | unknown, message?: string, status?: number): NextResponse {
     console.log(err);
     return this.response<T>({
       message: message || 'Has Any Error',
