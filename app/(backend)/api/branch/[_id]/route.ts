@@ -4,15 +4,6 @@ import { BranchDynamicParam, BranchType } from '@BackEnd/types';
 import { ErrorHandler } from '@BackEnd/lib/error-handler';
 import { NextResponse } from 'next/server';
 
-/**
- * @swagger
- * /api/branch:
- *   delete:
- *     description: Delete branch
- *     responses:
- *       200:
- *         description: Hello World!
- */
 export async function DELETE(
   _req: Request,
   { params: { _id } }: BranchDynamicParam
@@ -29,15 +20,6 @@ export async function DELETE(
   }
 }
 
-/**
- * @swagger
- * /api/branch/{_id}:
- *   get:
- *     description: Returns branch by id
- *     responses:
- *       200:
- *         description: Hello World!
- */
 export async function GET(
   _req: Request,
   { params: { _id } }: BranchDynamicParam

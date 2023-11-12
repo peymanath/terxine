@@ -2,8 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { FoodType } from '@BackEnd/types';
 import { apiResponse, dbConnect } from '@BackEnd/lib';
 import { ErrorHandler } from '@BackEnd/lib/error-handler';
-import { Branch } from '@BackEnd/models';
-import { Food } from '@BackEnd/models/food.model';
+import { Branch, Food } from '@BackEnd/models';
 
 export async function GET(req: NextRequest): Promise<NextResponse> {
   const branchId: string | null = req.nextUrl.searchParams.get('branchId');

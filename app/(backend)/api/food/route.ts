@@ -5,8 +5,7 @@ import { FoodType } from '@BackEnd/types';
 import { apiResponse, dbConnect } from '@BackEnd/lib';
 import slugify from 'slugify';
 import { ErrorHandler } from '@BackEnd/lib/error-handler';
-import { Food } from '@BackEnd/models/food.model';
-import { Branch } from '@BackEnd/models';
+import { Branch, Food } from '@BackEnd/models';
 
 const schema = zfd.formData(
   z.object({
@@ -77,6 +76,19 @@ export async function POST(req: Request): Promise<NextResponse> {
     return apiResponse<FoodType>({
       data: createFood,
       message: 'The Food was created successfully.',
+    });
+  } catch (err: Error | unknown) {
+    return new ErrorHandler(err).createError<FoodType>();
+  }
+}
+
+export async function GET(): Promise<NextResponse> {
+  try {
+    await dbConnect();
+    const findFoods = await Food.find();
+    return apiResponse<FoodType[]>({
+      data: findFoods,
+      message: 'Get All Food',
     });
   } catch (err: Error | unknown) {
     return new ErrorHandler(err).createError<FoodType>();

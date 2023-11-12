@@ -11,6 +11,6 @@ export interface BranchType {
   foods?: string[];
 }
 
-interface BranchDynamicParam {
+export interface BranchDynamicParam {
   params: { _id: ObjectId };
 }

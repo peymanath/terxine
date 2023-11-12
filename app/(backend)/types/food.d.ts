@@ -13,6 +13,6 @@ export interface FoodType {
   wishList?: string[];
 }
 
-interface FoodDynamicParam {
+export interface FoodDynamicParam {
   params: { _id: ObjectId };
 }

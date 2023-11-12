@@ -49,10 +49,10 @@ export async function POST(req: Request): Promise<NextResponse> {
 export async function GET(): Promise<NextResponse> {
   try {
     await dbConnect();
-    const createBranch = await Branch.find();
+    const findBranches = await Branch.find();
     return apiResponse<BranchType[]>({
-      data: createBranch,
-      message: 'The branch was created successfully.',
+      data: findBranches,
+      message: 'Get All Branch',
     });
   } catch (err: Error | unknown) {
     return new ErrorHandler(err).createError<BranchType>();
