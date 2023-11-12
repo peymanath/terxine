@@ -15,6 +15,10 @@ const foodSchema = new mongoose.Schema<FoodType>({
   },
   ingredient: [{ type: String, required: true }],
   minPrice: { type: Number, required: true },
+  fromPrice: { type: Number, default: 0 },
+  perssentage: { type: Number, default: 0 },
+  rating: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Rate' }],
+  wishList: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Wish' }],
   branches: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Branch', required: true }],
 });
 

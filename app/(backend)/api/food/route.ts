@@ -11,14 +11,30 @@ import { Branch } from '@BackEnd/models';
 const schema = zfd.formData(
   z.object({
     name: z.string(),
+    slug: z.string().optional(),
     ingredient: z.string().array(),
+    minPrice: z.number(),
+    fromPrice: z.number().optional(),
+    perssentage: z.number().optional(),
+    rating: z.string().array().optional(),
+    wishList: z.string().array().optional(),
     branches: z.string().array(),
   })
 );
 
 export async function POST(req: Request): Promise<NextResponse> {
   try {
-    const { name, slug, branches, ingredient }: FoodType = schema.parse(await req.json());
+    const {
+      name,
+      slug,
+      branches,
+      ingredient,
+      minPrice,
+      perssentage,
+      fromPrice,
+      wishList,
+      rating,
+    }: FoodType = schema.parse(await req.json());
     await dbConnect();
 
     // Does it check whether the branches exist or not? //
@@ -41,6 +57,11 @@ export async function POST(req: Request): Promise<NextResponse> {
       slug: slugify(slug || name, { lower: true, remove: /[*+~.()'"!:@]/g }),
       branches,
       ingredient,
+      minPrice,
+      fromPrice,
+      perssentage,
+      wishList,
+      rating,
     });
 
     // Add foods to branches

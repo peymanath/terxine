@@ -9,6 +9,7 @@ import { NextResponse } from 'next/server';
 
 const schema = zfd.formData(
   z.object({
+    slug: z.string().optional(),
     name: z.string(),
     images: z.string().array(),
     phoneNumbers: z
@@ -18,6 +19,7 @@ const schema = zfd.formData(
       .array(),
     address: z.string(),
     workingHours: z.string().array(),
+    foods: z.string().array().optional(),
   })
 );
 

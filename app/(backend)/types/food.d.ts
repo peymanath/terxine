@@ -1,16 +1,16 @@
 import { ObjectId } from 'mongoose';
 
 export interface FoodType {
-  _id?: ObjectId;
-  slug?: string;
   name: string;
   ingredient: string[];
   minPrice: number;
+  branches: string[];
+  _id?: ObjectId;
+  slug?: string;
   fromPrice?: number;
   perssentage?: number;
-  rating?: number[];
-  wishList: string[];
-  branches: string[];
+  rating?: string[];
+  wishList?: string[];
 }
 
 interface FoodDynamicParam {
