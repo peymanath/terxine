@@ -10,13 +10,6 @@ We have used the latest version of Next.js for the development of this project, 
 
 The project is currently a work in progress, and as it nears completion, we'll provide you with more detailed and refined information.
 
-#### **BackEnd Developer**
-[Atefe Asgariyan](https://github.com/atefe-aa)
-This project aims to provide a foundation for creating powerful web applications with a focus on the backend logic. Here's what you can expect:
-Laravel Framework: I've built this API using the Laravel framework, a robust and developer-friendly PHP framework that ensures security, scalability, and maintainability.
-RESTful API: The project follows RESTful API principles, making it easy to interact with from the front-end applications, including those built with React.js.
-Ongoing Learning: This is a project in progress. I'm continuously learning and improving the codebase. Feel free to provide feedback, suggestions, or contribute to its development.
-
 #### *UI/UX Design*
 
 We use Terxine UI/UX Design for this
