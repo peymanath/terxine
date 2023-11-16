@@ -7,7 +7,7 @@ export const estedad = localFont({
     {
       path: '../../public/fonts/Estedad-Regular.woff2',
       style: 'normal',
-      weight: '400',
+      weight: '',
     },
 
     // Medium

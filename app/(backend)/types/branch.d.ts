@@ -8,6 +8,10 @@ export interface BranchType {
   phoneNumbers: string[];
   address: string;
   workingHours: string[];
+  map: {
+    lat: number;
+    lng: number;
+  };
   foods?: string[];
 }
 

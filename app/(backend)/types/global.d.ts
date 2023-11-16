@@ -1,22 +1,18 @@
 import { NextResponse } from 'next/server';
+import { type ResponseMessages } from '@BackEnd/lib';
 
 export type ControllerJsonBody<T> = {
   data?: T | null;
   errors?: string[];
-  message: string;
+  message: ResponseMessages;
   status?: number;
   statusText?: string;
 };
 
-export type ControllerBaseRecord<T, JsonBody> = Record<string, (_req: T) => NextResponse<JsonBody>>;
-
-export type ControllerBase<T, JsonBody = ControllerJsonBody<T>> = ControllerBaseRecord<
-  T,
-  JsonBody
-> & {
-  create: (_req: T) => NextResponse<JsonBody>;
-  update: (_req: T) => NextResponse<JsonBody>;
-  delete: (_req: T) => NextResponse<JsonBody>;
-  find: (_req: T) => NextResponse<JsonBody>;
-  getAll: (_req: T) => NextResponse<JsonBody>;
+export type ControllerBase<Params = unknown> = {
+  create: (_req: Request) => Promise<NextResponse>;
+  delete: (_req: Request, _params: Params) => Promise<NextResponse>;
+  update: (_req: Request, _params: Params) => Promise<NextResponse>;
+  find: (_req: Request, _params: Params) => Promise<NextResponse>;
+  getAll: (_req: Request) => Promise<NextResponse>;
 };
