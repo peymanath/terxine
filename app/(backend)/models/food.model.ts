@@ -14,6 +14,13 @@ const foodSchema = new mongoose.Schema<FoodType>(
       lowercase: true,
       trim: true,
     },
+    // image: {
+    //   src: {
+    //     type: String,
+    //     required: true,
+    //     trim: true,
+    //   },
+    // },
     ingredient: [{ type: String, required: true }],
     minPrice: { type: Number, required: true },
     fromPrice: { type: Number, default: 0 },

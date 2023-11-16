@@ -16,5 +16,5 @@ export interface BranchType {
 }
 
 export interface BranchDynamicParam {
-  params: { _id: ObjectId };
+  params: { _id: ObjectId; populate: boolean };
 }

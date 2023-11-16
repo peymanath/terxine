@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { type ResponseMessages } from '@BackEnd/lib';
 
 export type ControllerJsonBody<T> = {
@@ -9,10 +9,12 @@ export type ControllerJsonBody<T> = {
   statusText?: string;
 };
 
+export type ControllerBaseRequest = Request & NextRequest;
+
 export type ControllerBase<Params = unknown> = {
-  create: (_req: Request) => Promise<NextResponse>;
-  delete: (_req: Request, _params: Params) => Promise<NextResponse>;
-  update: (_req: Request, _params: Params) => Promise<NextResponse>;
-  find: (_req: Request, _params: Params) => Promise<NextResponse>;
-  getAll: (_req: Request) => Promise<NextResponse>;
+  create: (_req: ControllerBaseRequest) => Promise<NextResponse>;
+  delete: (_req: ControllerBaseRequest, _params: Params) => Promise<NextResponse>;
+  update: (_req: ControllerBaseRequest, _params: Params) => Promise<NextResponse>;
+  find: (_req: ControllerBaseRequest, _params: Params) => Promise<NextResponse>;
+  getAll: (_req: ControllerBaseRequest) => Promise<NextResponse>;
 };

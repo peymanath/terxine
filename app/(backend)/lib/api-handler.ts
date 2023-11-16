@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { NextResponse } from 'next/server';
-import { type ControllerJsonBody } from '@BackEnd/types';
+import { ControllerBaseRequest, type ControllerJsonBody } from '@BackEnd/types';
 import {
   apiResponse,
   dbConnect,
@@ -12,7 +12,7 @@ import { validate } from 'uuid';
 import { ApiKey } from '@BackEnd/models/api-key.model';
 
 export type ApiHandlerOptions = {
-  req: Request;
+  req: ControllerBaseRequest;
   schema: z.ZodTypeAny;
   errorMessage?: ResponseMessages;
   hasBody?: boolean;
@@ -20,7 +20,7 @@ export type ApiHandlerOptions = {
 };
 
 export async function ApiHandler<SchemaType>(
-  fn: (_body: SchemaType | any) => Promise<ControllerJsonBody<SchemaType>>,
+  fn: (_body: SchemaType | any, populate: boolean) => Promise<ControllerJsonBody<SchemaType>>,
   { isVerify, ...options }: ApiHandlerOptions
 ): Promise<NextResponse> {
   try {
@@ -63,15 +63,16 @@ export async function ApiHandler<SchemaType>(
 }
 
 async function ApiHandlerValidation<SchemaType>(
-  fn: (_body: SchemaType | any) => Promise<ControllerJsonBody<SchemaType>>,
+  fn: (_body: SchemaType | any, populate: boolean) => Promise<ControllerJsonBody<SchemaType>>,
   { req, schema, hasBody = false }: ApiHandlerOptions
 ): Promise<NextResponse> {
   let fnReturn: ControllerJsonBody<SchemaType>;
+  const populate: boolean = req.nextUrl.searchParams.has('populate');
   if (hasBody) {
     const body: SchemaType = schema.parse(await req.json());
-    fnReturn = await fn(body);
+    fnReturn = await fn(body, populate);
   } else {
-    fnReturn = await fn({});
+    fnReturn = await fn({}, populate);
   }
   return apiResponse<SchemaType>(fnReturn);
 }
