@@ -105,7 +105,6 @@ async function BranchControllerUpdate(
         };
       } else {
         return {
-          data: null,
           message: ResponseSuccessMessages.NotFoundBranch,
         };
       }
@@ -131,8 +130,8 @@ async function BranchControllerGetAll(req: Request): Promise<NextResponse> {
         };
       } else {
         return {
-          data: null,
           message: ResponseSuccessMessages.NotFoundBranch,
+          status: 404,
         };
       }
     },
@@ -159,8 +158,8 @@ async function BranchControllerFind(
         };
       } else {
         return {
-          data: null,
           message: ResponseSuccessMessages.NotFoundBranch,
+          status: 404,
         };
       }
     },
@@ -183,13 +182,12 @@ async function BranchControllerDelete(
       if (result) {
         await Branch.deleteOne({ _id: params._id });
         return {
-          data: null,
           message: ResponseSuccessMessages.DeleteBranch,
         };
       } else {
         return {
-          data: null,
           message: ResponseSuccessMessages.NotFoundBranch,
+          status: 404,
         };
       }
     },

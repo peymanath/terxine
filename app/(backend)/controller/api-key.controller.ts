@@ -54,12 +54,10 @@ async function ApiKeyControllerDelete(
       if (result) {
         await ApiKey.deleteOne({ _id: params._id, apiKey: params.apiKey });
         return {
-          data: null,
           message: ResponseSuccessMessages.DeleteApiKey,
         };
       } else {
         return {
-          data: null,
           message: ResponseErrorMessages.APIKeyIsNotAvailable,
         };
       }

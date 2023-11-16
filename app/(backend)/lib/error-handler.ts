@@ -112,8 +112,7 @@ export class ErrorHandler {
    *
    *
    */
-  otherError<T>(err: Error | unknown, message?: ResponseMessages, status?: number): NextResponse {
-    console.log(err);
+  otherError<T>(_err: Error | unknown, message?: ResponseMessages, status?: number): NextResponse {
     return this.response<T>({
       message: message || ResponseErrorMessages.Any,
       errors: [],

@@ -9,6 +9,12 @@ export enum ResponseSuccessMessages {
   CreateNewApiKey = 'Api Key جدید ساخته شد',
   DeleteApiKey = 'Api Key حذف شد.',
   FindApiKey = 'Api Key دریافت شد.',
+  CreateNewFood = 'غذای جدید با موفقیت ساخته شد.',
+  GetAllFood = 'درخواست دریافت تمامی غذا ها با موفقیت ثبت شد.',
+  NotFoundFood = 'غذای موردنظر پیدا نشد.',
+  UpdateFoodById = 'شعبه مورد نظر با موفقیت به روزرسانی شد.',
+  DeleteFood = 'غذا مورد نظر حذف شد.',
+  FindFood = 'غذا موردنظر پیدا شد.',
 }
 
 export enum ResponseErrorMessages {
@@ -19,6 +25,7 @@ export enum ResponseErrorMessages {
   APIKeyIsNotAvailable = 'API Key موجود نیست',
   APIKeyIsNotInValid = 'API Key معتبر نیست',
   ApiKeyExpired = 'تاریخ انقضای این Api Key به اتمام رسیده است.',
+  OneOrMoreBranchesNotFound = 'یک یا چند شعبه پیدا نشد',
 }
 
 export type ResponseMessages = ResponseSuccessMessages | ResponseErrorMessages;

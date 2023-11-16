@@ -29,36 +29,35 @@ export async function ApiHandler<SchemaType>(
     await dbConnect();
     const isXApiKey = options.req.headers.has('x-api-key');
     const XApiKey = options.req.headers.get('x-api-key');
-    if (!isVerify) {
+
+    if (isVerify) {
       return await ApiHandlerValidation(fn, options);
-    }
-    if (isVerify && isXApiKey && XApiKey) {
-      if (validate(XApiKey)) {
-        try {
-          const result = await ApiKey.findOne({ apiKey: XApiKey });
-          if (result) {
-            return await ApiHandlerValidation(fn, options);
-          }
-          return apiResponse<SchemaType>({
-            data: null,
-            message: ResponseErrorMessages.ApiKeyExpired,
-            status: 401,
-          });
-        } catch (err: Error | unknown) {
-          return new ErrorHandler(err).createError<SchemaType>(options.errorMessage);
-        }
-      }
-      return apiResponse<SchemaType>({
-        data: null,
-        message: ResponseErrorMessages.APIKeyIsNotInValid,
-        status: 401,
-      });
     } else {
-      return apiResponse<SchemaType>({
-        data: null,
-        message: ResponseErrorMessages.APIKeyIsNotAvailable,
-        status: 401,
-      });
+      if (isXApiKey && XApiKey) {
+        if (validate(XApiKey)) {
+          try {
+            const result = await ApiKey.findOne({ apiKey: XApiKey });
+            if (result) {
+              return await ApiHandlerValidation(fn, options);
+            }
+            return apiResponse<SchemaType>({
+              message: ResponseErrorMessages.ApiKeyExpired,
+              status: 401,
+            });
+          } catch (err: Error | unknown) {
+            return new ErrorHandler(err).createError<SchemaType>(options.errorMessage);
+          }
+        }
+        return apiResponse<SchemaType>({
+          message: ResponseErrorMessages.APIKeyIsNotInValid,
+          status: 401,
+        });
+      } else {
+        return apiResponse<SchemaType>({
+          message: ResponseErrorMessages.APIKeyIsNotAvailable,
+          status: 401,
+        });
+      }
     }
   } catch (err: Error | unknown) {
     return new ErrorHandler(err).createError<SchemaType>(options.errorMessage);
