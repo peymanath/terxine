@@ -9,13 +9,14 @@ import { ApiHandler, ResponseErrorMessages, ResponseSuccessMessages } from '@Bac
 // Create Controller Object
 export const BranchController: ControllerBase<BranchType, BranchDynamicParam> = {
   create: BranchControllerCreate,
+  update: BranchControllerUpdate,
   getAll: BranchControllerGetAll,
   find: BranchControllerFind,
   delete: BranchControllerDelete,
 };
 
 // Schema Data Model
-const schema = zfd.formData(
+const createSchema = zfd.formData(
   z.object({
     slug: z.string().optional(),
     name: z.string(),
@@ -27,6 +28,32 @@ const schema = zfd.formData(
       .array(),
     address: z.string(),
     workingHours: z.string().array(),
+    map: z.object({
+      lat: z.number(),
+      lng: z.number(),
+    }),
+    foods: z.string().array().optional(),
+  })
+);
+const updateSchema = zfd.formData(
+  z.object({
+    slug: z.string().optional(),
+    name: z.string().optional(),
+    images: z.string().array().optional(),
+    phoneNumbers: z
+      .string({
+        required_error: 'Please Add phone Numbers',
+      })
+      .array()
+      .optional(),
+    address: z.string().optional(),
+    workingHours: z.string().array().optional(),
+    map: z
+      .object({
+        lat: z.number(),
+        lng: z.number(),
+      })
+      .optional(),
     foods: z.string().array().optional(),
   })
 );
@@ -46,7 +73,38 @@ async function BranchControllerCreate(req: Request): Promise<NextResponse> {
     },
     {
       req,
-      schema,
+      schema: createSchema,
+      errorMessage: undefined,
+      hasBody: true,
+    }
+  );
+}
+
+// Branch Update
+async function BranchControllerUpdate(
+  req: Request,
+  { params }: BranchDynamicParam
+): Promise<NextResponse> {
+  return await ApiHandler<BranchType>(
+    async body => {
+      const result = await Branch.findOneAndUpdate<BranchType>(
+        { _id: params._id },
+        {
+          $set: {
+            ...body,
+            slug: slugify(body.slug, { lower: true, remove: /[*+~.()'"!:@]/g }),
+          },
+        },
+        { new: true }
+      );
+      return {
+        data: result,
+        message: ResponseSuccessMessages.UpdateBranchById,
+      };
+    },
+    {
+      req,
+      schema: updateSchema,
       errorMessage: undefined,
       hasBody: true,
     }
@@ -65,7 +123,7 @@ async function BranchControllerGetAll(req: Request): Promise<NextResponse> {
     },
     {
       req,
-      schema,
+      schema: createSchema,
       errorMessage: ResponseErrorMessages.Error,
     }
   );
@@ -86,7 +144,7 @@ async function BranchControllerFind(
     },
     {
       req,
-      schema,
+      schema: createSchema,
       errorMessage: ResponseErrorMessages.Error,
     }
   );
@@ -107,7 +165,7 @@ async function BranchControllerDelete(
     },
     {
       req,
-      schema,
+      schema: createSchema,
       errorMessage: ResponseErrorMessages.Error,
     }
   );

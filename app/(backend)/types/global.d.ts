@@ -14,10 +14,10 @@ export type ControllerBaseRecord<JsonBody> = Record<
   (_req: Request, ..._rest: any[]) => Promise<NextResponse>
 >;
 
-export type ControllerBase<T, Params> = ControllerBaseRecord<ControllerJsonBody<T, Params>> & {
+export type ControllerBase<T, Params = {}> = ControllerBaseRecord<ControllerJsonBody<T, Params>> & {
   create: (_req: Request) => Promise<NextResponse>;
-  update?: (_req: Request) => Promise<NextResponse>;
   delete: (_req: Request, _params: Params) => Promise<NextResponse>;
+  update: (_req: Request, _params: Params) => Promise<NextResponse>;
   find: (_req: Request, _params: Params) => Promise<NextResponse>;
   getAll: (_req: Request) => Promise<NextResponse>;
 };
