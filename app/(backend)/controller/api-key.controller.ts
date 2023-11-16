@@ -12,7 +12,7 @@ const createSchema = zfd.formData(
   })
 );
 
-export const ApiKeyController: ControllerBase<ApiKeyType, ApiKeyDynamicParam> = {
+export const ApiKeyController: ControllerBase<ApiKeyDynamicParam> = {
   create: ApiKeyControllerCreate,
   delete: ApiKeyControllerDelete,
   update: ApiKeyControllerCreate,

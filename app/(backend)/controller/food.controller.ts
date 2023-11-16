@@ -7,8 +7,8 @@ import { NextResponse } from 'next/server';
 import { ApiHandler, ResponseErrorMessages, ResponseSuccessMessages } from '@BackEnd/lib';
 
 // Create Controller Object
-export const FoodController: ControllerBase<FoodType, FoodDynamicParam> &
-  FoodControllerType<FoodType, FoodDynamicParam> = {
+export const FoodController: ControllerBase<FoodDynamicParam> &
+  FoodControllerType<FoodDynamicParam> = {
   create: FoodControllerCreate,
   update: FoodControllerUpdate,
   getAll: FoodControllerGetAll,

@@ -19,10 +19,8 @@ export type ApiHandlerOptions = {
   isVerify?: boolean;
 };
 
-export type ApiHandlerReturn<T> = ControllerJsonBody<T> & {};
-
 export async function ApiHandler<SchemaType>(
-  fn: (_body: SchemaType | any) => Promise<ApiHandlerReturn<SchemaType>>,
+  fn: (_body: SchemaType | any) => Promise<ControllerJsonBody<SchemaType>>,
   { isVerify, ...options }: ApiHandlerOptions
 ): Promise<NextResponse> {
   try {
@@ -65,10 +63,10 @@ export async function ApiHandler<SchemaType>(
 }
 
 async function ApiHandlerValidation<SchemaType>(
-  fn: (_body: SchemaType | any) => Promise<ApiHandlerReturn<SchemaType>>,
+  fn: (_body: SchemaType | any) => Promise<ControllerJsonBody<SchemaType>>,
   { req, schema, hasBody = false }: ApiHandlerOptions
 ): Promise<NextResponse> {
-  let fnReturn: ApiHandlerReturn<SchemaType>;
+  let fnReturn: ControllerJsonBody<SchemaType>;
   if (hasBody) {
     const body: SchemaType = schema.parse(await req.json());
     fnReturn = await fn(body);

@@ -7,7 +7,7 @@ import { NextResponse } from 'next/server';
 import { ApiHandler, ResponseErrorMessages, ResponseSuccessMessages } from '@BackEnd/lib'; // Create Controller Object
 
 // Create Controller Object
-export const BranchController: ControllerBase<BranchType, BranchDynamicParam> = {
+export const BranchController: ControllerBase<BranchDynamicParam> = {
   create: BranchControllerCreate,
   update: BranchControllerUpdate,
   getAll: BranchControllerGetAll,

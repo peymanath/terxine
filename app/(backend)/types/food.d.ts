@@ -17,6 +17,6 @@ export interface FoodDynamicParam {
   params: { _id: ObjectId; branchId: ObjectId };
 }
 
-export type FoodControllerType<T, Params = {}> = {
+export type FoodControllerType<Params = unknown> = {
   byBranch: (_req: Request, _params: Params) => Promise<NextResponse>;
 };

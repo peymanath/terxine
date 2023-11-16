@@ -12,7 +12,7 @@ export enum ResponseSuccessMessages {
   CreateNewFood = 'غذای جدید با موفقیت ساخته شد.',
   GetAllFood = 'درخواست دریافت تمامی غذا ها با موفقیت ثبت شد.',
   NotFoundFood = 'غذای موردنظر پیدا نشد.',
-  UpdateFoodById = 'شعبه مورد نظر با موفقیت به روزرسانی شد.',
+  UpdateFoodById = 'غذا مورد نظر با موفقیت به روزرسانی شد.',
   DeleteFood = 'غذا مورد نظر حذف شد.',
   FindFood = 'غذا موردنظر پیدا شد.',
 }

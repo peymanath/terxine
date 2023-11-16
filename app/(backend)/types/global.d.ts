@@ -9,7 +9,7 @@ export type ControllerJsonBody<T> = {
   statusText?: string;
 };
 
-export type ControllerBase<T, Params = {}, OtherType = any> = {
+export type ControllerBase<Params = unknown> = {
   create: (_req: Request) => Promise<NextResponse>;
   delete: (_req: Request, _params: Params) => Promise<NextResponse>;
   update: (_req: Request, _params: Params) => Promise<NextResponse>;
