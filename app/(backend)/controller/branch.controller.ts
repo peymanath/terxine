@@ -87,20 +87,28 @@ async function BranchControllerUpdate(
 ): Promise<NextResponse> {
   return await ApiHandler<BranchType>(
     async body => {
-      const result = await Branch.findOneAndUpdate<BranchType>(
-        { _id: params._id },
-        {
-          $set: {
-            ...body,
-            slug: slugify(body.slug, { lower: true, remove: /[*+~.()'"!:@]/g }),
+      const result: BranchType | null = await Branch.findOne({ _id: params._id });
+      if (result) {
+        const update = await Branch.findOneAndUpdate<BranchType>(
+          { _id: params._id },
+          {
+            $set: {
+              ...body,
+              slug: slugify(body.slug, { lower: true, remove: /[*+~.()'"!:@]/g }),
+            },
           },
-        },
-        { new: true }
-      );
-      return {
-        data: result,
-        message: ResponseSuccessMessages.UpdateBranchById,
-      };
+          { new: true }
+        );
+        return {
+          data: update,
+          message: ResponseSuccessMessages.UpdateBranchById,
+        };
+      } else {
+        return {
+          data: null,
+          message: ResponseSuccessMessages.NotFoundBranch,
+        };
+      }
     },
     {
       req,
@@ -115,11 +123,18 @@ async function BranchControllerUpdate(
 async function BranchControllerGetAll(req: Request): Promise<NextResponse> {
   return await ApiHandler<BranchType[]>(
     async () => {
-      const result: BranchType[] = await Branch.find();
-      return {
-        data: result,
-        message: ResponseSuccessMessages.GetAllBranch,
-      };
+      const results: BranchType[] = await Branch.find();
+      if (results) {
+        return {
+          data: results,
+          message: ResponseSuccessMessages.GetAllBranch,
+        };
+      } else {
+        return {
+          data: null,
+          message: ResponseSuccessMessages.NotFoundBranch,
+        };
+      }
     },
     {
       req,
@@ -137,10 +152,17 @@ async function BranchControllerFind(
   return await ApiHandler<BranchType>(
     async () => {
       const result: BranchType | null = await Branch.findOne({ _id: params._id });
-      return {
-        data: result,
-        message: ResponseSuccessMessages.FindBranch,
-      };
+      if (result) {
+        return {
+          data: result,
+          message: ResponseSuccessMessages.FindBranch,
+        };
+      } else {
+        return {
+          data: null,
+          message: ResponseSuccessMessages.NotFoundBranch,
+        };
+      }
     },
     {
       req,
@@ -157,11 +179,19 @@ async function BranchControllerDelete(
 ): Promise<NextResponse> {
   return await ApiHandler<BranchType>(
     async () => {
-      await Branch.deleteOne({ _id: params._id });
-      return {
-        data: null,
-        message: ResponseSuccessMessages.DeleteBranch,
-      };
+      const result = await Branch.findOne({ _id: params._id });
+      if (result) {
+        await Branch.deleteOne({ _id: params._id });
+        return {
+          data: null,
+          message: ResponseSuccessMessages.DeleteBranch,
+        };
+      } else {
+        return {
+          data: null,
+          message: ResponseSuccessMessages.NotFoundBranch,
+        };
+      }
     },
     {
       req,
