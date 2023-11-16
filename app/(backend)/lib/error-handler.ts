@@ -1,11 +1,18 @@
 import mongoose from 'mongoose';
+import * as z from 'zod';
 import { MongoServerError } from 'mongodb';
 import { NextResponse } from 'next/server';
-import { apiResponse } from '@BackEnd/lib/api-response';
 import { ControllerJsonBody } from '@BackEnd/types';
-import * as z from 'zod';
-import { mongoDbErrors } from '@BackEnd/lib/mongodb-errors-list';
+import {
+  apiResponse,
+  mongoDbErrors,
+  ResponseErrorMessages,
+  type ResponseMessages,
+} from '@BackEnd/lib';
 
+/**
+ * Error Handler for BackEnd Apis
+ */
 export class ErrorHandler {
   protected error: Error | unknown;
 
@@ -20,7 +27,7 @@ export class ErrorHandler {
   /**
    *
    */
-  createError<T>(message?: string, status?: number): NextResponse {
+  createError<T>(message?: ResponseMessages, status?: number): NextResponse {
     if (this.error instanceof mongoose.Error.ValidationError) {
       return this.mongooseValidationError<T>(this.error);
     } else if (this.error instanceof z.ZodError) {
@@ -45,8 +52,7 @@ export class ErrorHandler {
 
     return this.response<T>({
       errors: errorList,
-      message: 'MD Validation Error',
-      statusText: 'Validation Error',
+      message: ResponseErrorMessages.MongooseValidation,
       status: 400,
     });
   }
@@ -78,7 +84,7 @@ export class ErrorHandler {
 
     return this.response<T>({
       errors: errorList,
-      message: `${err.name} Error`,
+      message: ResponseErrorMessages.Error,
       statusText: `${err.name} Error`,
       status: 500,
     });
@@ -97,8 +103,7 @@ export class ErrorHandler {
 
     return this.response<T>({
       errors: errorList,
-      message: 'Zod Validation Error',
-      statusText: 'Validation Error',
+      message: ResponseErrorMessages.ZodValidation,
       status: 400,
     });
   }
@@ -107,10 +112,10 @@ export class ErrorHandler {
    *
    *
    */
-  otherError<T>(err: Error | unknown, message?: string, status?: number): NextResponse {
+  otherError<T>(err: Error | unknown, message?: ResponseMessages, status?: number): NextResponse {
     console.log(err);
     return this.response<T>({
-      message: message || 'Has Any Error',
+      message: message || ResponseErrorMessages.Any,
       errors: [],
       status: status || 400,
     });

@@ -3,10 +3,10 @@ import { NextResponse } from 'next/server';
 
 export function apiResponse<T>({
   data = null,
-  message = '',
   errors = [],
   statusText = '',
   status = 200,
+  message,
 }: ControllerJsonBody<T>): NextResponse {
   return NextResponse.json(
     {
