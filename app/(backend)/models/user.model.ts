@@ -45,7 +45,7 @@ schema.pre('save', function (next) {
   if (!user.isModified('password')) return next();
 
   // generate a salt
-  bcrypt.genSalt(SALT_WORK_FACTOR, function (err: any, salt) {
+  bcrypt.genSalt(SALT_WORK_FACTOR, function (err: Error | null, salt) {
     if (err) return next(err);
 
     // hash the password using our new salt
