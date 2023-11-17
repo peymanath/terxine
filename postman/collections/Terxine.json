@@ -1,0 +1,944 @@
+{
+	"info": {
+		"_postman_id": "043327c1-b22f-4685-8e3e-9c10c2b3143a",
+		"name": "Terxine",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "24535626-043327c1-b22f-4685-8e3e-9c10c2b3143a"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Create User",
+					"id": "24ddb73d-0550-4093-b77c-b75823e53b5e",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{api-key}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"دلم کلم برگ\",\r\n    \"slug\": \"dolmeh-kalam-barg\",\r\n    \"minPrice\": 150000,\r\n    \"fromPrice\": 175000,\r\n    \"perssentage\": 20,\r\n    \"ingredient\": [\r\n        \"لیمو عمانی\",\r\n        \"سبزی خورشتی\",\r\n        \"لوبیا\",\r\n        \"گوشت\",\r\n        \"ادویه های مخصوص ترخینه\"\r\n    ],\r\n    \"branches\": [\r\n        \"655617d392b01c54e3191e44\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/{{API_VERSION}}/food",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"{{API_VERSION}}",
+								"food"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Food",
+					"id": "180c7230-14f2-4243-9db6-950e5e1eef01",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{api-key}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"اکباتان\",\r\n    // \"slug\": \"اکباتان\",\r\n    \"address\": \"شهرک اکباتان، فاز ۳، مجتمع تجاری کوروش، طبقه سوم\",\r\n    \"images\": [\r\n        \"https://peymannaderi.ir\",\r\n        \"https://peymannaderi.ir\"\r\n    ],\r\n    \"phoneNumbers\": [\r\n        \"۰۲۱-۳۳۵۳۵۳۵۴\",\r\n        \"۰۲۱-۳۳۵۳۵۳۵۴\"\r\n    ],\r\n    \"workingHours\": [\r\n        \"همه‌روزه از ساعت ۱۲  الی ۲۳ \"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/{{API_VERSION}}/food",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"{{API_VERSION}}",
+								"food"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Food By ID",
+					"id": "c3c831aa-1529-4799-bd9e-cab1468eb4bd",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{api-key}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"اکباتان\",\r\n    \"address\": \"شهرک اکباتان، فاز ۳، مجتمع تجاری کوروش، طبقه سوم\",\r\n    \"images\": [\r\n        \"https://peymannaderi.ir\",\r\n        \"https://peymannaderi.ir\"\r\n    ],\r\n    \"phoneNumbers\": [\r\n        \"۰۲۱-۳۳۵۳۵۳۵۴\",\r\n        \"۰۲۱-۳۳۵۳۵۳۵۴\"\r\n    ],\r\n    \"workingHours\": [\r\n        \"همه‌روزه از ساعت ۱۲  الی ۲۳ \"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/{{API_VERSION}}/food/65510a02aee3e8fa6c6395b4",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"{{API_VERSION}}",
+								"food",
+								"65510a02aee3e8fa6c6395b4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Food By Branch",
+					"id": "fa23c103-fe1f-4de8-9764-d448dad84599",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{api-key}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"اکباتان\",\r\n    \"address\": \"شهرک اکباتان، فاز ۳، مجتمع تجاری کوروش، طبقه سوم\",\r\n    \"images\": [\r\n        \"https://peymannaderi.ir\",\r\n        \"https://peymannaderi.ir\"\r\n    ],\r\n    \"phoneNumbers\": [\r\n        \"۰۲۱-۳۳۵۳۵۳۵۴\",\r\n        \"۰۲۱-۳۳۵۳۵۳۵۴\"\r\n    ],\r\n    \"workingHours\": [\r\n        \"همه‌روزه از ساعت ۱۲  الی ۲۳ \"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/{{API_VERSION}}/food/branch/:branchId",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"{{API_VERSION}}",
+								"food",
+								"branch",
+								":branchId"
+							],
+							"variable": [
+								{
+									"key": "branchId",
+									"value": "655617d392b01c54e3191e44"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Food By ID",
+					"id": "bb61aff3-80bb-42f5-beac-4a6ac3326dd2",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{api-key}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"اکباتان\",\r\n    // \"slug\": \"اکباتان\",\r\n    \"address\": \"شهرک اکباتان، فاز ۳، مجتمع تجاری کوروش، طبقه سوم\",\r\n    \"images\": [\r\n        \"https://peymannaderi.ir\",\r\n        \"https://peymannaderi.ir\"\r\n    ],\r\n    \"phoneNumbers\": [\r\n        \"۰۲۱-۳۳۵۳۵۳۵۴\",\r\n        \"۰۲۱-۳۳۵۳۵۳۵۴\"\r\n    ],\r\n    \"workingHours\": [\r\n        \"همه‌روزه از ساعت ۱۲  الی ۲۳ \"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/{{API_VERSION}}/food/:_id",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"{{API_VERSION}}",
+								"food",
+								":_id"
+							],
+							"variable": [
+								{
+									"key": "_id",
+									"value": "6556377692b01c54e3191e76"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "1b0d1247-7521-4bb9-b690-4a89b7f1d155"
+		},
+		{
+			"name": "Branch",
+			"item": [
+				{
+					"name": "Create Branch",
+					"id": "71a78f0e-7045-4650-b2fd-a046fff10c8f",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{api-key}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"زمین\",\r\n    \"slug\": \"zaminvegan\",\r\n    \"address\": \"شهرک غرب، خیابان سیمای ایران، شهرک پردیسان\",\r\n    \"images\": [\r\n        \"/public/images/branches/zaminvegan.jpg\"\r\n    ],\r\n    \"phoneNumbers\": [\r\n        \"۸۸۵۸۰۵۵۵-۰۲۱\"\r\n    ],\r\n    \"workingHours\": [\r\n        \"۱۰ صبح تا ۱۱:۳۰ شب\"\r\n    ],\r\n    \"map\": {\r\n        \"lat\": 35.75170371086507,\r\n        \"lng\": 51.366947521328115\r\n    },\r\n    \"foods\": []\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/{{API_VERSION}}/branch",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"{{API_VERSION}}",
+								"branch"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Branch By ID",
+					"id": "05ad267d-cbe6-48e4-9397-82bb360e2902",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{api-key}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    // \"name\": \"فیروزکوه\",\r\n    \"slug\": \"zaminvegan\"\r\n    // \"address\": \"شهرک غرب، خیابان سیمای ایران، شهرک پردیسان\",\r\n    // \"images\": [\r\n    //     \"/public/images/branches/zaminvegan.jpg\"\r\n    // ],\r\n    // \"phoneNumbers\": [\r\n    //     \"۸۸۵۸۰۵۵۵-۰۲۱\"\r\n    // ],\r\n    // \"workingHours\": [\r\n    //     \"۱۰ صبح تا ۱۱:۳۰ شب\"\r\n    // ],\r\n    // \"map\": {\r\n    //     \"lat\": 35.75170371086507,\r\n    //     \"lng\": 51.366947521328115\r\n    // },\r\n    // \"foods\": []\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/{{API_VERSION}}/branch/:_id?populate=true",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"{{API_VERSION}}",
+								"branch",
+								":_id"
+							],
+							"query": [
+								{
+									"key": "populate",
+									"value": "true"
+								}
+							],
+							"variable": [
+								{
+									"key": "_id",
+									"value": "655617d392b01c54e3191e44"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Branch",
+					"id": "d7f33fb0-3180-43c5-a033-40d5f2d089f5",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{api-key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}/api/{{API_VERSION}}/branch?populate",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"{{API_VERSION}}",
+								"branch"
+							],
+							"query": [
+								{
+									"key": "populate",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Branch By ID",
+					"id": "f5394a8b-57eb-44f1-a4f5-824b1c4d57ff",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{api-key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}/api/{{API_VERSION}}/branch/:_id?populate",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"{{API_VERSION}}",
+								"branch",
+								":_id"
+							],
+							"query": [
+								{
+									"key": "populate",
+									"value": null
+								}
+							],
+							"variable": [
+								{
+									"key": "_id",
+									"value": "655617d392b01c54e3191e44"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Branch By ID",
+					"id": "3aecec38-45f8-4e13-83ab-f3a76e0cb6ad",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{api-key}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"اکباتان\",\r\n    // \"slug\": \"اکباتان\",\r\n    \"address\": \"شهرک اکباتان، فاز ۳، مجتمع تجاری کوروش، طبقه سوم\",\r\n    \"images\": [\r\n        \"https://peymannaderi.ir\",\r\n        \"https://peymannaderi.ir\"\r\n    ],\r\n    \"phoneNumbers\": [\r\n        \"۰۲۱-۳۳۵۳۵۳۵۴\",\r\n        \"۰۲۱-۳۳۵۳۵۳۵۴\"\r\n    ],\r\n    \"workingHours\": [\r\n        \"همه‌روزه از ساعت ۱۲  الی ۲۳ \"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/{{API_VERSION}}/branch/:_id",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"{{API_VERSION}}",
+								"branch",
+								":_id"
+							],
+							"variable": [
+								{
+									"key": "_id",
+									"value": "6555ecf9baf7bc1e14bd8d14"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "39307ddf-ac49-4dd9-a60f-a71031886e9a"
+		},
+		{
+			"name": "Food",
+			"item": [
+				{
+					"name": "Create Food",
+					"id": "84a2c9b4-5193-41f2-866c-0428095675b9",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{api-key}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"دلم کلم برگ\",\r\n    \"slug\": \"dolmeh-kalam-barg\",\r\n    \"minPrice\": 150000,\r\n    \"fromPrice\": 175000,\r\n    \"perssentage\": 20,\r\n    \"ingredient\": [\r\n        \"لیمو عمانی\",\r\n        \"سبزی خورشتی\",\r\n        \"لوبیا\",\r\n        \"گوشت\",\r\n        \"ادویه های مخصوص ترخینه\"\r\n    ],\r\n    \"branches\": [\r\n        \"655617d392b01c54e3191e44\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/{{API_VERSION}}/food",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"{{API_VERSION}}",
+								"food"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Food",
+					"id": "61763c18-df36-4d25-933e-5db8979feba6",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{api-key}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"اکباتان\",\r\n    // \"slug\": \"اکباتان\",\r\n    \"address\": \"شهرک اکباتان، فاز ۳، مجتمع تجاری کوروش، طبقه سوم\",\r\n    \"images\": [\r\n        \"https://peymannaderi.ir\",\r\n        \"https://peymannaderi.ir\"\r\n    ],\r\n    \"phoneNumbers\": [\r\n        \"۰۲۱-۳۳۵۳۵۳۵۴\",\r\n        \"۰۲۱-۳۳۵۳۵۳۵۴\"\r\n    ],\r\n    \"workingHours\": [\r\n        \"همه‌روزه از ساعت ۱۲  الی ۲۳ \"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/{{API_VERSION}}/food",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"{{API_VERSION}}",
+								"food"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Food By ID",
+					"id": "bbb0fbe0-12d2-4797-97f9-8d43cba90ea5",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{api-key}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"اکباتان\",\r\n    \"address\": \"شهرک اکباتان، فاز ۳، مجتمع تجاری کوروش، طبقه سوم\",\r\n    \"images\": [\r\n        \"https://peymannaderi.ir\",\r\n        \"https://peymannaderi.ir\"\r\n    ],\r\n    \"phoneNumbers\": [\r\n        \"۰۲۱-۳۳۵۳۵۳۵۴\",\r\n        \"۰۲۱-۳۳۵۳۵۳۵۴\"\r\n    ],\r\n    \"workingHours\": [\r\n        \"همه‌روزه از ساعت ۱۲  الی ۲۳ \"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/{{API_VERSION}}/food/65510a02aee3e8fa6c6395b4",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"{{API_VERSION}}",
+								"food",
+								"65510a02aee3e8fa6c6395b4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Food By Branch",
+					"id": "0b356412-7840-4aee-b73e-43913a8e7db1",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{api-key}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"اکباتان\",\r\n    \"address\": \"شهرک اکباتان، فاز ۳، مجتمع تجاری کوروش، طبقه سوم\",\r\n    \"images\": [\r\n        \"https://peymannaderi.ir\",\r\n        \"https://peymannaderi.ir\"\r\n    ],\r\n    \"phoneNumbers\": [\r\n        \"۰۲۱-۳۳۵۳۵۳۵۴\",\r\n        \"۰۲۱-۳۳۵۳۵۳۵۴\"\r\n    ],\r\n    \"workingHours\": [\r\n        \"همه‌روزه از ساعت ۱۲  الی ۲۳ \"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/{{API_VERSION}}/food/branch/:branchId",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"{{API_VERSION}}",
+								"food",
+								"branch",
+								":branchId"
+							],
+							"variable": [
+								{
+									"key": "branchId",
+									"value": "655617d392b01c54e3191e44"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Food By ID",
+					"id": "061824c5-d97e-4d9d-bee8-b583888aac8e",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{api-key}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"اکباتان\",\r\n    // \"slug\": \"اکباتان\",\r\n    \"address\": \"شهرک اکباتان، فاز ۳، مجتمع تجاری کوروش، طبقه سوم\",\r\n    \"images\": [\r\n        \"https://peymannaderi.ir\",\r\n        \"https://peymannaderi.ir\"\r\n    ],\r\n    \"phoneNumbers\": [\r\n        \"۰۲۱-۳۳۵۳۵۳۵۴\",\r\n        \"۰۲۱-۳۳۵۳۵۳۵۴\"\r\n    ],\r\n    \"workingHours\": [\r\n        \"همه‌روزه از ساعت ۱۲  الی ۲۳ \"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/{{API_VERSION}}/food/:_id",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"{{API_VERSION}}",
+								"food",
+								":_id"
+							],
+							"variable": [
+								{
+									"key": "_id",
+									"value": "6556377692b01c54e3191e76"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "4564ea5f-b193-43fc-b164-96e8fc85d190"
+		},
+		{
+			"name": "Api Key",
+			"item": [
+				{
+					"name": "Create New Api Key",
+					"id": "6755956f-df59-418f-9032-b232175005ed",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"time\":31536000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/{{API_VERSION}}/api-key",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"{{API_VERSION}}",
+								"api-key"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Api Key",
+					"id": "e920b4d4-d9b4-4ce6-b6a3-a762e00da566",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{api-key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}/api/{{API_VERSION}}/api-key/:id/:api-key",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"{{API_VERSION}}",
+								"api-key",
+								":id",
+								":api-key"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "655614d592b01c54e3191e30"
+								},
+								{
+									"key": "api-key",
+									"value": "b88e7ae3-b733-4a4d-9e3c-207de6d4c29f"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "e26e6f1b-ebcc-4bfd-af93-7f51046dd314"
+		},
+		{
+			"name": "Login",
+			"item": [
+				{
+					"name": "OTP SMS",
+					"item": [
+						{
+							"name": "FarazSMS",
+							"item": [
+								{
+									"name": "Send OTP",
+									"id": "dc34874d-8ddd-40a4-8975-febef7a88d15",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "apikey",
+												"value": "{{OTP_API_KEY}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"code\": \"7duic3llh7sovjz\",\r\n  \"sender\": \"+9850002040000000\",\r\n  \"recipient\": \"+989218856192\",\r\n  \"variable\": {\r\n    \"amount\": \"2000\"\r\n  }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{OTP_URL}}/sms/pattern/normal/send",
+											"host": [
+												"{{OTP_URL}}"
+											],
+											"path": [
+												"sms",
+												"pattern",
+												"normal",
+												"send"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get Send List OTP",
+									"id": "7be8fe80-68b4-473d-aaed-fbcbdb4cb492",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "apikey",
+												"value": "{{OTP_API_KEY}}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{OTP_URL}}/sms/message/all",
+											"host": [
+												"{{OTP_URL}}"
+											],
+											"path": [
+												"sms",
+												"message",
+												"all"
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"id": "9797d074-a899-454c-8734-0df560cfffe8"
+						},
+						{
+							"name": "Ghasedak",
+							"item": [
+								{
+									"name": "New Request",
+									"id": "454085fd-dacf-4f66-b801-6eac779d3ab6",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/x-www-form-urlencoded",
+												"type": "text"
+											},
+											{
+												"key": "charset",
+												"value": "utf-8",
+												"type": "text"
+											},
+											{
+												"key": "apikey",
+												"value": "d7af6e509987a4df0164bac8e542ad4dd62a13a6ca49d5613b42d7ec6f5bd2d8",
+												"type": "text"
+											},
+											{
+												"key": "cache-control",
+												"value": "no-cache",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "template",
+													"value": "DevelopTerxineResturant",
+													"type": "text"
+												},
+												{
+													"key": "receptor",
+													"value": "09218856192",
+													"type": "text"
+												},
+												{
+													"key": "linenumber",
+													"value": "300002525",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "checkid",
+													"value": "1",
+													"type": "text"
+												},
+												{
+													"key": "type",
+													"value": "1",
+													"type": "text"
+												},
+												{
+													"key": "param1",
+													"value": "3232",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "https://api.ghasedak.me/v2/verification/send/simple",
+											"protocol": "https",
+											"host": [
+												"api",
+												"ghasedak",
+												"me"
+											],
+											"path": [
+												"v2",
+												"verification",
+												"send",
+												"simple"
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"id": "97f873d9-be65-4094-8d36-4c1e4bcca066"
+						},
+						{
+							"name": "Login",
+							"id": "ef1ac61f-55c9-4dc9-85d3-2742f56260c5",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{api-key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"template\": \"DevelopTerxineResturant\",\r\n    \"receptor\": \"09218856192\",\r\n    \"checkid\": \"1\",\r\n    \"type\": \"1\",\r\n    \"param1\": \"1080\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/api/{{API_VERSION}}/login",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"{{API_VERSION}}",
+										"login"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"id": "3a8d2353-eb80-4418-8c08-bc24e5d1b520"
+				}
+			],
+			"id": "582f52c0-52cd-4b38-a221-141f84e4f954"
+		}
+	]
+}
