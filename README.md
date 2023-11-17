@@ -26,8 +26,8 @@ We use Estedad font for this project.
 
 #### Info
 
-- View Online Website [Click](terxine.peymanath.ir)
-- View Online Component Document with StoryBok [Click](storybook.terxine.peymanath.ir)
+- View Online Website [Click](https://terxine.peymanath.ir)
+- View Online Component Document with StoryBok [Click](https://storybook.terxine.peymanath.ir)
 - View Online Api's Collection (Api's Document) [Click](https://documenter.getpostman.com/view/24535626/2s9YXpWJpx)
 - View Online Design(UI/UX) Project [Click](https://www.figma.com/file/9PZFhesaQ1kW6UdpbVA7yz/Tarkhineh-%7C-Food-ordering-Website-%26-Application-(Community)) 
 - View Online Font Documentation [Click](https://github.com/aminabedi68/Estedad)
