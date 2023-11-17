@@ -1,10 +1,5 @@
 import { NextResponse } from 'next/server';
-import {
-  ApiHandler,
-  ResponseErrorMessages,
-  ResponseSuccessMessages,
-  SmsService,
-} from '@BackEnd/lib';
+import { ApiHandler, ResponseMessages, SmsService } from '@BackEnd/lib';
 import {
   ControllerBaseRequest,
   type SmsControllerType,
@@ -31,25 +26,18 @@ const schema = zfd.formData(
 async function SmsControllerSendOtp(req: ControllerBaseRequest): Promise<NextResponse> {
   return await ApiHandler<SmsOtpSendOptionResponse>(
     async body => {
-      try {
-        const smsService = new SmsService();
-        const result = await smsService.OtpSend(body);
-        if (result.result.code === 200) {
-          return {
-            data: result,
-            message: ResponseSuccessMessages.Ok,
-          };
-        } else {
-          return {
-            errors: [result.result.message],
-            message: ResponseErrorMessages.Error,
-            status: result.result.code,
-          };
-        }
-      } catch (err: any) {
+      const smsService = new SmsService();
+      const result = await smsService.OtpSend(body);
+      if (result.result.code === 200) {
         return {
-          message: ResponseErrorMessages.Error,
-          status: 400,
+          data: result,
+          message: ResponseMessages.Ok,
+        };
+      } else {
+        return {
+          errors: [result.result.message],
+          message: ResponseMessages.Error,
+          status: result.result.code,
         };
       }
     },

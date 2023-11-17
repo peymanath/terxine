@@ -1,7 +1,12 @@
-import { ApiKeyDynamicParam, ApiKeyType, ControllerBase } from '@BackEnd/types';
+import {
+  ApiKeyDynamicParam,
+  ApiKeyType,
+  ControllerBase,
+  ControllerBaseRequest,
+} from '@BackEnd/types';
 import { zfd } from 'zod-form-data';
 import * as z from 'zod';
-import { ApiHandler, ResponseErrorMessages, ResponseSuccessMessages } from '@BackEnd/lib';
+import { ApiHandler, ResponseMessages } from '@BackEnd/lib';
 import { ApiKey } from '@BackEnd/models/api-key.model';
 import { NextResponse } from 'next/server';
 import { v4 } from 'uuid';
@@ -21,7 +26,7 @@ export const ApiKeyController: ControllerBase<ApiKeyDynamicParam> = {
 };
 
 // ApiKey Creator
-async function ApiKeyControllerCreate(req: Request): Promise<NextResponse> {
+async function ApiKeyControllerCreate(req: ControllerBaseRequest): Promise<NextResponse> {
   return await ApiHandler<ApiKeyType>(
     async body => {
       const result = await ApiKey.create<ApiKeyType>({
@@ -30,7 +35,7 @@ async function ApiKeyControllerCreate(req: Request): Promise<NextResponse> {
       });
       return {
         data: result,
-        message: ResponseSuccessMessages.CreateNewApiKey,
+        message: ResponseMessages.CreateNewApiKey,
       };
     },
     {
@@ -45,7 +50,7 @@ async function ApiKeyControllerCreate(req: Request): Promise<NextResponse> {
 
 // ApiKey Delete
 async function ApiKeyControllerDelete(
-  req: Request,
+  req: ControllerBaseRequest,
   { params }: ApiKeyDynamicParam
 ): Promise<NextResponse> {
   return await ApiHandler<ApiKeyType>(
@@ -54,11 +59,11 @@ async function ApiKeyControllerDelete(
       if (result) {
         await ApiKey.deleteOne({ _id: params._id, apiKey: params.apiKey });
         return {
-          message: ResponseSuccessMessages.DeleteApiKey,
+          message: ResponseMessages.DeleteApiKey,
         };
       } else {
         return {
-          message: ResponseErrorMessages.APIKeyIsNotAvailable,
+          message: ResponseMessages.APIKeyIsNotAvailable,
         };
       }
     },
@@ -71,7 +76,7 @@ async function ApiKeyControllerDelete(
 
 // ApiKey Find
 async function ApiKeyControllerFind(
-  req: Request,
+  req: ControllerBaseRequest,
   { params }: ApiKeyDynamicParam
 ): Promise<NextResponse> {
   return await ApiHandler<ApiKeyType>(
@@ -79,7 +84,7 @@ async function ApiKeyControllerFind(
       const result = await ApiKey.findOne({ apiKey: params.apiKey });
       return {
         data: result,
-        message: ResponseSuccessMessages.FindApiKey,
+        message: ResponseMessages.FindApiKey,
       };
     },
     {

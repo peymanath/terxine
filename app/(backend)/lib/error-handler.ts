@@ -3,12 +3,7 @@ import * as z from 'zod';
 import { MongoServerError } from 'mongodb';
 import { NextResponse } from 'next/server';
 import { ControllerJsonBody } from '@BackEnd/types';
-import {
-  apiResponse,
-  mongoDbErrors,
-  ResponseErrorMessages,
-  type ResponseMessages,
-} from '@BackEnd/lib';
+import { apiResponse, mongoDbErrors, ResponseMessages } from '@BackEnd/lib';
 
 /**
  * Error Handler for BackEnd Apis
@@ -52,7 +47,7 @@ export class ErrorHandler {
 
     return this.response<T>({
       errors: errorList,
-      message: ResponseErrorMessages.MongooseValidation,
+      message: ResponseMessages.MongooseValidation,
       status: 400,
     });
   }
@@ -84,7 +79,7 @@ export class ErrorHandler {
 
     return this.response<T>({
       errors: errorList,
-      message: ResponseErrorMessages.Error,
+      message: ResponseMessages.Error,
       statusText: `${err.name} Error`,
       status: 500,
     });
@@ -103,7 +98,7 @@ export class ErrorHandler {
 
     return this.response<T>({
       errors: errorList,
-      message: ResponseErrorMessages.ZodValidation,
+      message: ResponseMessages.ZodValidation,
       status: 400,
     });
   }
@@ -113,8 +108,9 @@ export class ErrorHandler {
    *
    */
   otherError<T>(_err: Error | unknown, message?: ResponseMessages, status?: number): NextResponse {
+    console.log(_err);
     return this.response<T>({
-      message: message || ResponseErrorMessages.Any,
+      message: message || ResponseMessages.Any,
       errors: [],
       status: status || 400,
     });

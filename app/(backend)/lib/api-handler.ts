@@ -1,13 +1,7 @@
 import { z } from 'zod';
 import { NextResponse } from 'next/server';
 import { ControllerBaseRequest, type ControllerJsonBody } from '@BackEnd/types';
-import {
-  apiResponse,
-  dbConnect,
-  ErrorHandler,
-  ResponseErrorMessages,
-  type ResponseMessages,
-} from '@BackEnd/lib';
+import { apiResponse, dbConnect, ErrorHandler, ResponseMessages } from '@BackEnd/lib';
 import { validate } from 'uuid';
 import { ApiKey } from '@BackEnd/models/api-key.model';
 
@@ -39,7 +33,7 @@ export async function ApiHandler<SchemaType>(
               return await ApiHandlerValidation(fn, options);
             }
             return apiResponse<SchemaType>({
-              message: ResponseErrorMessages.ApiKeyExpired,
+              message: ResponseMessages.ApiKeyExpired,
               status: 401,
             });
           } catch (err: Error | unknown) {
@@ -47,12 +41,12 @@ export async function ApiHandler<SchemaType>(
           }
         }
         return apiResponse<SchemaType>({
-          message: ResponseErrorMessages.APIKeyIsNotInValid,
+          message: ResponseMessages.APIKeyIsNotInValid,
           status: 401,
         });
       } else {
         return apiResponse<SchemaType>({
-          message: ResponseErrorMessages.APIKeyIsNotAvailable,
+          message: ResponseMessages.APIKeyIsNotAvailable,
           status: 401,
         });
       }

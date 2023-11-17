@@ -9,7 +9,7 @@ import slugify from 'slugify';
 import { zfd } from 'zod-form-data';
 import * as z from 'zod';
 import { NextResponse } from 'next/server';
-import { ApiHandler, ResponseErrorMessages, ResponseSuccessMessages } from '@BackEnd/lib'; // Create Controller Object
+import { ApiHandler, ResponseMessages } from '@BackEnd/lib'; // Create Controller Object
 
 // Create Controller Object
 export const BranchController: ControllerBase<BranchDynamicParam> = {
@@ -73,7 +73,7 @@ async function BranchControllerCreate(req: ControllerBaseRequest): Promise<NextR
       });
       return {
         data: result,
-        message: ResponseSuccessMessages.CreateNewBranch,
+        message: ResponseMessages.CreateNewBranch,
       };
     },
     {
@@ -106,11 +106,11 @@ async function BranchControllerUpdate(
         );
         return {
           data: update,
-          message: ResponseSuccessMessages.UpdateBranchById,
+          message: ResponseMessages.UpdateBranchById,
         };
       } else {
         return {
-          message: ResponseSuccessMessages.NotFoundBranch,
+          message: ResponseMessages.NotFoundBranch,
         };
       }
     },
@@ -132,11 +132,11 @@ async function BranchControllerGetAll(req: ControllerBaseRequest): Promise<NextR
       if (results) {
         return {
           data: results,
-          message: ResponseSuccessMessages.GetAllBranch,
+          message: ResponseMessages.GetAllBranch,
         };
       } else {
         return {
-          message: ResponseSuccessMessages.NotFoundBranch,
+          message: ResponseMessages.NotFoundBranch,
           status: 404,
         };
       }
@@ -144,7 +144,7 @@ async function BranchControllerGetAll(req: ControllerBaseRequest): Promise<NextR
     {
       req,
       schema: createSchema,
-      errorMessage: ResponseErrorMessages.Error,
+      errorMessage: ResponseMessages.Error,
     }
   );
 }
@@ -162,11 +162,11 @@ async function BranchControllerFind(
       if (result) {
         return {
           data: result,
-          message: ResponseSuccessMessages.FindBranch,
+          message: ResponseMessages.FindBranch,
         };
       } else {
         return {
-          message: ResponseSuccessMessages.NotFoundBranch,
+          message: ResponseMessages.NotFoundBranch,
           status: 404,
         };
       }
@@ -174,7 +174,7 @@ async function BranchControllerFind(
     {
       req,
       schema: createSchema,
-      errorMessage: ResponseErrorMessages.Error,
+      errorMessage: ResponseMessages.Error,
     }
   );
 }
@@ -190,11 +190,11 @@ async function BranchControllerDelete(
       if (result) {
         await Branch.deleteOne({ _id: params._id });
         return {
-          message: ResponseSuccessMessages.DeleteBranch,
+          message: ResponseMessages.DeleteBranch,
         };
       } else {
         return {
-          message: ResponseSuccessMessages.NotFoundBranch,
+          message: ResponseMessages.NotFoundBranch,
           status: 404,
         };
       }
@@ -202,7 +202,7 @@ async function BranchControllerDelete(
     {
       req,
       schema: createSchema,
-      errorMessage: ResponseErrorMessages.Error,
+      errorMessage: ResponseMessages.Error,
     }
   );
 }

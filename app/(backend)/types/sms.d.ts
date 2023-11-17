@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { ControllerBaseRequest } from '@BackEnd/types/global';
+import { ObjectId } from 'mongoose';
 
 export type SmsOtpSendOption = {
   template: string;
@@ -27,3 +28,10 @@ export type SmsOtpSendOptionResponse = {
 export type SmsControllerType = {
   sendOtp: (_option: ControllerBaseRequest) => Promise<NextResponse>;
 };
+
+export interface OtpType {
+  _id?: ObjectId;
+  user: ObjectId;
+  code: string;
+  expireAt: Date;
+}

@@ -3,14 +3,14 @@ import slugify from 'slugify';
 import { zfd } from 'zod-form-data';
 import * as z from 'zod';
 import { NextResponse } from 'next/server';
-import { ApiHandler, ResponseErrorMessages, ResponseSuccessMessages } from '@BackEnd/lib';
+import { ApiHandler, ResponseMessages } from '@BackEnd/lib';
 import {
   ControllerBase,
   ControllerBaseRequest,
   FoodControllerType,
   FoodDynamicParam,
   FoodType,
-} from '@BackEnd/types';
+} from '@BackEnd/types'; // Create Controller Object
 
 // Create Controller Object
 export const FoodController: ControllerBase<FoodDynamicParam> &
@@ -73,12 +73,12 @@ async function FoodControllerCreate(req: ControllerBaseRequest): Promise<NextRes
         }
         return {
           data: result,
-          message: ResponseSuccessMessages.CreateNewFood,
+          message: ResponseMessages.CreateNewFood,
           status: 404,
         };
       } catch {
         return {
-          message: ResponseErrorMessages.OneOrMoreBranchesNotFound,
+          message: ResponseMessages.OneOrMoreBranchesNotFound,
           status: 400,
         };
       }
@@ -113,11 +113,11 @@ async function FoodControllerUpdate(
         );
         return {
           data: update,
-          message: ResponseSuccessMessages.UpdateFoodById,
+          message: ResponseMessages.UpdateFoodById,
         };
       } else {
         return {
-          message: ResponseSuccessMessages.NotFoundFood,
+          message: ResponseMessages.NotFoundFood,
           status: 404,
         };
       }
@@ -139,11 +139,11 @@ async function FoodControllerGetAll(req: ControllerBaseRequest): Promise<NextRes
       if (results.length > 0) {
         return {
           data: results,
-          message: ResponseSuccessMessages.GetAllFood,
+          message: ResponseMessages.GetAllFood,
         };
       } else {
         return {
-          message: ResponseSuccessMessages.NotFoundFood,
+          message: ResponseMessages.NotFoundFood,
           status: 404,
         };
       }
@@ -151,7 +151,7 @@ async function FoodControllerGetAll(req: ControllerBaseRequest): Promise<NextRes
     {
       req,
       schema: createSchema,
-      errorMessage: ResponseErrorMessages.Error,
+      errorMessage: ResponseMessages.Error,
     }
   );
 }
@@ -167,11 +167,11 @@ async function FoodControllerFind(
       if (result) {
         return {
           data: result,
-          message: ResponseSuccessMessages.FindFood,
+          message: ResponseMessages.FindFood,
         };
       } else {
         return {
-          message: ResponseSuccessMessages.NotFoundFood,
+          message: ResponseMessages.NotFoundFood,
           status: 404,
         };
       }
@@ -179,7 +179,7 @@ async function FoodControllerFind(
     {
       req,
       schema: createSchema,
-      errorMessage: ResponseErrorMessages.Error,
+      errorMessage: ResponseMessages.Error,
     }
   );
 }
@@ -195,11 +195,11 @@ async function FoodControllerDelete(
       if (result) {
         await Food.deleteOne({ _id: params._id });
         return {
-          message: ResponseSuccessMessages.DeleteFood,
+          message: ResponseMessages.DeleteFood,
         };
       } else {
         return {
-          message: ResponseSuccessMessages.NotFoundFood,
+          message: ResponseMessages.NotFoundFood,
           status: 404,
         };
       }
@@ -207,7 +207,7 @@ async function FoodControllerDelete(
     {
       req,
       schema: createSchema,
-      errorMessage: ResponseErrorMessages.Error,
+      errorMessage: ResponseMessages.Error,
     }
   );
 }
@@ -225,17 +225,17 @@ async function FoodControllerFindByBranchId(
         if (result.length > 0) {
           return {
             data: result,
-            message: ResponseSuccessMessages.FindFood,
+            message: ResponseMessages.FindFood,
           };
         } else {
           return {
-            message: ResponseSuccessMessages.NotFoundFood,
+            message: ResponseMessages.NotFoundFood,
             status: 404,
           };
         }
       } else {
         return {
-          message: ResponseSuccessMessages.NotFoundBranch,
+          message: ResponseMessages.NotFoundBranch,
           status: 404,
         };
       }
@@ -243,7 +243,7 @@ async function FoodControllerFindByBranchId(
     {
       req,
       schema: createSchema,
-      errorMessage: ResponseErrorMessages.Error,
+      errorMessage: ResponseMessages.Error,
     }
   );
 }
