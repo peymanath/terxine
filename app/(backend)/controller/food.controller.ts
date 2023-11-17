@@ -1,10 +1,16 @@
-import { ControllerBase, FoodControllerType, FoodDynamicParam, FoodType } from '@BackEnd/types';
 import { Branch, Food } from '@BackEnd/models';
 import slugify from 'slugify';
 import { zfd } from 'zod-form-data';
 import * as z from 'zod';
 import { NextResponse } from 'next/server';
-import { ApiHandler, ResponseErrorMessages, ResponseSuccessMessages } from '@BackEnd/lib';
+import { ApiHandler, ResponseMessages } from '@BackEnd/lib';
+import {
+  ControllerBase,
+  ControllerBaseRequest,
+  FoodControllerType,
+  FoodDynamicParam,
+  FoodType,
+} from '@BackEnd/types'; // Create Controller Object
 
 // Create Controller Object
 export const FoodController: ControllerBase<FoodDynamicParam> &
@@ -46,7 +52,7 @@ const updateSchema = zfd.formData(
 );
 
 // Food Creator
-async function FoodControllerCreate(req: Request): Promise<NextResponse> {
+async function FoodControllerCreate(req: ControllerBaseRequest): Promise<NextResponse> {
   return await ApiHandler<FoodType>(
     async body => {
       // Does it check whether the branches exist or not?
@@ -67,12 +73,12 @@ async function FoodControllerCreate(req: Request): Promise<NextResponse> {
         }
         return {
           data: result,
-          message: ResponseSuccessMessages.CreateNewFood,
+          message: ResponseMessages.CreateNewFood,
           status: 404,
         };
       } catch {
         return {
-          message: ResponseErrorMessages.OneOrMoreBranchesNotFound,
+          message: ResponseMessages.OneOrMoreBranchesNotFound,
           status: 400,
         };
       }
@@ -88,7 +94,7 @@ async function FoodControllerCreate(req: Request): Promise<NextResponse> {
 
 // Food Update
 async function FoodControllerUpdate(
-  req: Request,
+  req: ControllerBaseRequest,
   { params }: FoodDynamicParam
 ): Promise<NextResponse> {
   return await ApiHandler<FoodType>(
@@ -107,11 +113,11 @@ async function FoodControllerUpdate(
         );
         return {
           data: update,
-          message: ResponseSuccessMessages.UpdateFoodById,
+          message: ResponseMessages.UpdateFoodById,
         };
       } else {
         return {
-          message: ResponseSuccessMessages.NotFoundFood,
+          message: ResponseMessages.NotFoundFood,
           status: 404,
         };
       }
@@ -126,18 +132,18 @@ async function FoodControllerUpdate(
 }
 
 // Get All Food
-async function FoodControllerGetAll(req: Request): Promise<NextResponse> {
+async function FoodControllerGetAll(req: ControllerBaseRequest): Promise<NextResponse> {
   return await ApiHandler<FoodType[]>(
     async () => {
       const results: FoodType[] = await Food.find();
       if (results.length > 0) {
         return {
           data: results,
-          message: ResponseSuccessMessages.GetAllFood,
+          message: ResponseMessages.GetAllFood,
         };
       } else {
         return {
-          message: ResponseSuccessMessages.NotFoundFood,
+          message: ResponseMessages.NotFoundFood,
           status: 404,
         };
       }
@@ -145,14 +151,14 @@ async function FoodControllerGetAll(req: Request): Promise<NextResponse> {
     {
       req,
       schema: createSchema,
-      errorMessage: ResponseErrorMessages.Error,
+      errorMessage: ResponseMessages.Error,
     }
   );
 }
 
 // Find by id branch
 async function FoodControllerFind(
-  req: Request,
+  req: ControllerBaseRequest,
   { params }: FoodDynamicParam
 ): Promise<NextResponse> {
   return await ApiHandler<FoodType>(
@@ -161,11 +167,11 @@ async function FoodControllerFind(
       if (result) {
         return {
           data: result,
-          message: ResponseSuccessMessages.FindFood,
+          message: ResponseMessages.FindFood,
         };
       } else {
         return {
-          message: ResponseSuccessMessages.NotFoundFood,
+          message: ResponseMessages.NotFoundFood,
           status: 404,
         };
       }
@@ -173,14 +179,14 @@ async function FoodControllerFind(
     {
       req,
       schema: createSchema,
-      errorMessage: ResponseErrorMessages.Error,
+      errorMessage: ResponseMessages.Error,
     }
   );
 }
 
 // Delete by id branch
 async function FoodControllerDelete(
-  req: Request,
+  req: ControllerBaseRequest,
   { params }: FoodDynamicParam
 ): Promise<NextResponse> {
   return await ApiHandler<FoodType>(
@@ -189,11 +195,11 @@ async function FoodControllerDelete(
       if (result) {
         await Food.deleteOne({ _id: params._id });
         return {
-          message: ResponseSuccessMessages.DeleteFood,
+          message: ResponseMessages.DeleteFood,
         };
       } else {
         return {
-          message: ResponseSuccessMessages.NotFoundFood,
+          message: ResponseMessages.NotFoundFood,
           status: 404,
         };
       }
@@ -201,14 +207,14 @@ async function FoodControllerDelete(
     {
       req,
       schema: createSchema,
-      errorMessage: ResponseErrorMessages.Error,
+      errorMessage: ResponseMessages.Error,
     }
   );
 }
 
 // Find Food by id branch
 async function FoodControllerFindByBranchId(
-  req: Request,
+  req: ControllerBaseRequest,
   { params }: FoodDynamicParam
 ): Promise<NextResponse> {
   return await ApiHandler<FoodType[]>(
@@ -219,17 +225,17 @@ async function FoodControllerFindByBranchId(
         if (result.length > 0) {
           return {
             data: result,
-            message: ResponseSuccessMessages.FindFood,
+            message: ResponseMessages.FindFood,
           };
         } else {
           return {
-            message: ResponseSuccessMessages.NotFoundFood,
+            message: ResponseMessages.NotFoundFood,
             status: 404,
           };
         }
       } else {
         return {
-          message: ResponseSuccessMessages.NotFoundBranch,
+          message: ResponseMessages.NotFoundBranch,
           status: 404,
         };
       }
@@ -237,7 +243,7 @@ async function FoodControllerFindByBranchId(
     {
       req,
       schema: createSchema,
-      errorMessage: ResponseErrorMessages.Error,
+      errorMessage: ResponseMessages.Error,
     }
   );
 }

@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import { FoodType } from '@BackEnd/types';
 
-const foodSchema = new mongoose.Schema<FoodType>(
+const schema = new mongoose.Schema<FoodType>(
   {
     name: {
       type: String,
@@ -27,4 +27,4 @@ const foodSchema = new mongoose.Schema<FoodType>(
   }
 );
 
-export const Food = mongoose.models.Food || mongoose.model<FoodType>('Food', foodSchema);
+export const Food = mongoose.models.Food || mongoose.model<FoodType>('Food', schema);

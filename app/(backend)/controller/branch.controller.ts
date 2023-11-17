@@ -1,10 +1,15 @@
-import { BranchDynamicParam, BranchType, ControllerBase } from '@BackEnd/types';
+import {
+  BranchDynamicParam,
+  BranchType,
+  ControllerBase,
+  ControllerBaseRequest,
+} from '@BackEnd/types';
 import { Branch } from '@BackEnd/models';
 import slugify from 'slugify';
 import { zfd } from 'zod-form-data';
 import * as z from 'zod';
 import { NextResponse } from 'next/server';
-import { ApiHandler, ResponseErrorMessages, ResponseSuccessMessages } from '@BackEnd/lib'; // Create Controller Object
+import { ApiHandler, ResponseMessages } from '@BackEnd/lib'; // Create Controller Object
 
 // Create Controller Object
 export const BranchController: ControllerBase<BranchDynamicParam> = {
@@ -59,7 +64,7 @@ const updateSchema = zfd.formData(
 );
 
 // Branch Creator
-async function BranchControllerCreate(req: Request): Promise<NextResponse> {
+async function BranchControllerCreate(req: ControllerBaseRequest): Promise<NextResponse> {
   return await ApiHandler<BranchType>(
     async body => {
       const result = await Branch.create<BranchType>({
@@ -68,7 +73,7 @@ async function BranchControllerCreate(req: Request): Promise<NextResponse> {
       });
       return {
         data: result,
-        message: ResponseSuccessMessages.CreateNewBranch,
+        message: ResponseMessages.CreateNewBranch,
       };
     },
     {
@@ -82,7 +87,7 @@ async function BranchControllerCreate(req: Request): Promise<NextResponse> {
 
 // Branch Update
 async function BranchControllerUpdate(
-  req: Request,
+  req: ControllerBaseRequest,
   { params }: BranchDynamicParam
 ): Promise<NextResponse> {
   return await ApiHandler<BranchType>(
@@ -101,11 +106,11 @@ async function BranchControllerUpdate(
         );
         return {
           data: update,
-          message: ResponseSuccessMessages.UpdateBranchById,
+          message: ResponseMessages.UpdateBranchById,
         };
       } else {
         return {
-          message: ResponseSuccessMessages.NotFoundBranch,
+          message: ResponseMessages.NotFoundBranch,
         };
       }
     },
@@ -119,18 +124,19 @@ async function BranchControllerUpdate(
 }
 
 // Get All Branch
-async function BranchControllerGetAll(req: Request): Promise<NextResponse> {
+async function BranchControllerGetAll(req: ControllerBaseRequest): Promise<NextResponse> {
   return await ApiHandler<BranchType[]>(
-    async () => {
-      const results: BranchType[] = await Branch.find();
+    async (_, populate) => {
+      const results: BranchType[] = await Branch.find().populate(populate ? 'foods' : '');
+
       if (results) {
         return {
           data: results,
-          message: ResponseSuccessMessages.GetAllBranch,
+          message: ResponseMessages.GetAllBranch,
         };
       } else {
         return {
-          message: ResponseSuccessMessages.NotFoundBranch,
+          message: ResponseMessages.NotFoundBranch,
           status: 404,
         };
       }
@@ -138,27 +144,29 @@ async function BranchControllerGetAll(req: Request): Promise<NextResponse> {
     {
       req,
       schema: createSchema,
-      errorMessage: ResponseErrorMessages.Error,
+      errorMessage: ResponseMessages.Error,
     }
   );
 }
 
 // Find by id branch
 async function BranchControllerFind(
-  req: Request,
+  req: ControllerBaseRequest,
   { params }: BranchDynamicParam
 ): Promise<NextResponse> {
   return await ApiHandler<BranchType>(
-    async () => {
-      const result: BranchType | null = await Branch.findOne({ _id: params._id });
+    async (_, populate) => {
+      const result: BranchType | null = await Branch.findOne({ _id: params._id })
+        .populate(populate ? 'foods' : '')
+        .exec();
       if (result) {
         return {
           data: result,
-          message: ResponseSuccessMessages.FindBranch,
+          message: ResponseMessages.FindBranch,
         };
       } else {
         return {
-          message: ResponseSuccessMessages.NotFoundBranch,
+          message: ResponseMessages.NotFoundBranch,
           status: 404,
         };
       }
@@ -166,14 +174,14 @@ async function BranchControllerFind(
     {
       req,
       schema: createSchema,
-      errorMessage: ResponseErrorMessages.Error,
+      errorMessage: ResponseMessages.Error,
     }
   );
 }
 
 // Delete by id branch
 async function BranchControllerDelete(
-  req: Request,
+  req: ControllerBaseRequest,
   { params }: BranchDynamicParam
 ): Promise<NextResponse> {
   return await ApiHandler<BranchType>(
@@ -182,11 +190,11 @@ async function BranchControllerDelete(
       if (result) {
         await Branch.deleteOne({ _id: params._id });
         return {
-          message: ResponseSuccessMessages.DeleteBranch,
+          message: ResponseMessages.DeleteBranch,
         };
       } else {
         return {
-          message: ResponseSuccessMessages.NotFoundBranch,
+          message: ResponseMessages.NotFoundBranch,
           status: 404,
         };
       }
@@ -194,7 +202,7 @@ async function BranchControllerDelete(
     {
       req,
       schema: createSchema,
-      errorMessage: ResponseErrorMessages.Error,
+      errorMessage: ResponseMessages.Error,
     }
   );
 }

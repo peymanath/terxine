@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import { BranchType } from '@BackEnd/types';
 
-const branchSchema = new mongoose.Schema<BranchType>(
+const schema = new mongoose.Schema<BranchType>(
   {
     name: {
       type: String,
@@ -59,4 +59,4 @@ const branchSchema = new mongoose.Schema<BranchType>(
   }
 );
 
-export const Branch = mongoose.models.Branch || mongoose.model<BranchType>('Branch', branchSchema);
+export const Branch = mongoose.models.Branch || mongoose.model<BranchType>('Branch', schema);

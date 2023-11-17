@@ -1,5 +1,6 @@
 import { ObjectId } from 'mongoose';
 import { NextResponse } from 'next/server';
+import { ControllerBaseRequest } from '@BackEnd/types/global';
 
 export interface FoodType {
   name: string;
@@ -18,5 +19,5 @@ export interface FoodDynamicParam {
 }
 
 export type FoodControllerType<Params = unknown> = {
-  byBranch: (_req: Request, _params: Params) => Promise<NextResponse>;
+  byBranch: (_req: ControllerBaseRequest, _params: Params) => Promise<NextResponse>;
 };
