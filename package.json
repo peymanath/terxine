@@ -20,6 +20,7 @@
     "colord": "^2.9.3",
     "embla-carousel-autoplay": "^8.0.0-rc14",
     "embla-carousel-react": "^8.0.0-rc14",
+    "ghasedak": "^0.2.1",
     "mongoose": "^8.0.0",
     "next": "^14.0.3",
     "next-swagger-doc": "^0.4.0",

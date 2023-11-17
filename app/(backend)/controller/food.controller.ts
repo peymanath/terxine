@@ -1,10 +1,16 @@
-import { ControllerBase, FoodControllerType, FoodDynamicParam, FoodType } from '@BackEnd/types';
 import { Branch, Food } from '@BackEnd/models';
 import slugify from 'slugify';
 import { zfd } from 'zod-form-data';
 import * as z from 'zod';
 import { NextResponse } from 'next/server';
 import { ApiHandler, ResponseErrorMessages, ResponseSuccessMessages } from '@BackEnd/lib';
+import {
+  ControllerBase,
+  ControllerBaseRequest,
+  FoodControllerType,
+  FoodDynamicParam,
+  FoodType,
+} from '@BackEnd/types';
 
 // Create Controller Object
 export const FoodController: ControllerBase<FoodDynamicParam> &
@@ -46,7 +52,7 @@ const updateSchema = zfd.formData(
 );
 
 // Food Creator
-async function FoodControllerCreate(req: Request): Promise<NextResponse> {
+async function FoodControllerCreate(req: ControllerBaseRequest): Promise<NextResponse> {
   return await ApiHandler<FoodType>(
     async body => {
       // Does it check whether the branches exist or not?
@@ -88,7 +94,7 @@ async function FoodControllerCreate(req: Request): Promise<NextResponse> {
 
 // Food Update
 async function FoodControllerUpdate(
-  req: Request,
+  req: ControllerBaseRequest,
   { params }: FoodDynamicParam
 ): Promise<NextResponse> {
   return await ApiHandler<FoodType>(
@@ -126,7 +132,7 @@ async function FoodControllerUpdate(
 }
 
 // Get All Food
-async function FoodControllerGetAll(req: Request): Promise<NextResponse> {
+async function FoodControllerGetAll(req: ControllerBaseRequest): Promise<NextResponse> {
   return await ApiHandler<FoodType[]>(
     async () => {
       const results: FoodType[] = await Food.find();
@@ -152,7 +158,7 @@ async function FoodControllerGetAll(req: Request): Promise<NextResponse> {
 
 // Find by id branch
 async function FoodControllerFind(
-  req: Request,
+  req: ControllerBaseRequest,
   { params }: FoodDynamicParam
 ): Promise<NextResponse> {
   return await ApiHandler<FoodType>(
@@ -180,7 +186,7 @@ async function FoodControllerFind(
 
 // Delete by id branch
 async function FoodControllerDelete(
-  req: Request,
+  req: ControllerBaseRequest,
   { params }: FoodDynamicParam
 ): Promise<NextResponse> {
   return await ApiHandler<FoodType>(
@@ -208,7 +214,7 @@ async function FoodControllerDelete(
 
 // Find Food by id branch
 async function FoodControllerFindByBranchId(
-  req: Request,
+  req: ControllerBaseRequest,
   { params }: FoodDynamicParam
 ): Promise<NextResponse> {
   return await ApiHandler<FoodType[]>(
