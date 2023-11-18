@@ -12,6 +12,7 @@ import {
   UserType,
 } from '@BackEnd/types'; // Create Controller Object
 import crypto from 'crypto';
+import { passHash } from '@BackEnd/lib/password';
 
 // Create Controller Object
 export const UserController: ControllerBase<UserDynamicParam> = {
@@ -43,8 +44,6 @@ const updateSchema = zfd.formData(
     lastName: z.string().optional(),
     email: z.string().optional(),
     phoneNumber: z.string().optional(),
-    password: z.string().optional(),
-    isActive: z.string().optional(),
     nickname: z.string().optional(),
     birthdate: z.date().optional(),
   })
@@ -97,12 +96,15 @@ async function UserControllerCreate(req: ControllerBaseRequest): Promise<NextRes
         }
       } else {
         const otp: number = crypto.randomInt(100000, 999999);
+        console.log(body.password);
+        const password = body.password ? await passHash(body.password) : null;
         const result: UserType = await User.create<UserType>({
           ...body,
           username: slugify(body.username || body.firstName + body.lastName, {
             lower: true,
             remove: /[*+~.()'"!:@]/g,
           }),
+          password,
           isActive: false,
         });
         await Otp.create({
@@ -149,7 +151,6 @@ async function UserControllerUpdate(
               firstName: body.firstName,
               lastName: body.lastName,
               email: body.email,
-              password: body.password,
               nickname: body.nickname,
               birthdate: body.birthdate,
             },
@@ -162,7 +163,9 @@ async function UserControllerUpdate(
             firstName: update?.firstName,
             lastName: update?.lastName,
             email: update?.email,
-            password: update?.password,
+            username: update?.username,
+            phoneNumber: update?.phoneNumber,
+            isActive: update?.isActive,
             nickname: update?.nickname,
             birthdate: update?.birthdate,
           },
