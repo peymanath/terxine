@@ -1,6 +1,6 @@
 import { ObjectId } from 'mongoose';
 
-export interface UserType {
+export type UserType = {
   _id?: ObjectId;
   firstName: string;
   lastName: string;
@@ -12,8 +12,8 @@ export interface UserType {
   phoneNumber: string;
   birthdate: Date;
   isActive: boolean;
-}
+};
 
 export interface UserDynamicParam {
-  params: { _id: ObjectId };
+  params: { _id: ObjectId; email: string; username: string };
 }

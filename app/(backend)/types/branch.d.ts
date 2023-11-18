@@ -1,6 +1,6 @@
 import { ObjectId } from 'mongoose';
 
-export interface BranchType {
+export type BranchType = {
   _id?: ObjectId;
   slug?: string;
   name: string;
@@ -13,8 +13,8 @@ export interface BranchType {
     lng: number;
   };
   foods?: string[];
-}
+};
 
-export interface BranchDynamicParam {
+export type BranchDynamicParam = {
   params: { _id: ObjectId; populate: boolean };
-}
+};

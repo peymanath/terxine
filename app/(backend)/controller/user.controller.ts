@@ -138,7 +138,7 @@ async function UserControllerUpdate(
   req: ControllerBaseRequest,
   { params }: UserDynamicParam
 ): Promise<NextResponse> {
-  return await ApiHandler<UserType>(
+  return await ApiHandler<Partial<UserType>>(
     async body => {
       const result: UserType | null = await User.findOne({ _id: params._id });
       if (result) {
@@ -146,14 +146,26 @@ async function UserControllerUpdate(
           { _id: params._id },
           {
             $set: {
-              ...body,
-              slug: slugify(body.slug, { lower: true, remove: /[*+~.()'"!:@]/g }),
+              firstName: body.firstName,
+              lastName: body.lastName,
+              email: body.email,
+              password: body.password,
+              nickname: body.nickname,
+              birthdate: body.birthdate,
             },
           },
           { new: true }
         );
         return {
-          data: update,
+          data: {
+            _id: update?._id,
+            firstName: update?.firstName,
+            lastName: update?.lastName,
+            email: update?.email,
+            password: update?.password,
+            nickname: update?.nickname,
+            birthdate: update?.birthdate,
+          },
           message: ResponseMessages.UpdateUserById,
         };
       } else {
