@@ -133,3 +133,5 @@ dist
 .idea
 
 storybook-static
+
+*.key
