@@ -6,3 +6,4 @@ export * from './error-handler';
 export * from './mongodb-errors-list';
 export * from './sms-config';
 export * from './config';
+export * from './jwt';

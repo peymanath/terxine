@@ -32,4 +32,7 @@ export enum ResponseMessages {
   DeleteUser = 'کاربر مورد نظر حذف شد.',
   SendOtpCode = 'کد Otp ارسال شد.',
   CodeNotAvailable = 'کد Otp معتبر نیست!',
+  TokenIsNotAvailable = 'Token موجود نیست',
+  TokenIsNotInValid = 'Token معتبر نیست',
+  TokenIsValid = 'Token معتبر است.',
 }
