@@ -7,8 +7,9 @@ export function apiResponse<T>({
   statusText = '',
   status = 200,
   message,
+  cookies,
 }: ControllerJsonBody<T>): NextResponse {
-  return NextResponse.json(
+  const res = NextResponse.json(
     {
       data,
       errors,
@@ -21,4 +22,8 @@ export function apiResponse<T>({
       statusText,
     }
   );
+  if (!!cookies) {
+    res.cookies.set(cookies);
+  }
+  return res;
 }

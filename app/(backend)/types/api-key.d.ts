@@ -5,6 +5,6 @@ export type ApiKeyType = {
   expireAt: Date;
 };
 
-export interface ApiKeyDynamicParam {
+export type ApiKeyDynamicParam = {
   params: { _id: ObjectId; apiKey: string };
-}
+};

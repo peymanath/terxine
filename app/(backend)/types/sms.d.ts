@@ -29,9 +29,9 @@ export type SmsControllerType = {
   sendOtp: (_option: ControllerBaseRequest) => Promise<NextResponse>;
 };
 
-export interface OtpType {
+export type OtpType = {
   _id?: ObjectId;
   user: ObjectId;
   code: string;
   expireAt: Date;
-}
+};

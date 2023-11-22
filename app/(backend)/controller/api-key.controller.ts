@@ -10,10 +10,11 @@ import { ApiHandler, ResponseMessages } from '@BackEnd/lib';
 import { ApiKey } from '@BackEnd/models/api-key.model';
 import { NextResponse } from 'next/server';
 import { v4 } from 'uuid';
+import ms from 'ms';
 
 const createSchema = zfd.formData(
   z.object({
-    time: z.number().optional(),
+    time: z.string().optional(),
   })
 );
 
@@ -31,7 +32,7 @@ async function ApiKeyControllerCreate(req: ControllerBaseRequest): Promise<NextR
     async body => {
       const result = await ApiKey.create<ApiKeyType>({
         apiKey: v4(),
-        expireAt: new Date(Date.now() + parseInt(body.time, 10) * 1000),
+        expireAt: new Date(Date.now() + ms(String(body.time) || '30 d')),
       });
       return {
         data: result,
