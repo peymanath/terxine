@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
-
 import { Config, ResponseMessages } from '@BackEnd/lib';
+import { ResponseCookie } from 'next/dist/compiled/@edge-runtime/cookies';
 
 type TokenVerifyReturn<T> = TokenVerifyReturnTrue<T> | TokenVerifyReturnFalse<T>;
 
@@ -53,6 +53,11 @@ export class Token {
     };
   }
 
+  /**
+   *
+   * @param data
+   * @constructor
+   */
   static async Create(data: TokenCreateData): Promise<string | undefined> {
     try {
       return jwt.sign(data, Config.JWT.JWT_PRIVATE_KEY, {
@@ -63,5 +68,29 @@ export class Token {
     } catch (err) {
       console.log(err);
     }
+  }
+
+  static async CreateAndSetCookie(data: TokenCreateData): Promise<ResponseCookie | undefined> {
+    const token = await Token.Create(data);
+    if (token) {
+      return {
+        sameSite: 'lax',
+        priority: 'high',
+        name: '_terxineAccessToken',
+        value: token,
+        domain:
+          process.env.NODE_ENV === 'development'
+            ? Config.TOKEN.ACCESS_TOKEN.DEV_DOMAIN
+            : Config.TOKEN.ACCESS_TOKEN.PRO_DOMAIN,
+        path:
+          process.env.NODE_ENV === 'development'
+            ? Config.TOKEN.ACCESS_TOKEN.DEV_DOMAIN
+            : Config.TOKEN.ACCESS_TOKEN.PRO_DOMAIN,
+        expires: Config.TOKEN.ACCESS_TOKEN.EXPIRE,
+        maxAge: Config.TOKEN.ACCESS_TOKEN.MAX_AGE,
+        httpOnly: true,
+        secure: true,
+      };
+    } else return undefined;
   }
 }

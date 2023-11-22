@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import { OtpType } from '@BackEnd/types';
+import ms from 'ms';
 
 const schema = new mongoose.Schema<OtpType>(
   {
@@ -10,7 +11,7 @@ const schema = new mongoose.Schema<OtpType>(
     },
     expireAt: {
       type: Date,
-      default: new Date(Date.now() + 60 * 1000),
+      default: new Date(Date.now() + ms('2 m')),
     },
   },
   {

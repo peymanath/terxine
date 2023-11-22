@@ -1,5 +1,7 @@
 'use strict';
 
+import ms from 'ms';
+
 type Algorithm =
   | 'ES384'
   | 'ES512'
@@ -14,10 +16,19 @@ type Algorithm =
   | 'RS512'
   | 'ES256';
 
+type SmsTemplates = 'SmsOtp';
+type TOKENCOOKIE = {
+  DEV_DOMAIN: string;
+  PRO_DOMAIN: string;
+  EXPIRE: number | Date;
+  MAX_AGE: number;
+};
+
 type Config = {
   readonly OTP: {
-    readonly LENGTH: number;
+    readonly LENGTH: 4 | 6 | 8;
     readonly DURATION: number;
+    readonly TEMPLATE: Record<SmsTemplates, string>;
   };
   readonly JWT: {
     readonly JWT_PRIVATE_KEY: string;
@@ -26,6 +37,7 @@ type Config = {
     readonly EXPIRE_IN: string;
     readonly AUDIENCE: string;
   };
+  readonly TOKEN: { ACCESS_TOKEN: TOKENCOOKIE };
   readonly BCRYPT: {
     readonly SALT_ROUNDS: 10;
   };
@@ -35,6 +47,9 @@ export const Config: Config = {
   OTP: {
     LENGTH: 6,
     DURATION: 300000, //ms
+    TEMPLATE: {
+      SmsOtp: 'DevelopTerxineResturant',
+    },
   },
   JWT: {
     JWT_PRIVATE_KEY: process.env.JWT_PRIVATE_KEY.replace(/\\n/g, '\n'),
@@ -42,6 +57,14 @@ export const Config: Config = {
     ALGORITHM: 'RS256',
     EXPIRE_IN: '2h',
     AUDIENCE: 'Terxine | Peyman Naderi | peymanath.ir',
+  },
+  TOKEN: {
+    ACCESS_TOKEN: {
+      DEV_DOMAIN: 'http://localhost:3000',
+      PRO_DOMAIN: 'peymanath.ir',
+      EXPIRE: ms('1 d'),
+      MAX_AGE: ms('1 d'),
+    },
   },
   BCRYPT: {
     SALT_ROUNDS: 10,

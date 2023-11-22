@@ -1,4 +1,5 @@
 import { SmsOtpSendOption, SmsOtpSendOptionResponse } from '@BackEnd/types/sms';
+import crypto from 'crypto';
 
 class SmsConfigs {
   /**
@@ -23,6 +24,13 @@ class SmsConfigs {
   protected readonly version: string;
 
   /**
+   * This api key is placed in url request
+   * @type {number}
+   * @protected
+   */
+  private catchOtp: number | undefined;
+
+  /**
    * Sms Config
    * @param {string} version - the utilize version api
    */
@@ -43,6 +51,25 @@ class SmsConfigs {
 
     // Initial Version Api
     this.version = version || 'v2';
+  }
+
+  public OtpGenerator(num: 4 | 6 | 8): number {
+    const maxNum: Record<typeof num, number> = {
+      '4': 9999,
+      '6': 999999,
+      '8': 99999999,
+    };
+    const minNum: Record<typeof num, number> = {
+      '4': 1000,
+      '6': 100000,
+      '8': 10000000,
+    };
+
+    if (!this.catchOtp) {
+      this.catchOtp = crypto.randomInt(minNum[num], maxNum[num]);
+    }
+
+    return this.catchOtp;
   }
 
   /**

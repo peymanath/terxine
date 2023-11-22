@@ -12,6 +12,7 @@ export type UserType = {
   phoneNumber: string;
   birthdate: Date;
   isActive: boolean;
+  token: string | undefined;
 };
 
 export interface UserDynamicParam {

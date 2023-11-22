@@ -3,7 +3,9 @@ import slugify from 'slugify';
 import { zfd } from 'zod-form-data';
 import * as z from 'zod';
 import { NextResponse } from 'next/server';
-import { ApiHandler, ResponseMessages, SmsService } from '@BackEnd/lib';
+import { ApiHandler, Config, ResponseMessages, SmsService, Token } from '@BackEnd/lib';
+import { passHash } from '@BackEnd/lib/password';
+import ms from 'ms';
 import {
   ControllerBase,
   ControllerBaseRequest,
@@ -11,8 +13,6 @@ import {
   UserDynamicParam,
   UserType,
 } from '@BackEnd/types'; // Create Controller Object
-import crypto from 'crypto';
-import { passHash } from '@BackEnd/lib/password';
 
 // Create Controller Object
 export const UserController: ControllerBase<UserDynamicParam> = {
@@ -51,7 +51,7 @@ const updateSchema = zfd.formData(
 
 // User Creator
 async function UserControllerCreate(req: ControllerBaseRequest): Promise<NextResponse> {
-  return await ApiHandler<UserType>(
+  return await ApiHandler<Omit<UserType, 'password' | 'isActive' | 'code' | 'token'>>(
     async body => {
       const findUser: UserType | null = await User.findOne({
         email: body.email,
@@ -78,10 +78,33 @@ async function UserControllerCreate(req: ControllerBaseRequest): Promise<NextRes
               user: findUser._id,
               code: getOtp?.code,
             });
-            return {
-              data: updateUser,
-              message: ResponseMessages.CreateNewUser,
-            };
+
+            if (!!updateUser) {
+              const user: Omit<UserType, 'password' | 'isActive' | 'code' | 'token'> = {
+                _id: updateUser._id,
+                firstName: updateUser.firstName,
+                lastName: updateUser.lastName,
+                email: updateUser.email,
+                username: updateUser.username,
+                phoneNumber: updateUser.phoneNumber,
+                nickname: updateUser.nickname,
+                birthdate: updateUser.birthdate,
+              };
+
+              return {
+                data: user,
+                message: ResponseMessages.CreateNewUser,
+                cookies: await Token.CreateAndSetCookie(user),
+              };
+            } else {
+              await User.deleteOne({
+                user: findUser._id,
+              });
+              return {
+                message: ResponseMessages.CreateNewUserFailed,
+                status: 500,
+              };
+            }
           } else {
             return {
               message: ResponseMessages.CodeNotAvailable,
@@ -95,8 +118,7 @@ async function UserControllerCreate(req: ControllerBaseRequest): Promise<NextRes
           };
         }
       } else {
-        const otp: number = crypto.randomInt(100000, 999999);
-        console.log(body.password);
+        const smsService = new SmsService();
         const password = body.password ? await passHash(body.password) : null;
         const result: UserType = await User.create<UserType>({
           ...body,
@@ -109,16 +131,16 @@ async function UserControllerCreate(req: ControllerBaseRequest): Promise<NextRes
         });
         await Otp.create({
           user: result._id,
-          code: otp,
-          expireAt: new Date(Date.now() + 180 * 1000),
+          code: smsService.OtpGenerator(Config.OTP.LENGTH),
+          expireAt: new Date(Date.now() + ms('2 m')),
         });
-        const smsService = new SmsService();
+
         await smsService.OtpSend({
-          template: 'DevelopTerxineResturant',
+          template: Config.OTP.TEMPLATE.SmsOtp,
           receptor: result.phoneNumber,
           checkid: '1',
           type: '1',
-          param1: String(otp),
+          param1: String(smsService.OtpGenerator(Config.OTP.LENGTH)),
         });
         return {
           data: result,

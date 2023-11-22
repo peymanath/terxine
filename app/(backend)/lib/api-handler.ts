@@ -15,14 +15,14 @@ export type ApiHandlerOptions = {
 
 export async function ApiHandler<SchemaType>(
   fn: (_body: SchemaType | any, populate: boolean) => Promise<ControllerJsonBody<SchemaType>>,
-  { isVerify, ...options }: ApiHandlerOptions
+  { isVerify = true, ...options }: ApiHandlerOptions
 ): Promise<NextResponse> {
   try {
     await dbConnect();
     const isXApiKey = options.req.headers.has('x-api-key');
     const XApiKey = options.req.headers.get('x-api-key');
 
-    if (isVerify) {
+    if (!isVerify) {
       return await ApiHandlerValidation(fn, options);
     } else {
       if (isXApiKey && XApiKey) {

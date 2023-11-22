@@ -24,6 +24,7 @@ export enum ResponseMessages {
   DeleteFood = 'غذا مورد نظر حذف شد.',
   FindFood = 'غذا موردنظر پیدا شد.',
   CreateNewUser = 'کاربر جدید با موفقیت ساخته شد.',
+  CreateNewUserFailed = 'ساخت کاربر جدید با شکست مواجه شد.',
   UpdateUserById = 'اطلاعات کاربر مورد نظر با موفقیت به روزرسانی شد.',
   NotFoundUser = 'کاربر موردنظر پیدا نشد.',
   ExistFoundUser = 'کاربر موردنظر از قبل وجود دارد.',

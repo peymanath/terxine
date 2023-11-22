@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { type ResponseMessages } from '@BackEnd/lib';
+import { ResponseCookie } from 'next/dist/compiled/@edge-runtime/cookies';
 
 export type ControllerJsonBody<T> = {
   data?: T | null;
@@ -7,6 +8,7 @@ export type ControllerJsonBody<T> = {
   message: ResponseMessages;
   status?: number;
   statusText?: string;
+  cookies?: ResponseCookie;
 };
 
 export type ControllerBaseRequest = Request & NextRequest;
