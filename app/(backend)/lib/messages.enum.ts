@@ -36,4 +36,7 @@ export enum ResponseMessages {
   TokenIsNotAvailable = 'Token موجود نیست',
   TokenIsNotInValid = 'Token معتبر نیست',
   TokenIsValid = 'Token معتبر است.',
+  LoginUserIsValid = 'ورود شما موفقیت آمیز بود.',
+  PleaseEnterUsernameOrEmail = 'لطفا ایمیل یا نام کاربری را وارد نمایید.',
+  UsernameOrPasswordIsInValid = 'رمزعبور یا نام کاربری معتبر نیست.',
 }
