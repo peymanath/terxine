@@ -10,17 +10,22 @@ import {
   ControllerBase,
   ControllerBaseRequest,
   OtpType,
+  UserControllerType,
   UserDynamicParam,
+  UserLoginBodyType,
   UserType,
-} from '@BackEnd/types'; // Create Controller Object
+} from '@BackEnd/types';
+import { TrimUser } from '@BackEnd/lib/trim-user-data';
+import { UserAuth } from '@BackEnd/lib/user-auth'; // Create Controller Object
 
 // Create Controller Object
-export const UserController: ControllerBase<UserDynamicParam> = {
-  create: UserControllerCreate,
+export const UserController: ControllerBase<UserDynamicParam> & UserControllerType = {
+  create: UserControllerRegister,
   update: UserControllerUpdate,
   getAll: UserControllerGetAll,
   find: UserControllerFind,
   delete: UserControllerDelete,
+  login: UserControllerLogin,
 };
 
 // Schema Data Model
@@ -48,9 +53,16 @@ const updateSchema = zfd.formData(
     birthdate: z.date().optional(),
   })
 );
+const loginSchema = zfd.formData(
+  z.object({
+    email: z.string().optional(),
+    username: z.string().optional(),
+    password: z.string(),
+  })
+);
 
 // User Creator
-async function UserControllerCreate(req: ControllerBaseRequest): Promise<NextResponse> {
+async function UserControllerRegister(req: ControllerBaseRequest): Promise<NextResponse> {
   return await ApiHandler<Omit<UserType, 'password' | 'isActive' | 'code' | 'token'>>(
     async body => {
       const findUser: UserType | null = await User.findOne({
@@ -80,21 +92,10 @@ async function UserControllerCreate(req: ControllerBaseRequest): Promise<NextRes
             });
 
             if (!!updateUser) {
-              const user: Omit<UserType, 'password' | 'isActive' | 'code' | 'token'> = {
-                _id: updateUser._id,
-                firstName: updateUser.firstName,
-                lastName: updateUser.lastName,
-                email: updateUser.email,
-                username: updateUser.username,
-                phoneNumber: updateUser.phoneNumber,
-                nickname: updateUser.nickname,
-                birthdate: updateUser.birthdate,
-              };
-
               return {
-                data: user,
+                data: TrimUser(updateUser),
                 message: ResponseMessages.CreateNewUser,
-                cookies: await Token.CreateAndSetCookie(user),
+                cookies: await Token.CreateAndSetCookie(TrimUser(updateUser)),
               };
             } else {
               await User.deleteOne({
@@ -143,7 +144,7 @@ async function UserControllerCreate(req: ControllerBaseRequest): Promise<NextRes
           param1: String(smsService.OtpGenerator(Config.OTP.LENGTH)),
         });
         return {
-          data: result,
+          data: TrimUser(result),
           message: ResponseMessages.SendOtpCode,
         };
       }
@@ -286,6 +287,29 @@ async function UserControllerDelete(
       req,
       schema: createSchema,
       errorMessage: ResponseMessages.Error,
+    }
+  );
+}
+
+// Login User
+async function UserControllerLogin(req: ControllerBaseRequest): Promise<NextResponse> {
+  return await ApiHandler<any>(
+    async (body: UserLoginBodyType) => {
+      if (body.username || body.email) {
+        const userAuth = new UserAuth(req);
+        return await userAuth.verify(body.password, body.username, body.email);
+      }
+      return {
+        data: null,
+        message: ResponseMessages.PleaseEnterUsernameOrEmail,
+        status: 400,
+      };
+    },
+    {
+      req,
+      schema: loginSchema,
+      errorMessage: ResponseMessages.Error,
+      hasBody: true,
     }
   );
 }

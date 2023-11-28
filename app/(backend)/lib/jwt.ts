@@ -2,18 +2,20 @@ import jwt from 'jsonwebtoken';
 import { Config, ResponseMessages } from '@BackEnd/lib';
 import { ResponseCookie } from 'next/dist/compiled/@edge-runtime/cookies';
 
-type TokenVerifyReturn = TokenVerifyReturnTrue | TokenVerifyReturnFalse;
-
-type TokenVerifyReturnTrue = {
+type TokenVerifyReturnTrue<TokenDecodeType> = {
   isValid: true;
   errorMessage: null;
-  decoded: any;
+  decoded: TokenDecodeType;
 };
-type TokenVerifyReturnFalse = {
+type TokenVerifyReturnFalse<TokenDecodeType> = {
   isValid: false;
   errorMessage: ResponseMessages;
-  decoded: null;
+  decoded: TokenDecodeType | null;
 };
+
+export type TokenVerifyReturn<TokenDecodeType = null> =
+  | TokenVerifyReturnTrue<TokenDecodeType>
+  | TokenVerifyReturnFalse<TokenDecodeType>;
 
 type TokenCreateData = string | Buffer | object;
 
@@ -23,7 +25,7 @@ export class Token {
    * @param {string} token
    * @constructor
    */
-  static Verify(token: string | null): TokenVerifyReturn {
+  static Verify<TokenDecodeType>(token: string | null): TokenVerifyReturn<TokenDecodeType> {
     if (!token) {
       return {
         isValid: false,
@@ -42,7 +44,7 @@ export class Token {
         return {
           isValid: true,
           errorMessage: null,
-          decoded: decoded,
+          decoded: decoded as TokenDecodeType,
         };
       }
     });

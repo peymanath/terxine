@@ -60,7 +60,7 @@ export const Config: Config = {
   },
   TOKEN: {
     ACCESS_TOKEN: {
-      DEV_DOMAIN: 'http://localhost:3000',
+      DEV_DOMAIN: 'localhost',
       PRO_DOMAIN: 'peymanath.ir',
       EXPIRE: ms('1 d'),
       MAX_AGE: ms('1 d'),

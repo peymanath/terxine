@@ -1,4 +1,6 @@
 import { ObjectId } from 'mongoose';
+import { ControllerBaseRequest } from '@BackEnd/types/global';
+import { NextResponse } from 'next/server';
 
 export type UserType = {
   _id?: ObjectId;
@@ -13,6 +15,14 @@ export type UserType = {
   birthdate: Date;
   isActive: boolean;
   token: string | undefined;
+};
+export type UserLoginBodyType = {
+  email?: string;
+  username?: string;
+  password: string;
+};
+export type UserControllerType = {
+  login: (_req: ControllerBaseRequest) => Promise<NextResponse>;
 };
 
 export interface UserDynamicParam {
