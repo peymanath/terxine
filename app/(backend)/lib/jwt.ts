@@ -84,10 +84,7 @@ export class Token {
           process.env.NODE_ENV === 'development'
             ? Config.TOKEN.ACCESS_TOKEN.DEV_DOMAIN
             : Config.TOKEN.ACCESS_TOKEN.PRO_DOMAIN,
-        path:
-          process.env.NODE_ENV === 'development'
-            ? Config.TOKEN.ACCESS_TOKEN.DEV_DOMAIN
-            : Config.TOKEN.ACCESS_TOKEN.PRO_DOMAIN,
+        path: '/',
         expires: Config.TOKEN.ACCESS_TOKEN.EXPIRE,
         maxAge: Config.TOKEN.ACCESS_TOKEN.MAX_AGE,
         httpOnly: true,

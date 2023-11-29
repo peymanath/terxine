@@ -40,4 +40,5 @@ export enum ResponseMessages {
   PleaseEnterUsernameOrEmail = 'لطفا ایمیل یا نام کاربری را وارد نمایید.',
   PleaseEnterPhoneNumber = 'لطفا شماره تماس را وارد کنید.',
   UsernameOrPasswordIsInValid = 'رمزعبور یا نام کاربری معتبر نیست.',
+  DataIsInValid = 'اطلاعات وارد شده معتبر نیستد.',
 }

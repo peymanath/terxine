@@ -25,6 +25,11 @@ export type UserLoginOtpBodyType = {
   phoneNumber: string;
   code?: string;
 };
+export type UserDeleteBodyType = {
+  email: string;
+  phoneNumber: string;
+  password: string;
+};
 export type UserControllerType = {
   passwordLogin: (_req: ControllerBaseRequest) => Promise<NextResponse>;
   otpLogin: (_req: ControllerBaseRequest) => Promise<NextResponse>;
