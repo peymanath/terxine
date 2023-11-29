@@ -4,18 +4,20 @@ import { zfd } from 'zod-form-data';
 import * as z from 'zod';
 import { NextResponse } from 'next/server';
 import { ApiHandler, Config, ResponseMessages, SmsService, Token } from '@BackEnd/lib';
-import { passHash } from '@BackEnd/lib/password';
+import { passCheck, passHash } from '@BackEnd/lib/password';
 import ms from 'ms';
 import {
   ControllerBase,
   ControllerBaseRequest,
   OtpType,
   UserControllerType,
+  UserDeleteBodyType,
   UserDynamicParam,
-  UserLoginBodyType,
+  UserLoginOtpBodyType,
+  UserLoginPasswordBodyType,
   UserType,
 } from '@BackEnd/types';
-import { TrimUser } from '@BackEnd/lib/trim-user-data';
+import { TrimUser, TrimUserType } from '@BackEnd/lib/trim-user-data';
 import { UserAuth } from '@BackEnd/lib/user-auth'; // Create Controller Object
 
 // Create Controller Object
@@ -25,7 +27,8 @@ export const UserController: ControllerBase<UserDynamicParam> & UserControllerTy
   getAll: UserControllerGetAll,
   find: UserControllerFind,
   delete: UserControllerDelete,
-  login: UserControllerLogin,
+  passwordLogin: UserControllerPasswordLogin,
+  otpLogin: UserControllerOtpLogin,
 };
 
 // Schema Data Model
@@ -40,7 +43,10 @@ const createSchema = zfd.formData(
     username: z.string().optional(),
     isActive: z.string().optional(),
     nickname: z.string().optional(),
-    birthdate: z.date().optional(),
+    birthdate: z
+      .string()
+      .transform(str => new Date(str))
+      .optional(),
   })
 );
 const updateSchema = zfd.formData(
@@ -48,16 +54,31 @@ const updateSchema = zfd.formData(
     firstName: z.string().optional(),
     lastName: z.string().optional(),
     email: z.string().optional(),
-    phoneNumber: z.string().optional(),
     nickname: z.string().optional(),
-    birthdate: z.date().optional(),
+    birthdate: z
+      .string()
+      .transform(str => new Date(str))
+      .optional(),
   })
 );
-const loginSchema = zfd.formData(
+const loginPasswordSchema = zfd.formData(
   z.object({
     email: z.string().optional(),
     username: z.string().optional(),
     password: z.string(),
+  })
+);
+const loginOtpSchema = zfd.formData(
+  z.object({
+    phoneNumber: z.string(),
+    code: z.string().optional(),
+  })
+);
+const deleteSchema = zfd.formData(
+  z.object({
+    phoneNumber: z.string(),
+    password: z.string(),
+    email: z.string(),
   })
 );
 
@@ -163,43 +184,32 @@ async function UserControllerUpdate(
   req: ControllerBaseRequest,
   { params }: UserDynamicParam
 ): Promise<NextResponse> {
-  return await ApiHandler<Partial<UserType>>(
+  return await ApiHandler<Partial<TrimUserType>>(
     async body => {
-      const result: UserType | null = await User.findOne({ _id: params._id });
+      const result: UserType | null = await User.findOneAndUpdate<UserType>(
+        { _id: params._id },
+        {
+          $set: {
+            firstName: body.firstName,
+            lastName: body.lastName,
+            email: body.email,
+            nickname: body.nickname,
+            birthdate: body.birthdate,
+          },
+        },
+        { new: true }
+      );
       if (result) {
-        const update = await User.findOneAndUpdate<UserType>(
-          { _id: params._id },
-          {
-            $set: {
-              firstName: body.firstName,
-              lastName: body.lastName,
-              email: body.email,
-              nickname: body.nickname,
-              birthdate: body.birthdate,
-            },
-          },
-          { new: true }
-        );
         return {
-          data: {
-            _id: update?._id,
-            firstName: update?.firstName,
-            lastName: update?.lastName,
-            email: update?.email,
-            username: update?.username,
-            phoneNumber: update?.phoneNumber,
-            isActive: update?.isActive,
-            nickname: update?.nickname,
-            birthdate: update?.birthdate,
-          },
+          data: TrimUser(result),
           message: ResponseMessages.UpdateUserById,
-        };
-      } else {
-        return {
-          message: ResponseMessages.NotFoundUser,
-          status: 404,
+          cookies: await Token.CreateAndSetCookie(TrimUser(result)),
         };
       }
+      return {
+        message: ResponseMessages.NotFoundUser,
+        status: 404,
+      };
     },
     {
       req,
@@ -212,12 +222,15 @@ async function UserControllerUpdate(
 
 // Get All User
 async function UserControllerGetAll(req: ControllerBaseRequest): Promise<NextResponse> {
-  return await ApiHandler<UserType[]>(
+  return await ApiHandler<TrimUserType[]>(
     async () => {
       const results: UserType[] = await User.find();
       if (results.length > 0) {
+        const trimUsers: TrimUserType[] = results.map(item => {
+          return TrimUser(item);
+        });
         return {
-          data: results,
+          data: trimUsers,
           message: ResponseMessages.GetAllUser,
         };
       } else {
@@ -235,25 +248,24 @@ async function UserControllerGetAll(req: ControllerBaseRequest): Promise<NextRes
   );
 }
 
-// Find by id branch
+// Find by ID
 async function UserControllerFind(
   req: ControllerBaseRequest,
   { params }: UserDynamicParam
 ): Promise<NextResponse> {
-  return await ApiHandler<UserType>(
+  return await ApiHandler<TrimUserType>(
     async () => {
       const result: UserType | null = await User.findOne({ _id: params._id });
       if (result) {
         return {
-          data: result,
+          data: TrimUser(result),
           message: ResponseMessages.FindUser,
         };
-      } else {
-        return {
-          message: ResponseMessages.NotFoundUser,
-          status: 404,
-        };
       }
+      return {
+        message: ResponseMessages.NotFoundUser,
+        status: 404,
+      };
     },
     {
       req,
@@ -263,38 +275,52 @@ async function UserControllerFind(
   );
 }
 
-// Delete by id branch
+// Delete by ID
 async function UserControllerDelete(
   req: ControllerBaseRequest,
   { params }: UserDynamicParam
 ): Promise<NextResponse> {
-  return await ApiHandler<UserType>(
-    async () => {
-      const result = await User.findOne({ _id: params._id });
+  return await ApiHandler<null>(
+    async (body: UserDeleteBodyType) => {
+      const result: UserType | null = await User.findOne({ _id: params._id });
       if (result) {
-        await User.deleteOne({ _id: params._id });
+        if (
+          (await passCheck(body.password, result.password)) &&
+          body.email === result.email &&
+          body.phoneNumber === result.phoneNumber
+        ) {
+          await User.deleteOne({
+            _id: params._id,
+            email: result.email,
+            phoneNumber: result.phoneNumber,
+          });
+          return {
+            message: ResponseMessages.DeleteUser,
+          };
+        }
         return {
-          message: ResponseMessages.DeleteUser,
-        };
-      } else {
-        return {
-          message: ResponseMessages.NotFoundUser,
+          message: ResponseMessages.DataIsInValid,
           status: 404,
         };
       }
+      return {
+        message: ResponseMessages.NotFoundUser,
+        status: 404,
+      };
     },
     {
       req,
-      schema: createSchema,
+      schema: deleteSchema,
       errorMessage: ResponseMessages.Error,
+      hasBody: true,
     }
   );
 }
 
-// Login User
-async function UserControllerLogin(req: ControllerBaseRequest): Promise<NextResponse> {
+// Login User With Password
+async function UserControllerPasswordLogin(req: ControllerBaseRequest): Promise<NextResponse> {
   return await ApiHandler<any>(
-    async (body: UserLoginBodyType) => {
+    async (body: UserLoginPasswordBodyType) => {
       if (body.username || body.email) {
         const userAuth = new UserAuth(req);
         return await userAuth.verify(body.password, body.username, body.email);
@@ -307,7 +333,29 @@ async function UserControllerLogin(req: ControllerBaseRequest): Promise<NextResp
     },
     {
       req,
-      schema: loginSchema,
+      schema: loginPasswordSchema,
+      errorMessage: ResponseMessages.Error,
+      hasBody: true,
+    }
+  );
+}
+
+async function UserControllerOtpLogin(req: ControllerBaseRequest): Promise<NextResponse> {
+  return await ApiHandler<any>(
+    async (body: UserLoginOtpBodyType) => {
+      if (body.phoneNumber) {
+        const userAuth = new UserAuth(req);
+        return await userAuth.verifyOtp(body.phoneNumber, body.code);
+      }
+      return {
+        data: null,
+        message: ResponseMessages.PleaseEnterPhoneNumber,
+        status: 400,
+      };
+    },
+    {
+      req,
+      schema: loginOtpSchema,
       errorMessage: ResponseMessages.Error,
       hasBody: true,
     }

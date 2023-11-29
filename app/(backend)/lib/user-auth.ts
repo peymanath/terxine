@@ -1,10 +1,13 @@
-import { ControllerBaseRequest, ControllerJsonBody, UserType } from '@BackEnd/types';
+import { ControllerBaseRequest, ControllerJsonBody, OtpType, UserType } from '@BackEnd/types';
 import { RequestCookie } from 'next/dist/compiled/@edge-runtime/cookies';
 import { Token, TokenVerifyReturn } from '@BackEnd/lib/jwt';
 import { ResponseMessages } from '@BackEnd/lib/messages.enum';
 import { TrimUser, TrimUserType } from '@BackEnd/lib/trim-user-data';
-import { User } from '@BackEnd/models';
+import { Otp, User } from '@BackEnd/models';
 import { passCheck } from '@BackEnd/lib/password';
+import { SmsService } from '@BackEnd/lib/sms-config';
+import { Config } from '@BackEnd/lib/config';
+import ms from 'ms';
 
 export class UserAuth {
   /**
@@ -61,7 +64,6 @@ export class UserAuth {
           return {
             data: TrimUser(user),
             message: ResponseMessages.LoginUserIsValid,
-            status: 200,
             cookies: await Token.CreateAndSetCookie(TrimUser(user)),
           };
         } else {
@@ -83,5 +85,48 @@ export class UserAuth {
         status: 401,
       };
     }
+  }
+
+  async verifyOtp(phoneNumber: string, code?: string): Promise<ControllerJsonBody<TrimUserType>> {
+    const findUser: UserType | null = await User.findOne({ phoneNumber: phoneNumber });
+    if (findUser) {
+      if (!code) {
+        const smsService = new SmsService();
+
+        await Otp.create({
+          user: findUser._id,
+          code: smsService.OtpGenerator(Config.OTP.LENGTH),
+          expireAt: new Date(Date.now() + ms('2 m')),
+        });
+
+        await smsService.OtpSend({
+          template: Config.OTP.TEMPLATE.SmsOtp,
+          receptor: phoneNumber,
+          checkid: '1',
+          type: '1',
+          param1: String(smsService.OtpGenerator(Config.OTP.LENGTH)),
+        });
+        return {
+          data: TrimUser(findUser),
+          message: ResponseMessages.SendOtpCode,
+        };
+      } else {
+        const getOtp: OtpType | null = await Otp.findOne({
+          user: findUser._id,
+        });
+        if (getOtp?.code === code) {
+          return {
+            data: TrimUser(findUser),
+            message: ResponseMessages.LoginUserIsValid,
+            cookies: await Token.CreateAndSetCookie(TrimUser(findUser)),
+          };
+        }
+      }
+    }
+    return {
+      data: null,
+      message: ResponseMessages.NotFoundUser,
+      status: 404,
+    };
   }
 }
