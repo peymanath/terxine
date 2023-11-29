@@ -12,7 +12,8 @@ import {
   OtpType,
   UserControllerType,
   UserDynamicParam,
-  UserLoginBodyType,
+  UserLoginOtpBodyType,
+  UserLoginPasswordBodyType,
   UserType,
 } from '@BackEnd/types';
 import { TrimUser } from '@BackEnd/lib/trim-user-data';
@@ -25,7 +26,8 @@ export const UserController: ControllerBase<UserDynamicParam> & UserControllerTy
   getAll: UserControllerGetAll,
   find: UserControllerFind,
   delete: UserControllerDelete,
-  login: UserControllerLogin,
+  passwordLogin: UserControllerPasswordLogin,
+  otpLogin: UserControllerOtpLogin,
 };
 
 // Schema Data Model
@@ -53,11 +55,17 @@ const updateSchema = zfd.formData(
     birthdate: z.date().optional(),
   })
 );
-const loginSchema = zfd.formData(
+const loginPasswordSchema = zfd.formData(
   z.object({
     email: z.string().optional(),
     username: z.string().optional(),
     password: z.string(),
+  })
+);
+const loginOtpSchema = zfd.formData(
+  z.object({
+    phoneNumber: z.string(),
+    code: z.string().optional(),
   })
 );
 
@@ -291,10 +299,10 @@ async function UserControllerDelete(
   );
 }
 
-// Login User
-async function UserControllerLogin(req: ControllerBaseRequest): Promise<NextResponse> {
+// Login User With Password
+async function UserControllerPasswordLogin(req: ControllerBaseRequest): Promise<NextResponse> {
   return await ApiHandler<any>(
-    async (body: UserLoginBodyType) => {
+    async (body: UserLoginPasswordBodyType) => {
       if (body.username || body.email) {
         const userAuth = new UserAuth(req);
         return await userAuth.verify(body.password, body.username, body.email);
@@ -307,7 +315,29 @@ async function UserControllerLogin(req: ControllerBaseRequest): Promise<NextResp
     },
     {
       req,
-      schema: loginSchema,
+      schema: loginPasswordSchema,
+      errorMessage: ResponseMessages.Error,
+      hasBody: true,
+    }
+  );
+}
+
+async function UserControllerOtpLogin(req: ControllerBaseRequest): Promise<NextResponse> {
+  return await ApiHandler<any>(
+    async (body: UserLoginOtpBodyType) => {
+      if (body.phoneNumber) {
+        const userAuth = new UserAuth(req);
+        return await userAuth.verifyOtp(body.phoneNumber, body.code);
+      }
+      return {
+        data: null,
+        message: ResponseMessages.PleaseEnterPhoneNumber,
+        status: 400,
+      };
+    },
+    {
+      req,
+      schema: loginOtpSchema,
       errorMessage: ResponseMessages.Error,
       hasBody: true,
     }

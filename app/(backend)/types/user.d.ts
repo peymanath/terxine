@@ -16,13 +16,18 @@ export type UserType = {
   isActive: boolean;
   token: string | undefined;
 };
-export type UserLoginBodyType = {
+export type UserLoginPasswordBodyType = {
   email?: string;
   username?: string;
   password: string;
 };
+export type UserLoginOtpBodyType = {
+  phoneNumber: string;
+  code?: string;
+};
 export type UserControllerType = {
-  login: (_req: ControllerBaseRequest) => Promise<NextResponse>;
+  passwordLogin: (_req: ControllerBaseRequest) => Promise<NextResponse>;
+  otpLogin: (_req: ControllerBaseRequest) => Promise<NextResponse>;
 };
 
 export interface UserDynamicParam {
