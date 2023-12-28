@@ -19,6 +19,7 @@ const config: StorybookConfig = {
   },
   webpackFinal: async (config: any) => {
     config.resolve.alias['@'] = path.resolve(__dirname, '../');
+    config.resolve.alias['@BackEnd'] = path.resolve(__dirname, '../app/(backend)');
     return config;
   },
 };
