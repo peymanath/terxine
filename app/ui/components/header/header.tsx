@@ -6,8 +6,8 @@ import { Button, Logo, MenuListDesktop } from '@/app/ui/components';
 import { useMediaQuery } from '@/app/lib';
 
 export const Header: React.FC = () => {
-  const { isLaptop } = useMediaQuery();
-
+  const { isLaptop, ...rest } = useMediaQuery();
+  console.log({ isLaptop, ...rest });
   return (
     <header className='bg-white w-full flex items-center justify-between fixed top-0 right-0 left-0 h-7 laptop:h-10 shadow-2 z-50'>
       <div className='container flex items-center justify-between'>
