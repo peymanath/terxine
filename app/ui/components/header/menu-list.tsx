@@ -9,28 +9,28 @@ const menuListItem: MenuListItem[] = [
   },
   {
     id: 2,
-    text: 'شعبه',
+    text: 'شعبه ها',
     url: '/branchs',
     subMenu: [
       {
         id: 1,
         text: 'شعبه اکباتان',
-        url: '/branchs/ekabtan',
+        url: '/branch/ekabtan',
       },
       {
         id: 2,
         text: 'شعبه چالوس',
-        url: 'branchs/chaloos',
+        url: '/branch/chaloos',
       },
       {
         id: 3,
         text: 'شعبه اقدسیه',
-        url: 'branchs/aghdasyeh',
+        url: '/branch/aghdasyeh',
       },
       {
         id: 4,
         text: 'شعبه ونک',
-        url: 'branchs/vanak',
+        url: '/branch/vanak',
       },
     ],
   },

@@ -15,6 +15,7 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.17",
     "autoprefixer": "10.4.16",
     "bcryptjs": "^2.4.3",
     "classnames": "^2.3.2",
@@ -34,7 +35,7 @@
     "slugify": "^1.6.6",
     "swagger-ui-react": "^5.9.3",
     "swiper": "^11.0.1",
-    "tailwindcss": "3.3.3",
+    "tailwindcss": "^3.4.0",
     "typescript": "5.2.2",
     "uuid": "^9.0.1",
     "zod": "^3.22.4",

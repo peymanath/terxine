@@ -20,24 +20,20 @@ export const CarouselSlider: React.FC<CarouselSliderProps> = props => {
   // Default Config
   const defaultBreakPoints: typeof breakpoints = {
     0: {
-      slidesPerView: 1,
+      slidesPerView: 1.5,
       spaceBetween: 10,
     },
     576: {
-      slidesPerView: 1,
+      slidesPerView: 2.5,
       spaceBetween: 10,
     },
     768: {
-      slidesPerView: 2,
+      slidesPerView: 3.5,
       spaceBetween: 16,
     },
     992: {
-      slidesPerView: 3,
+      slidesPerView: 4.5,
       spaceBetween: 16,
-    },
-    1224: {
-      slidesPerView: 4,
-      spaceBetween: 24,
     },
   };
   const refConfig = ref || swiperRef;
@@ -61,7 +57,7 @@ export const CarouselSlider: React.FC<CarouselSliderProps> = props => {
         <React.Fragment>
           <Button
             onClick={(): void => {
-              refConfig?.current?.swiper.slidePrev();
+              refConfig?.current?.swiper.slideNext();
             }}
             color='tint-50'
             shape='square'
@@ -71,7 +67,7 @@ export const CarouselSlider: React.FC<CarouselSliderProps> = props => {
           />
           <Button
             onClick={(): void => {
-              refConfig?.current?.swiper.slideNext();
+              refConfig?.current?.swiper.slidePrev();
             }}
             color='tint-50'
             shape='square'

@@ -2,6 +2,7 @@ export interface BranchInterface {
   id: number;
   name: string;
   address: string;
+  slug: string;
   // Utilize for Map
   coordinates: {
     latitude: number;
