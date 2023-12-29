@@ -7,3 +7,7 @@
 :lang(fa-IR) {
   font-family: var(--font-estedad);
 }
+
+* > button {
+  @apply outline-transparent focus:outline-transparent focus-visible:outline-transparent;
+}
